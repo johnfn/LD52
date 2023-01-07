@@ -12,6 +12,7 @@ public partial class UiPanel : Panel {
   public ISelectable selectedUnit = null;
   public ISelectable hoveredUnit = null;
   public Sprite2D selectedBuilding = null;
+  public BuildingType selectedBuildingType = BuildingType.None;
 
   Panel townHallPanel;
   Panel buildPanel;
@@ -23,6 +24,7 @@ public partial class UiPanel : Panel {
   Panel builderPanel;
   Button townHallButton;
   Button townHallBuyGrasshopperButton;
+  Button depotButton;
 
   public override void _Ready() {
 	townHallPanel = GetNode<Panel>("TownHallPanel");
@@ -34,9 +36,10 @@ public partial class UiPanel : Panel {
 	builderPanel = GetNode<Panel>("BuilderPanel");
 	builderPanelLabel = GetNode<Label>("BuilderPanel/SelectedUnitLabel");
 	townHallButton = GetNode<Button>("BuilderPanel/TownHallButton");
+	depotButton = GetNode<Button>("BuilderPanel/ResourceDepot");
 	townHallBuyGrasshopperButton = GetNode<Button>("TownHallPanel/BuyGrasshopper");
 
-	showCommandUi();
+	_showCommandUi();
 
 	townHallBuyGrasshopperButton.Connect("pressed", Callable.From(() => {
 	  if (selectedUnit is TownHall th) {
@@ -45,16 +48,32 @@ public partial class UiPanel : Panel {
 	}));
 
 	townHallButton.Connect("pressed", Callable.From(() => {
-	  selectedBuilding = GD.Load<PackedScene>("res://scenes/town_hall.tscn").Instantiate<Sprite2D>();
+	  _beginBuilding(BuildingType.TownHall);
+	}));
 
+	depotButton.Connect("pressed", Callable.From(() => {
+	  GD.Print("Buy Depot");
+	  _beginBuilding(BuildingType.ResourceDepot);
+	}));
+  }
+
+  private void _beginBuilding(BuildingType buildingType) {
+	var stats = Util.BuildingStats[buildingType];
+
+	if (
+	  Globals.TwigCount >= stats.twigCost &&
+	  Globals.MeatCount >= stats.meatCost
+	) {
+	  selectedBuildingType = buildingType;
+	  selectedBuilding = GD.Load<PackedScene>(stats.resourcePath).Instantiate<Sprite2D>();
 	  selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
 
 	  GetNode("/root/Root").AddChild(selectedBuilding);
 	  gameMode = GameMode.Build;
-	}));
+	}
   }
 
-  private void showCommandUi() {
+  private void _showCommandUi() {
 	var townHallPanelVisible = false;
 	var buildPanelVisible = false;
 	var unitPanelVisible = false;
@@ -105,6 +124,31 @@ public partial class UiPanel : Panel {
 	}
   }
 
+  private void _placeBuilding() {
+	if (selectedBuildingType == BuildingType.None) {
+	  return;
+	}
+
+	var stats = Util.BuildingStats[selectedBuildingType];
+
+	if (
+	  Globals.TwigCount >= stats.twigCost &&
+	  Globals.MeatCount >= stats.meatCost
+	) {
+	  Globals.TwigCount -= stats.twigCost;
+	  Globals.MeatCount -= stats.meatCost;
+
+	  selectedBuilding.Modulate = new Color(1, 1, 1, 1);
+	  selectedBuilding = null;
+	  selectedBuildingType = BuildingType.None;
+	  gameMode = GameMode.Command;
+	} else {
+	  // TODO
+
+	  GD.Print("Not enough twigs");
+	}
+  }
+
   private void _handleMouseDown(InputEventMouseButton mouseEvent) {
 	if (!mouseEvent.Pressed) {
 	  return;
@@ -112,9 +156,7 @@ public partial class UiPanel : Panel {
 
 	if (gameMode == GameMode.Build) {
 	  if (mouseEvent.ButtonIndex == MouseButton.Left) {
-		selectedBuilding.Modulate = new Color(1, 1, 1, 1);
-		selectedBuilding = null;
-		gameMode = GameMode.Command;
+		_placeBuilding();
 
 		return;
 	  }
@@ -122,6 +164,7 @@ public partial class UiPanel : Panel {
 
 	if (gameMode == GameMode.Command) {
 	  // Issue action like Move
+
 	  if (mouseEvent.ButtonIndex == MouseButton.Right) {
 		if (selectedUnit == null) {
 		  return;
@@ -143,12 +186,13 @@ public partial class UiPanel : Panel {
 	  }
 
 	  // Select
+
 	  if (mouseEvent.ButtonIndex == MouseButton.Left) {
 		var unit = GetHoveredUnit();
 
 		if (unit is ISelectable s) {
 		  selectedUnit = s;
-		  showCommandUi();
+		  _showCommandUi();
 		}
 	  }
 	}
@@ -207,7 +251,7 @@ public partial class UiPanel : Panel {
 
   public override void _Process(double delta) {
 	if (gameMode == GameMode.Command) {
-	  showCommandUi();
+	  _showCommandUi();
 	}
   }
 }

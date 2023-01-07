@@ -15,8 +15,4 @@ func _ready():
   )
 
 func _input(event):
-  if event is InputEventMouseButton and event.is_pressed() and event.get_button_index() == MOUSE_BUTTON_LEFT:
-    if is_mouse_inside:
-      get_tree().get_root().set_input_as_handled()
-
-      self.emit_signal("mouse_button_pressed", event.get_position())
+  pass

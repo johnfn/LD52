@@ -1,16 +1,35 @@
 using Godot;
 
+public enum ResourceType {
+  Twig,
+  Meat,
+}
+
+public enum BuildingType {
+  TownHall,
+  ResourceDepot,
+  None,
+}
+
+public struct BuildingStats {
+  public float buildTime;
+  public int health;
+  public int twigCost;
+  public int meatCost;
+  public string resourcePath;
+  public string description;
+}
+
+
 public interface ISelectable {
   public bool isHoverable { get; set; }
+  /** Unused today */
   public int priority { get; set; }
 
   public void OnHoverEnd();
   public void OnHoverStart();
 }
 
-public enum ResourceType {
-  Twig,
-}
 
 public interface IResource {
   public int amount { get; set; }
