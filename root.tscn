@@ -1,15 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2ioxh4mhw6y2"]
+[gd_scene load_steps=6 format=3 uid="uid://b2ioxh4mhw6y2"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
 [ext_resource type="PackedScene" uid="uid://dr36wj34htulv" path="res://scenes/ant.tscn" id="3_0h73t"]
-[ext_resource type="Texture2D" uid="uid://c0jfuwkt6bp3l" path="res://assets/town_hall.png" id="4_a8vu0"]
-[ext_resource type="Script" path="res://TownHall.gd" id="5_24mp2"]
-[ext_resource type="Script" path="res://ClickableArea2D.gd" id="6_hqid7"]
 [ext_resource type="Script" path="res://UiPanel.gd" id="6_o2q21"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_anmcy"]
-size = Vector2(204, 169)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs4lf"]
 
@@ -41,27 +35,15 @@ centered = false
 [node name="Ant" parent="." instance=ExtResource("3_0h73t")]
 position = Vector2(199, 251)
 
-[node name="TownHall" type="Sprite2D" parent="."]
-position = Vector2(500, 275)
-texture = ExtResource("4_a8vu0")
-script = ExtResource("5_24mp2")
-
-[node name="Area" type="Area2D" parent="TownHall" groups=["collider"]]
-collision_layer = 3
-script = ExtResource("6_hqid7")
-
-[node name="CollisionShape" type="CollisionShape2D" parent="TownHall/Area"]
-position = Vector2(9, -12)
-shape = SubResource("RectangleShape2D_anmcy")
-
 [node name="UiPanel" type="Panel" parent="."]
-offset_left = 6.0
-offset_top = 734.0
-offset_right = 997.0
-offset_bottom = 1014.0
+offset_left = 4.0
+offset_top = 919.0
+offset_right = 995.0
+offset_bottom = 1199.0
 script = ExtResource("6_o2q21")
 
 [node name="UnitPanel" type="Panel" parent="UiPanel"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -79,7 +61,29 @@ offset_top = 83.0
 offset_right = 509.0
 offset_bottom = 162.0
 theme_override_font_sizes/font_size = 40
+text = "Stats"
+
+[node name="BuilderPanel" type="Panel" parent="UiPanel"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SelectedUnitLabel" type="Label" parent="UiPanel/BuilderPanel"]
+layout_mode = 1
+offset_right = 509.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 40
 text = "Selection: Literally nothing"
+
+[node name="TownHallButton" type="Button" parent="UiPanel/BuilderPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 84.0
+offset_right = 148.0
+offset_bottom = 216.0
+theme_override_font_sizes/font_size = 40
+text = "Town 
+Hall"
 
 [node name="BuildPanel" type="Panel" parent="UiPanel"]
 visible = false
