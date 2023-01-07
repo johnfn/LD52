@@ -141,6 +141,7 @@ public partial class UiPanel : Panel {
 
     if (gameMode == GameMode.Command) {
       // Issue action like Move
+
       if (mouseEvent.ButtonIndex == MouseButton.Right) {
         if (selectedUnit == null) {
           return;
@@ -162,6 +163,7 @@ public partial class UiPanel : Panel {
       }
 
       // Select
+
       if (mouseEvent.ButtonIndex == MouseButton.Left) {
         var unit = GetHoveredUnit();
 

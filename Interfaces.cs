@@ -11,6 +11,7 @@ public enum BuildingType {
 
 public interface ISelectable {
   public bool isHoverable { get; set; }
+  /** Unused today */
   public int priority { get; set; }
 
   public void OnHoverEnd();
