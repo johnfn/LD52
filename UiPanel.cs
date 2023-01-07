@@ -7,7 +7,7 @@ public enum GameMode {
   Command,
 }
 
-public partial class UiPanel : Panel {
+public partial class UiPanel : Control {
   public GameMode gameMode = GameMode.Command;
   public ISelectable selectedUnit = null;
   public ISelectable hoveredUnit = null;
@@ -18,26 +18,38 @@ public partial class UiPanel : Panel {
   Control buildPanel;
   Label progressLabel;
   Control unitPanel;
-  Label statsLabel;
-  Label selectedUnitLabel;
-  Label builderPanelLabel;
   Control builderPanel;
   Button townHallButton;
   Button townHallBuyGrasshopperButton;
   Button depotButton;
 
+  Panel selectionInfoPanel;
+  Panel selectionCommandsPanel;
+
+  Label selectionNameLabel;
+
   public override void _Ready() {
-    townHallPanel = GetNode<Control>("TownHallPanel");
-    buildPanel = GetNode<Control>("BuildPanel");
-    unitPanel = GetNode<Control>("UnitPanel");
-    progressLabel = GetNode<Label>("BuildPanel/ProgressLabel");
-    statsLabel = GetNode<Label>("UnitPanel/StatsLabel");
-    selectedUnitLabel = GetNode<Label>("UnitPanel/SelectedUnitLabel");
-    builderPanel = GetNode<Control>("BuilderPanel");
-    builderPanelLabel = GetNode<Label>("BuilderPanel/SelectedUnitLabel");
-    townHallButton = GetNode<Button>("BuilderPanel/TownHallButton");
-    depotButton = GetNode<Button>("BuilderPanel/ResourceDepot");
-    townHallBuyGrasshopperButton = GetNode<Button>("TownHallPanel/BuyGrasshopper");
+
+    // Panels
+    selectionCommandsPanel = GetNode<Panel>("VBoxContainer/SelectionDataAndCommands/SelectionCommands");
+    townHallPanel = selectionCommandsPanel.GetNode<Control>("TownHallPanel");
+    buildPanel = selectionCommandsPanel.GetNode<Control>("BuildPanel");
+    unitPanel = selectionCommandsPanel.GetNode<Control>("UnitPanel");
+    builderPanel = selectionCommandsPanel.GetNode<Control>("BuilderPanel");
+
+
+    // NameTag
+    selectionInfoPanel = GetNode<Panel>("VBoxContainer/SelectionNameTag/IconPanel");
+    selectionInfoPanel.ThemeTypeVariation = "RoundedPanel";
+    selectionNameLabel = GetNode<Label>("VBoxContainer/SelectionNameTag/NamePanel/Label");
+
+    // Misc stuff I havent looked at yet
+    progressLabel = buildPanel.GetNode<Label>("ProgressLabel");
+    townHallButton = builderPanel.GetNode<Button>("TownHallButton");
+    depotButton = builderPanel.GetNode<Button>("ResourceDepot");
+    townHallBuyGrasshopperButton = townHallPanel.GetNode<Button>("BuyGrasshopper");
+
+
 
     _showCommandUi();
 
@@ -80,29 +92,31 @@ public partial class UiPanel : Panel {
     var builderPanelVisible = false;
 
     if (selectedUnit == null) {
-      selectedUnitLabel.Text = "Selected Unit: None";
+      selectionNameLabel.Text = "Selected Unit: None";
     }
 
     // if (selectedUnit is IUnit u) {
     //   unitPanelVisible = true;
-    //   selectedUnitLabel.Text = "Selected Unit: " + u.unitName;
+    //   selectionNameLabel.Text = "Selected Unit: " + u.unitName;
     //   selectedUnitName = u.unitName;
     // }
 
     if (selectedUnit is TownHall th) {
       if (th.status == BuildingStatus.Building) {
         buildPanelVisible = true;
+        selectionNameLabel.Text = "Town Hall (Producing units...)";
       } else {
         townHallPanelVisible = true;
+        selectionNameLabel.Text = "Town Hall";
       }
     }
 
     if (selectedUnit is Ant a) {
       builderPanelVisible = true;
-      builderPanelLabel.Text = "Selected Unit: " + a.unitName;
+      selectionNameLabel.Text = a.unitName;
 
       if (a.InventoryItem != null) {
-        builderPanelLabel.Text += " - Holding " + a.InventoryItem.resourceType;
+        selectionNameLabel.Text += " - Holding " + a.InventoryItem.resourceType;
       }
     }
 
