@@ -8,6 +8,7 @@ public enum ResourceType {
 public enum BuildingType {
   TownHall,
   ResourceDepot,
+  Barrachnid,
   None,
 }
 
