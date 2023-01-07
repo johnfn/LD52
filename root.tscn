@@ -1,3 +1,100 @@
-[gd_scene format=3 uid="uid://b2ioxh4mhw6y2"]
+[gd_scene load_steps=10 format=3 uid="uid://b2ioxh4mhw6y2"]
+
+[ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
+[ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
+[ext_resource type="Texture2D" uid="uid://mvp7k68868ra" path="res://assets/ant.png" id="3_a6xmt"]
+[ext_resource type="Texture2D" uid="uid://c0jfuwkt6bp3l" path="res://assets/town_hall.png" id="4_a8vu0"]
+[ext_resource type="Script" path="res://TownHall.gd" id="5_24mp2"]
+[ext_resource type="Script" path="res://ClickableArea2D.gd" id="6_hqid7"]
+[ext_resource type="Script" path="res://UiPanel.gd" id="6_o2q21"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anmcy"]
+size = Vector2(204, 169)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs4lf"]
 
 [node name="Root" type="Node2D"]
+
+[node name="Map" type="Node2D" parent="."]
+script = ExtResource("1_6y1nh")
+
+[node name="Rock" type="Sprite2D" parent="Map"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("1_hrow8")
+centered = false
+
+[node name="Rock2" type="Sprite2D" parent="Map"]
+position = Vector2(113, 14)
+texture = ExtResource("1_hrow8")
+centered = false
+
+[node name="Rock3" type="Sprite2D" parent="Map"]
+position = Vector2(36, 94)
+texture = ExtResource("1_hrow8")
+centered = false
+
+[node name="Rock4" type="Sprite2D" parent="Map"]
+position = Vector2(240, 10)
+texture = ExtResource("1_hrow8")
+centered = false
+
+[node name="Ant" type="Sprite2D" parent="."]
+position = Vector2(199, 335)
+texture = ExtResource("3_a6xmt")
+
+[node name="TownHall" type="Sprite2D" parent="."]
+position = Vector2(500, 275)
+texture = ExtResource("4_a8vu0")
+script = ExtResource("5_24mp2")
+
+[node name="Area" type="Area2D" parent="TownHall"]
+script = ExtResource("6_hqid7")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="TownHall/Area"]
+position = Vector2(9, -12)
+shape = SubResource("RectangleShape2D_anmcy")
+
+[node name="UiPanel" type="Panel" parent="."]
+offset_left = 6.0
+offset_top = 734.0
+offset_right = 997.0
+offset_bottom = 1014.0
+script = ExtResource("6_o2q21")
+
+[node name="SelectedUnitLabel" type="Label" parent="UiPanel"]
+layout_mode = 0
+offset_right = 251.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 40
+text = "Selection: Literally nothing"
+
+[node name="BuildPanel" type="Panel" parent="UiPanel"]
+layout_mode = 1
+offset_left = -4.0
+offset_top = 61.0
+offset_right = 991.0
+offset_bottom = 280.0
+
+[node name="ProgressLabel" type="Label" parent="UiPanel/BuildPanel"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 40
+text = "Progress: 0 / 50"
+
+[node name="TownHallPanel" type="Panel" parent="UiPanel"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = 58.0
+offset_right = 986.0
+offset_bottom = 277.0
+
+[node name="BuyGrasshopper" type="Button" parent="UiPanel/TownHallPanel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 428.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs4lf")
+text = "Buy Grasshopper (5 Meat)"
