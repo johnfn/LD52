@@ -19,15 +19,15 @@ public class Util {
     );
   }
 
-  // If end is already on top of a collision, find a safe end point which is not
-  // colliding with anything instead.
-  private static Vector2 _getSafeEnd(
+  // If end is already on top of a collision, find a safe point near it, which
+  // is not colliding with anything instead.
+  public static Vector2 FindSafeSpaceNear(
     SceneTree tree,
-    Vector2 initialEnd
+    Vector2 point
   ) {
     var f = new PhysicsPointQueryParameters2D();
 
-    f.Position = initialEnd;
+    f.Position = point;
     f.Exclude = new Godot.Collections.Array<RID>();
     f.CollideWithAreas = true;
     f.CollideWithBodies = true;
@@ -38,12 +38,12 @@ public class Util {
     if (collisions.Count == 0) {
       GD.Print("Nothing to worry about!");
 
-      return initialEnd;
+      return point;
     }
 
-    // spiral around initialEnd until we find a safe point
+    // spiral around point until we find a new point which does not collide with anything
 
-    var end = initialEnd;
+    var end = point;
 
     for (var i = 0; i < 20; i++) {
       foreach (var direction in new List<Vector2>() {
@@ -91,7 +91,7 @@ public class Util {
     var start = RoundToCell(initialStart);
     var end = RoundToCell(initialEnd);
 
-    end = _getSafeEnd(tree, end);
+    end = FindSafeSpaceNear(tree, end);
 
     if (end == Vector2.Inf) {
       GD.Print("Could not find a path");

@@ -47,7 +47,7 @@ public interface IUnit {
 public interface IBuilding {
   public float buildProgress { get; set; }
   public float buildTime { get; set; }
-  public string unitName { get; set; }
+  public string unitName { get; }
   public BuildingStatus status { get; set; }
 }
 

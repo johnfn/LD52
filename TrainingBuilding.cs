@@ -12,12 +12,16 @@ public enum BuildingStatus {
   Building
 }
 
-public partial class TownHall : Sprite2D, IBuilding, ISelectable, ICollider {
+// This is currently either TownHall or BugBarracks
+public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, ICollider {
+
+  [Export]
+  public bool IsBugBarracks;
 
   // IBuilding
   public float buildProgress { get; set; } = 0;
   public float buildTime { get; set; } = 0.1f;
-  public string unitName { get; set; } = "Town Hall";
+  public string unitName { get; } = "Town Hall";
   public BuildingStatus status { get; set; } = BuildingStatus.Idle;
 
   // IHoverable
@@ -59,18 +63,17 @@ public partial class TownHall : Sprite2D, IBuilding, ISelectable, ICollider {
 
         var ant = _antScene.Instantiate<Ant>();
 
-        ant.Position = Position + new Vector2(0, 150);
+        ant.Position = Util.FindSafeSpaceNear(GetTree(), GlobalPosition);
+
         GetParent().AddChild(ant);
       }
     }
   }
 
   public void BuyUnit(UnitType unit) {
-    if (unit == UnitType.Ant) {
-      status = BuildingStatus.Building;
+    status = BuildingStatus.Building;
 
-      buildProgress = 0;
-      buildTime = 0.1f;
-    }
+    buildProgress = 0;
+    buildTime = 0.1f;
   }
 }
