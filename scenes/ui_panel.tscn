@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://drlyhbmyyfjva"]
+[gd_scene load_steps=4 format=3 uid="uid://drlyhbmyyfjva"]
 
+[ext_resource type="Theme" uid="uid://beulorra254b2" path="res://assets/UI/SimpleBox.tres" id="1_1p6nn"]
 [ext_resource type="Script" path="res://UiPanel.cs" id="1_ir2a3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs4lf"]
@@ -9,16 +10,19 @@ offset_left = 4.0
 offset_top = 919.0
 offset_right = 995.0
 offset_bottom = 1199.0
+theme = ExtResource("1_1p6nn")
 script = ExtResource("1_ir2a3")
 
 [node name="UnitPanel" type="Panel" parent="."]
 visible = false
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("1_1p6nn")
 
 [node name="SelectedUnitLabel" type="Label" parent="UnitPanel"]
 offset_right = 509.0
 offset_bottom = 79.0
+theme = ExtResource("1_1p6nn")
 theme_override_font_sizes/font_size = 40
 text = "Selection: Literally nothing"
 
@@ -26,16 +30,19 @@ text = "Selection: Literally nothing"
 offset_top = 83.0
 offset_right = 509.0
 offset_bottom = 162.0
+theme = ExtResource("1_1p6nn")
 theme_override_font_sizes/font_size = 40
 text = "Stats"
 
 [node name="BuilderPanel" type="Panel" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("1_1p6nn")
 
 [node name="SelectedUnitLabel" type="Label" parent="BuilderPanel"]
 offset_right = 509.0
 offset_bottom = 79.0
+theme = ExtResource("1_1p6nn")
 theme_override_font_sizes/font_size = 40
 text = "Selection: Literally nothing"
 
@@ -44,6 +51,7 @@ offset_left = 16.0
 offset_top = 84.0
 offset_right = 148.0
 offset_bottom = 216.0
+theme = ExtResource("1_1p6nn")
 theme_override_font_sizes/font_size = 40
 text = "Town 
 Hall"
@@ -54,10 +62,12 @@ offset_left = -4.0
 offset_top = 61.0
 offset_right = 991.0
 offset_bottom = 280.0
+theme = ExtResource("1_1p6nn")
 
 [node name="ProgressLabel" type="Label" parent="BuildPanel"]
 offset_right = 383.0
 offset_bottom = 128.0
+theme = ExtResource("1_1p6nn")
 theme_override_font_sizes/font_size = 40
 text = "Progress: 0 / 50"
 
@@ -67,12 +77,14 @@ offset_left = -9.0
 offset_top = 58.0
 offset_right = 986.0
 offset_bottom = 277.0
+theme = ExtResource("1_1p6nn")
 
 [node name="BuyGrasshopper" type="Button" parent="TownHallPanel"]
 offset_left = 24.0
 offset_top = 16.0
 offset_right = 428.0
 offset_bottom = 87.0
+theme = ExtResource("1_1p6nn")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_rs4lf")
 text = "Buy Grasshopper (5 Meat)"
