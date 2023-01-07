@@ -9,7 +9,7 @@ var build_time = 0
 var shape = $Area
 
 @onready
-var ui_panel = $"/root/Root/UiPanel"
+var ui_panel = $"/root/Root/Static/UiPanel"
 
 var ant_scene = preload("res://scenes/ant.tscn")
 

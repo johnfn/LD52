@@ -6,13 +6,13 @@
 [ext_resource type="Script" path="res://Camera.gd" id="5_w81tg"]
 [ext_resource type="Script" path="res://UiPanel.gd" id="6_o2q21"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs4lf"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irmio"]
 size = Vector2(197, 1199.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3o8ia"]
 size = Vector2(1801, 186.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs4lf"]
 
 [node name="Root" type="Node2D"]
 
@@ -21,6 +21,11 @@ script = ExtResource("1_6y1nh")
 
 [node name="Rock" type="Sprite2D" parent="Map"]
 position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("1_hrow8")
+centered = false
+
+[node name="Rock5" type="Sprite2D" parent="Map"]
+position = Vector2(847, -226)
 texture = ExtResource("1_hrow8")
 centered = false
 
@@ -34,6 +39,16 @@ position = Vector2(363, 475)
 texture = ExtResource("1_hrow8")
 centered = false
 
+[node name="Rock6" type="Sprite2D" parent="Map"]
+position = Vector2(1265, 658)
+texture = ExtResource("1_hrow8")
+centered = false
+
+[node name="Rock7" type="Sprite2D" parent="Map"]
+position = Vector2(-388, 754)
+texture = ExtResource("1_hrow8")
+centered = false
+
 [node name="Rock4" type="Sprite2D" parent="Map"]
 position = Vector2(240, 10)
 texture = ExtResource("1_hrow8")
@@ -41,89 +56,6 @@ centered = false
 
 [node name="Ant" parent="." instance=ExtResource("3_0h73t")]
 position = Vector2(199, 251)
-
-[node name="UiPanel" type="Panel" parent="."]
-offset_left = 4.0
-offset_top = 919.0
-offset_right = 995.0
-offset_bottom = 1199.0
-script = ExtResource("6_o2q21")
-
-[node name="UnitPanel" type="Panel" parent="UiPanel"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SelectedUnitLabel" type="Label" parent="UiPanel/UnitPanel"]
-layout_mode = 0
-offset_right = 509.0
-offset_bottom = 79.0
-theme_override_font_sizes/font_size = 40
-text = "Selection: Literally nothing"
-
-[node name="StatsLabel" type="Label" parent="UiPanel/UnitPanel"]
-layout_mode = 1
-offset_top = 83.0
-offset_right = 509.0
-offset_bottom = 162.0
-theme_override_font_sizes/font_size = 40
-text = "Stats"
-
-[node name="BuilderPanel" type="Panel" parent="UiPanel"]
-layout_mode = 1
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SelectedUnitLabel" type="Label" parent="UiPanel/BuilderPanel"]
-layout_mode = 1
-offset_right = 509.0
-offset_bottom = 79.0
-theme_override_font_sizes/font_size = 40
-text = "Selection: Literally nothing"
-
-[node name="TownHallButton" type="Button" parent="UiPanel/BuilderPanel"]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 84.0
-offset_right = 148.0
-offset_bottom = 216.0
-theme_override_font_sizes/font_size = 40
-text = "Town 
-Hall"
-
-[node name="BuildPanel" type="Panel" parent="UiPanel"]
-visible = false
-layout_mode = 0
-offset_left = -4.0
-offset_top = 61.0
-offset_right = 991.0
-offset_bottom = 280.0
-
-[node name="ProgressLabel" type="Label" parent="UiPanel/BuildPanel"]
-layout_mode = 0
-offset_right = 383.0
-offset_bottom = 128.0
-theme_override_font_sizes/font_size = 40
-text = "Progress: 0 / 50"
-
-[node name="TownHallPanel" type="Panel" parent="UiPanel"]
-visible = false
-layout_mode = 0
-offset_left = -9.0
-offset_top = 58.0
-offset_right = 986.0
-offset_bottom = 277.0
-
-[node name="BuyGrasshopper" type="Button" parent="UiPanel/TownHallPanel"]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 16.0
-offset_right = 428.0
-offset_bottom = 87.0
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_rs4lf")
-text = "Buy Grasshopper (5 Meat)"
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(890, 606)
@@ -156,3 +88,88 @@ position = Vector2(1531, 1091)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/MoveDown"]
 position = Vector2(-1528.5, -507.25)
 shape = SubResource("RectangleShape2D_3o8ia")
+
+[node name="Static" type="CanvasLayer" parent="."]
+
+[node name="UiPanel" type="Panel" parent="Static"]
+offset_left = 4.0
+offset_top = 919.0
+offset_right = 995.0
+offset_bottom = 1199.0
+script = ExtResource("6_o2q21")
+
+[node name="UnitPanel" type="Panel" parent="Static/UiPanel"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SelectedUnitLabel" type="Label" parent="Static/UiPanel/UnitPanel"]
+layout_mode = 0
+offset_right = 509.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 40
+text = "Selection: Literally nothing"
+
+[node name="StatsLabel" type="Label" parent="Static/UiPanel/UnitPanel"]
+layout_mode = 1
+offset_top = 83.0
+offset_right = 509.0
+offset_bottom = 162.0
+theme_override_font_sizes/font_size = 40
+text = "Stats"
+
+[node name="BuilderPanel" type="Panel" parent="Static/UiPanel"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SelectedUnitLabel" type="Label" parent="Static/UiPanel/BuilderPanel"]
+layout_mode = 1
+offset_right = 509.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 40
+text = "Selection: Literally nothing"
+
+[node name="TownHallButton" type="Button" parent="Static/UiPanel/BuilderPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 84.0
+offset_right = 148.0
+offset_bottom = 216.0
+theme_override_font_sizes/font_size = 40
+text = "Town 
+Hall"
+
+[node name="BuildPanel" type="Panel" parent="Static/UiPanel"]
+visible = false
+layout_mode = 0
+offset_left = -4.0
+offset_top = 61.0
+offset_right = 991.0
+offset_bottom = 280.0
+
+[node name="ProgressLabel" type="Label" parent="Static/UiPanel/BuildPanel"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 40
+text = "Progress: 0 / 50"
+
+[node name="TownHallPanel" type="Panel" parent="Static/UiPanel"]
+visible = false
+layout_mode = 0
+offset_left = -9.0
+offset_top = 58.0
+offset_right = 986.0
+offset_bottom = 277.0
+
+[node name="BuyGrasshopper" type="Button" parent="Static/UiPanel/TownHallPanel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 428.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs4lf")
+text = "Buy Grasshopper (5 Meat)"

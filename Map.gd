@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready
-var ui_panel = $"/root/Root/UiPanel"
+var ui_panel = $"/root/Root/Static/UiPanel"
 
 func _unhandled_input(event):
   if (event is InputEventMouseButton and 

@@ -58,8 +58,11 @@ func _input(event):
 
   if event is InputEventMouseMotion:
     if game_mode == "Build":
-      var mouse = get_viewport().get_mouse_position()
+      var mouse = get_viewport().get_mouse_position() + $"/root/Root/Camera".global_position - $"/root/Root/Camera".get_viewport().get_visible_rect().size / 2
       var rounded = Vector2(round(mouse.x / 32) * 32, round(mouse.y / 32) * 32)
+
+      # get width of camera 
+      var camera_width = $"/root/Root/Camera".get_viewport_rect().size.x
 
       selected_building.position = rounded
 
