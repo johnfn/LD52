@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dr36wj34htulv"]
 
 [ext_resource type="Texture2D" uid="uid://mvp7k68868ra" path="res://assets/ant.png" id="1_stg67"]
-[ext_resource type="Script" path="res://Ant.gd" id="2_10gtb"]
+[ext_resource type="Script" path="res://Ant.cs" id="2_uvaca"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_yorjn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
@@ -10,7 +10,7 @@ size = Vector2(188, 161.25)
 [node name="Ant" type="Sprite2D"]
 position = Vector2(76, 65)
 texture = ExtResource("1_stg67")
-script = ExtResource("2_10gtb")
+script = ExtResource("2_uvaca")
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(5, 10)

@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://i6od1cr3x623"]
 
 [ext_resource type="Texture2D" uid="uid://c0jfuwkt6bp3l" path="res://assets/town_hall.png" id="1_edfkt"]
-[ext_resource type="Script" path="res://TownHall.gd" id="2_i170x"]
+[ext_resource type="Script" path="res://TownHall.cs" id="2_ocy4t"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_othbg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_anmcy"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
 
 [node name="TownHall" type="Sprite2D"]
 position = Vector2(500, 275)
 texture = ExtResource("1_edfkt")
-script = ExtResource("2_i170x")
+script = ExtResource("2_ocy4t")
 
 [node name="Area" type="Area2D" parent="." groups=["collider"]]
 collision_layer = 3
@@ -18,4 +18,4 @@ script = ExtResource("3_othbg")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Area"]
 position = Vector2(9, -12)
-shape = SubResource("RectangleShape2D_anmcy")
+shape = SubResource("RectangleShape2D_kl8im")

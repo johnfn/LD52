@@ -34,8 +34,8 @@ public partial class UiPanel : Panel {
     showCommandUi();
 
     townHallBuyGrasshopperButton.Connect("pressed", Callable.From(() => {
-      if (selectedUnit != null && (string)selectedUnit.Get("unit_name") == "Town Hall") {
-        selectedUnit.Call("buy_unit", "Grasshopper");
+      if (selectedUnit is TownHall th) {
+        th.BuyUnit(UnitType.Ant);
       }
     }));
 
@@ -66,16 +66,15 @@ public partial class UiPanel : Panel {
       selectedUnitName = u.unitName;
     }
 
-    if (selectedUnitName == "Town Hall") {
-      if ((string)selectedUnit.Get("status") == "Idle") {
-        townHallPanelVisible = true;
-      } else {
+    if (selectedUnit is TownHall th) {
+      if (th.status == BuildingStatus.Building) {
         buildPanelVisible = true;
-        // progress_label.Text = "Progress: " + str(round(selectedUnit.build_progress * 100 / selectedUnit.build_time)) + "%";
+      } else {
+        townHallPanelVisible = true;
       }
     }
 
-    if (selectedUnitName == "Ant") {
+    if (selectedUnit is Ant a) {
       builderPanelVisible = true;
     }
 
