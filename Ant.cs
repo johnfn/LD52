@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public enum UnitStatus {
@@ -107,11 +108,40 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
             resourceType = harvestState.resource.resourceType
           };
 
-          harvestState = null;
-          _status = UnitStatus.Idle;
+          var resourceDropoff = FindNearestResourceDropoff();
+
+          if (resourceDropoff != null) {
+            harvestState.path = Util.Pathfind(GetTree(), GlobalPosition, resourceDropoff.GlobalPosition);
+            harvestState.status = HarvestStatus.Returning;
+          } else {
+            // TODO: Show some sort of error
+            harvestState = null;
+            _status = UnitStatus.Idle;
+          }
         }
       }
     }
+
+    if (harvestState.status == HarvestStatus.Returning) {
+      var done = Util.WalkAlongPath(this, harvestState.path, _speed * (float)delta);
+
+      if (done) {
+        harvestState.status = HarvestStatus.Harvesting;
+        return;
+      }
+    }
+  }
+
+  public Node2D FindNearestResourceDropoff() {
+    var results = GetTree().GetNodesInGroup("resource_dropoff").ToList().OrderBy((a_) => {
+      if (a_ is Node2D a) {
+        return GlobalPosition.DistanceTo(a.GlobalPosition);
+      }
+
+      return 99999999999;
+    });
+
+    return results.FirstOrDefault() as Node2D;
   }
 
   public void Move(Vector2 destination) {

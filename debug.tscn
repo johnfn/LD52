@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bexji8bo5mj5g"]
+
+[ext_resource type="Texture2D" uid="uid://buq3j6ypa1i03" path="res://assets/debug.png" id="1_lxavo"]
+
+[node name="Debug" type="Sprite2D" groups=["debug"]]
+position = Vector2(-283, 556)
+texture = ExtResource("1_lxavo")

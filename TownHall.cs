@@ -9,7 +9,7 @@ public enum BuildingStatus {
   Building
 }
 
-public partial class TownHall : Sprite2D, IBuilding, ISelectable {
+public partial class TownHall : Sprite2D, IBuilding, ISelectable, ICollider {
 
   // IBuilding
   public float buildProgress { get; set; } = 0;
@@ -20,6 +20,11 @@ public partial class TownHall : Sprite2D, IBuilding, ISelectable {
   // IHoverable
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;
+  public Area2D colliderShape {
+    get {
+      return _shape;
+    }
+  }
 
   public void OnHoverStart() {
     Modulate = new Color(1, 1, 1, 0.5f);

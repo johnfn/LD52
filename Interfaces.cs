@@ -30,3 +30,7 @@ public interface IBuilding {
   public string unitName { get; set; }
   public BuildingStatus status { get; set; }
 }
+
+public interface ICollider {
+  public Area2D colliderShape { get; }
+}

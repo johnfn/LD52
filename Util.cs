@@ -6,6 +6,7 @@ using Godot;
 public class Util {
   public static int CELL_SIZE = 32;
   public static bool DEBUG = true;
+  public static bool DEBUG_PATH = false;
 
   public static Vector2 MousePosition(SceneTree tree) {
     return tree.Root.GetNode<Node2D>("Root").GetLocalMousePosition();
@@ -18,15 +19,94 @@ public class Util {
     );
   }
 
+  // If end is already on top of a collision, find a safe end point which is not
+  // colliding with anything instead.
+  private static Vector2 _getSafeEnd(
+    SceneTree tree,
+    Vector2 initialEnd
+  ) {
+    var f = new PhysicsPointQueryParameters2D();
+
+    f.Position = initialEnd;
+    f.Exclude = new Godot.Collections.Array<RID>();
+    f.CollideWithAreas = true;
+    f.CollideWithBodies = true;
+    f.CollisionMask = 2;
+
+    var collisions = tree.Root.World2d.DirectSpaceState.IntersectPoint(f);
+
+    if (collisions.Count == 0) {
+      GD.Print("Nothing to worry about!");
+
+      return initialEnd;
+    }
+
+    // spiral around initialEnd until we find a safe point
+
+    var end = initialEnd;
+
+    for (var i = 0; i < 20; i++) {
+      foreach (var direction in new List<Vector2>() {
+        new Vector2(1, 0),
+        new Vector2(0, 1),
+        new Vector2(-1, 0),
+        new Vector2(0, -1)
+      }) {
+        var nextEnd = end + i * direction * CELL_SIZE;
+
+        f.Position = nextEnd;
+
+        if (tree.Root.World2d.DirectSpaceState.IntersectPoint(f).Count == 0) {
+          GD.Print("Found safe end point" + i);
+          return nextEnd;
+        }
+      }
+    }
+
+    GD.Print("Could not find a safe end point");
+    return Vector2.Inf;
+  }
+
+  private static void DbgPoint(Vector2 p, SceneTree tree, Color color) {
+    var debug = GD.Load<PackedScene>("res://Debug.tscn").Instantiate<Node2D>();
+    tree.Root.AddChild(debug);
+    debug.GlobalPosition = p;
+    debug.Modulate = color;
+  }
+
   public static List<Vector2> Pathfind(
     SceneTree tree,
     Vector2 initialStart,
     Vector2 initialEnd
   ) {
+    if (DEBUG_PATH) {
+      var dbgs = tree.GetNodesInGroup("Debug");
+
+      foreach (Node2D dbg in dbgs) {
+        dbg.QueueFree();
+      }
+    }
+
     var allColliders = tree.GetNodesInGroup("collider");
 
     var start = RoundToCell(initialStart);
     var end = RoundToCell(initialEnd);
+
+    end = _getSafeEnd(tree, end);
+
+    if (end == Vector2.Inf) {
+      GD.Print("Could not find a path");
+
+      return new List<Vector2>() { };
+    }
+
+    if (DEBUG_PATH) {
+      DbgPoint(start, tree, new Color(1, 1, 0, 1f));
+    }
+
+    if (DEBUG_PATH) {
+      DbgPoint(end, tree, new Color(1, 1, 0, 1f));
+    }
 
     var topLeft = new Vector2(
         Math.Min(start.x, end.x),
@@ -72,6 +152,10 @@ public class Util {
           continue;
         }
 
+        if (DEBUG_PATH) {
+          DbgPoint(point, tree, new Color(0, 1, 0, 0.5f));
+        }
+
         pointIds[point] = lastId++;
         astar.AddPoint(lastId, point);
 
@@ -96,6 +180,9 @@ public class Util {
 
     if (!pointIds.ContainsKey(start) || !pointIds.ContainsKey(end)) {
       GD.Print("No path found");
+
+      GD.Print("start: " + start);
+      GD.Print("end: " + end);
 
       return new List<Vector2>();
     }
