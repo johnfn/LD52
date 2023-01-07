@@ -61,14 +61,28 @@ offset_right = 997.0
 offset_bottom = 1014.0
 script = ExtResource("6_o2q21")
 
-[node name="SelectedUnitLabel" type="Label" parent="UiPanel"]
+[node name="UnitPanel" type="Panel" parent="UiPanel"]
 layout_mode = 0
-offset_right = 251.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SelectedUnitLabel" type="Label" parent="UiPanel/UnitPanel"]
+layout_mode = 0
+offset_right = 509.0
 offset_bottom = 79.0
 theme_override_font_sizes/font_size = 40
 text = "Selection: Literally nothing"
 
+[node name="StatsLabel" type="Label" parent="UiPanel/UnitPanel"]
+layout_mode = 1
+offset_top = 83.0
+offset_right = 509.0
+offset_bottom = 162.0
+theme_override_font_sizes/font_size = 40
+text = "Selection: Literally nothing"
+
 [node name="BuildPanel" type="Panel" parent="UiPanel"]
+visible = false
 layout_mode = 0
 offset_left = -4.0
 offset_top = 61.0
@@ -83,6 +97,7 @@ theme_override_font_sizes/font_size = 40
 text = "Progress: 0 / 50"
 
 [node name="TownHallPanel" type="Panel" parent="UiPanel"]
+visible = false
 layout_mode = 0
 offset_left = -9.0
 offset_top = 58.0

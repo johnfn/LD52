@@ -5,17 +5,20 @@ enum UnitStatus {
   MOVING
 }
 
+# Used by UIPanel
+var unit_name = "Ant"
+var health = 10
+
+# Private
 var speed = 500
 var status: UnitStatus = UnitStatus.IDLE
-var move_destination: Vector2 = Vector2.ZERO # godot does not allow null for Vector2
+var path: Array[Vector2] = []
 
 @onready
 var shape = $Area
 
 @onready
 var ui_panel = $"/root/Root/UiPanel"
-
-var unit_name = "Ant"
 
 func _ready():
   shape.connect("mouse_entered", func ():
@@ -31,31 +34,31 @@ func _ready():
   )
 
 func _process(_delta: float):
-  pass
+  if status == UnitStatus.MOVING:
+    if path.size() > 0:
+      var next_point = path[0]
+      var direction = (next_point - global_position).normalized()
+      var distance = (next_point - global_position).length()
+
+      if distance < 1:
+        path.pop_front()
+      else:
+        global_position += direction * speed * _delta
+    else:
+      status = UnitStatus.IDLE
 
 func move(destination: Vector2):
-  move_destination = destination
   status = UnitStatus.MOVING
-  queue_redraw()
+  path = find_path(global_position, destination)
 
-  print("Yeet")
 
-func round_to_32(vector: Vector2):
-  return Vector2(
-    round(vector.x / 32) * 32,
-    round(vector.y / 32) * 32
-  )
-
-func _draw():
-  if status != UnitStatus.MOVING:
-    return
-
+func find_path(initial_start: Vector2, initial_end: Vector2):
   var cell_size = 32
 
   var all_colliders = get_tree().get_nodes_in_group("collider")
 
-  var start = round_to_32(global_position)
-  var end = round_to_32(move_destination)
+  var start = round_to_32(initial_start)
+  var end = round_to_32(initial_end)
 
   var top_left = Vector2(min(start.x, end.x), min(start.y, end.y))
   var bottom_right = Vector2(max(start.x, end.x), max(start.y, end.y))
@@ -102,30 +105,120 @@ func _draw():
         Vector2(x + cell_size, y),
         Vector2(x - cell_size, y),
         Vector2(x, y + cell_size),
-        Vector2(x, y - cell_size)
+        Vector2(x, y - cell_size),
+        Vector2(x + cell_size, y + cell_size),
+        Vector2(x - cell_size, y - cell_size),
+        Vector2(x + cell_size, y - cell_size),
+        Vector2(x - cell_size, y + cell_size)
       ]
 
       for neighbor in neighbors:
         if point_ids.has(neighbor):
           astar.connect_points(point_ids[point], point_ids[neighbor])
 
-          draw_line(
-            point - global_position, 
-            neighbor - global_position, 
-            Color(0, 1, 0, 0.8)
-          )
-
   if !point_ids.has(start) or !point_ids.has(end):
     print("No path found")
-    return
+
+    return []
 
   var path = astar.get_point_path(
     point_ids[start], 
     point_ids[end]
   )
 
+  var array_path: Array[Vector2] = []
+
   for point in path:
-    draw_rect(Rect2(point - global_position, Vector2(32, 32)), Color(1, 0, 0, 0.8), false)
+    array_path.append(point)
+
+  return array_path
+
+func round_to_32(vector: Vector2):
+  return Vector2(
+    round(vector.x / 32) * 32,
+    round(vector.y / 32) * 32
+  )
+
+# func _draw():
+#   if status != UnitStatus.MOVING:
+#     return
+
+#   var cell_size = 32
+
+#   var all_colliders = get_tree().get_nodes_in_group("collider")
+
+#   var start = round_to_32(global_position)
+#   var end = round_to_32(move_destination)
+
+#   var top_left = Vector2(min(start.x, end.x), min(start.y, end.y))
+#   var bottom_right = Vector2(max(start.x, end.x), max(start.y, end.y))
+
+#   for collider in all_colliders:
+#     top_left.x = min(top_left.x, collider.global_position.x)
+#     top_left.y = min(top_left.y, collider.global_position.y)
+
+#     bottom_right.x = max(bottom_right.x, collider.global_position.x)
+#     bottom_right.y = max(bottom_right.y, collider.global_position.y)
+
+#   top_left -= Vector2(320, 320)
+#   bottom_right += Vector2(320, 320)
+
+#   top_left = round_to_32(top_left)
+#   bottom_right = round_to_32(bottom_right)
+
+#   var astar = AStar2D.new()
+#   var point_ids = {}
+#   var last_id = 0
+
+#   var f: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
+#   f.exclude = []
+#   f.collide_with_areas = true
+#   f.collide_with_bodies = true
+#   f.collision_mask = 0b00000000000000000000000000000010
+
+#   for x in range(top_left.x, bottom_right.x, cell_size):
+#     for y in range(top_left.y, bottom_right.y, cell_size):
+#       last_id += 1
+
+#       var point = Vector2(x, y)
+#       f.position = point
+
+#       var collisions = get_world_2d().direct_space_state.intersect_point(f)
+
+#       if collisions.size() > 0:
+#         continue
+
+#       point_ids[point] = last_id
+#       astar.add_point(last_id, Vector2(x, y))
+
+#       var neighbors = [
+#         Vector2(x + cell_size, y),
+#         Vector2(x - cell_size, y),
+#         Vector2(x, y + cell_size),
+#         Vector2(x, y - cell_size)
+#       ]
+
+#       for neighbor in neighbors:
+#         if point_ids.has(neighbor):
+#           astar.connect_points(point_ids[point], point_ids[neighbor])
+
+#           draw_line(
+#             point - global_position, 
+#             neighbor - global_position, 
+#             Color(0, 1, 0, 0.8)
+#           )
+
+#   if !point_ids.has(start) or !point_ids.has(end):
+#     print("No path found")
+#     return
+
+#   var path = astar.get_point_path(
+#     point_ids[start], 
+#     point_ids[end]
+#   )
+
+#   for point in path:
+#     draw_rect(Rect2(point - global_position, Vector2(32, 32)), Color(1, 0, 0, 0.8), false)
 
   # var stack = []
   # var prev_cell = {}
