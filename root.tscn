@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b2ioxh4mhw6y2"]
+[gd_scene load_steps=14 format=3 uid="uid://b2ioxh4mhw6y2"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://Twig.cs" id="4_bcwt3"]
 [ext_resource type="Script" path="res://Camera.cs" id="4_po8t6"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="6_hqid7"]
-[ext_resource type="PackedScene" uid="uid://noqqsuc8xwxj" path="res://scenes/resource_depot.tscn" id="7_6hxhf"]
 [ext_resource type="PackedScene" uid="uid://drlyhbmyyfjva" path="res://scenes/ui_panel.tscn" id="9_vx6l0"]
 [ext_resource type="PackedScene" uid="uid://dwmu32upluapl" path="res://scenes/resource_panel.tscn" id="10_nmyny"]
 
@@ -75,9 +74,7 @@ position = Vector2(13, -1)
 shape = SubResource("RectangleShape2D_pt062")
 
 [node name="TownHall" parent="Map" instance=ExtResource("4_21wg8")]
-position = Vector2(605, 792)
-
-[node name="ResourceDepot" parent="Map" instance=ExtResource("7_6hxhf")]
+position = Vector2(376, 791)
 
 [node name="Ant" parent="." instance=ExtResource("3_0h73t")]
 position = Vector2(1038, 392)
