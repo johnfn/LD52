@@ -127,9 +127,9 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
         // Add to resources.
 
         if (InventoryItem.resourceType == ResourceType.Twig) {
-          _resourcePanel.TwigCount += 5;
+          Globals.TwigCount += 5;
         } else if (InventoryItem.resourceType == ResourceType.Meat) {
-          _resourcePanel.MeatCount += 5;
+          Globals.MeatCount += 5;
         }
 
         InventoryItem = null;

@@ -1,5 +1,14 @@
 using Godot;
 
+public enum ResourceType {
+  Twig,
+  Meat,
+}
+
+public enum BuildingType {
+  TownHall,
+}
+
 public interface ISelectable {
   public bool isHoverable { get; set; }
   public int priority { get; set; }
@@ -8,10 +17,6 @@ public interface ISelectable {
   public void OnHoverStart();
 }
 
-public enum ResourceType {
-  Twig,
-  Meat,
-}
 
 public interface IResource {
   public int amount { get; set; }

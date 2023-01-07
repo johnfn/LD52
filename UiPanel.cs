@@ -36,7 +36,7 @@ public partial class UiPanel : Panel {
     townHallButton = GetNode<Button>("BuilderPanel/TownHallButton");
     townHallBuyGrasshopperButton = GetNode<Button>("TownHallPanel/BuyGrasshopper");
 
-    showCommandUi();
+    _showCommandUi();
 
     townHallBuyGrasshopperButton.Connect("pressed", Callable.From(() => {
       if (selectedUnit is TownHall th) {
@@ -45,16 +45,23 @@ public partial class UiPanel : Panel {
     }));
 
     townHallButton.Connect("pressed", Callable.From(() => {
-      selectedBuilding = GD.Load<PackedScene>("res://scenes/town_hall.tscn").Instantiate<Sprite2D>();
-
-      selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
-
-      GetNode("/root/Root").AddChild(selectedBuilding);
-      gameMode = GameMode.Build;
+      _beginBuilding(BuildingType.TownHall);
     }));
   }
 
-  private void showCommandUi() {
+  private void _beginBuilding(BuildingType buildingType) {
+    if (buildingType == BuildingType.TownHall) {
+      if (Globals.TwigCount > 50) {
+        selectedBuilding = GD.Load<PackedScene>("res://scenes/town_hall.tscn").Instantiate<Sprite2D>();
+        selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
+
+        GetNode("/root/Root").AddChild(selectedBuilding);
+        gameMode = GameMode.Build;
+      }
+    }
+  }
+
+  private void _showCommandUi() {
     var townHallPanelVisible = false;
     var buildPanelVisible = false;
     var unitPanelVisible = false;
@@ -105,6 +112,20 @@ public partial class UiPanel : Panel {
     }
   }
 
+  private void _placeBuilding() {
+    if (Globals.TwigCount > 50) {
+      Globals.TwigCount -= 50;
+
+      selectedBuilding.Modulate = new Color(1, 1, 1, 1);
+      selectedBuilding = null;
+      gameMode = GameMode.Command;
+    } else {
+      // TODO
+
+      GD.Print("Not enough twigs");
+    }
+  }
+
   private void _handleMouseDown(InputEventMouseButton mouseEvent) {
     if (!mouseEvent.Pressed) {
       return;
@@ -112,9 +133,7 @@ public partial class UiPanel : Panel {
 
     if (gameMode == GameMode.Build) {
       if (mouseEvent.ButtonIndex == MouseButton.Left) {
-        selectedBuilding.Modulate = new Color(1, 1, 1, 1);
-        selectedBuilding = null;
-        gameMode = GameMode.Command;
+        _placeBuilding();
 
         return;
       }
@@ -148,7 +167,7 @@ public partial class UiPanel : Panel {
 
         if (unit is ISelectable s) {
           selectedUnit = s;
-          showCommandUi();
+          _showCommandUi();
         }
       }
     }
@@ -207,7 +226,7 @@ public partial class UiPanel : Panel {
 
   public override void _Process(double delta) {
     if (gameMode == GameMode.Command) {
-      showCommandUi();
+      _showCommandUi();
     }
   }
 }
