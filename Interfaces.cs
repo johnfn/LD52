@@ -1,3 +1,5 @@
+using Godot;
+
 public interface ISelectable {
   public bool isHoverable { get; set; }
   public int priority { get; set; }
@@ -6,8 +8,15 @@ public interface ISelectable {
   public void OnHoverStart();
 }
 
+public enum ResourceType {
+  Twig,
+}
+
 public interface IResource {
   public int amount { get; set; }
+  public float harvestTime { get; set; }
+  public Vector2 resourceGlobalPosition { get; }
+  public ResourceType resourceType { get; set; }
 }
 
 public interface IUnit {

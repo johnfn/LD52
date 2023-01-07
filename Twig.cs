@@ -7,6 +7,15 @@ public partial class Twig : Sprite2D, ISelectable, IResource {
 
   // IResource
   public int amount { get; set; } = 10;
+  public ResourceType resourceType { get; set; } = ResourceType.Twig;
+
+  public Vector2 resourceGlobalPosition {
+    get {
+      return GlobalPosition;
+    }
+  }
+
+  public float harvestTime { get; set; } = Util.DEBUG ? 0.1f : 5f;
 
   public void OnHoverStart() {
     Modulate = new Color(1, 1, 1, 0.5f);

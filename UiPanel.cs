@@ -81,6 +81,10 @@ public partial class UiPanel : Panel {
     if (selectedUnit is Ant a) {
       builderPanelVisible = true;
       builderPanelLabel.Text = "Selected Unit: " + a.unitName;
+
+      if (a.InventoryItem != null) {
+        builderPanelLabel.Text += " - Holding " + a.InventoryItem.resourceType;
+      }
     }
 
     townHallPanel.Visible = townHallPanelVisible;

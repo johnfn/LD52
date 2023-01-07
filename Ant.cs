@@ -7,6 +7,24 @@ public enum UnitStatus {
   Harvesting
 }
 
+public enum HarvestStatus {
+  GoingToResource,
+  Harvesting,
+  Returning
+}
+
+public class HarvestState {
+  public IResource resource { get; set; }
+  public float harvestProgress { get; set; }
+  public float harvestTime { get; set; }
+  public HarvestStatus status { get; set; }
+  public List<Vector2> path { get; set; }
+}
+
+public class InventoryItem {
+  public ResourceType resourceType { get; set; }
+}
+
 public partial class Ant : Sprite2D, IUnit, ISelectable {
 
   // IHoverable
@@ -28,7 +46,15 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
 
   private int _speed = 500;
   private UnitStatus _status = UnitStatus.Idle;
+
+  // Moving state
   private List<Vector2> _path = new List<Vector2>();
+
+  // Harvesting state
+  private HarvestState harvestState = null;
+
+  // Worker stuff
+  public InventoryItem InventoryItem { get; private set; } = null;
 
   private Area2D _shape;
 
@@ -42,18 +68,48 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
 
   public override void _Process(double delta) {
     if (_status == UnitStatus.Moving) {
-      if (_path.Count > 0) {
-        var target = _path[0];
-        var distance = Position.DistanceTo(target);
-        var direction = (target - Position).Normalized();
+      var done = Util.WalkAlongPath(this, _path, _speed * (float)delta);
 
-        if (distance > 1) {
-          Position += direction * _speed * (float)delta;
-        } else {
-          _path.RemoveAt(0);
-        }
-      } else {
+      if (done) {
         _status = UnitStatus.Idle;
+      }
+    } else if (_status == UnitStatus.Harvesting) {
+      _processHarvest(delta);
+    }
+  }
+
+  private void _processHarvest(double delta) {
+    if (harvestState.status == HarvestStatus.GoingToResource) {
+      var done = Util.WalkAlongPath(this, harvestState.path, _speed * (float)delta);
+
+      if (done) {
+        harvestState.status = HarvestStatus.Harvesting;
+        return;
+      }
+    }
+
+    if (harvestState.status == HarvestStatus.Harvesting) {
+      harvestState.harvestProgress += (float)delta;
+
+      if (harvestState.harvestProgress >= harvestState.harvestTime) {
+        harvestState.resource.amount -= 1;
+        harvestState.harvestProgress = 0;
+
+        if (harvestState.resource.amount <= 0) {
+          // Harvest complete!
+
+          // harvestState.status = HarvestStatus.Returning;
+          // harvestState.path = Util.Pathfind(GetTree(), GlobalPosition, _uiPanel.townHallGlobalPosition);
+
+          // TODO: Return to town hall, or another building.
+
+          InventoryItem = new InventoryItem {
+            resourceType = harvestState.resource.resourceType
+          };
+
+          harvestState = null;
+          _status = UnitStatus.Idle;
+        }
       }
     }
   }
@@ -65,6 +121,14 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
 
   public void Harvest(IResource resource) {
     _status = UnitStatus.Harvesting;
+
+    harvestState = new HarvestState {
+      resource = resource,
+      harvestProgress = 0,
+      harvestTime = resource.harvestTime,
+      status = HarvestStatus.GoingToResource,
+      path = Util.Pathfind(GetTree(), GlobalPosition, resource.resourceGlobalPosition)
+    };
 
     GD.Print("Harvesting");
   }

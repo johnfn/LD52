@@ -5,6 +5,7 @@ using Godot;
 
 public class Util {
   public static int CELL_SIZE = 32;
+  public static bool DEBUG = true;
 
   public static Vector2 MousePosition(SceneTree tree) {
     return tree.Root.GetNode<Node2D>("Root").GetLocalMousePosition();
@@ -100,5 +101,27 @@ public class Util {
     }
 
     return astar.GetPointPath(pointIds[start], pointIds[end]).ToList();
+  }
+
+  /** Returns true when done */
+  public static bool WalkAlongPath(
+    Node2D node,
+    List<Vector2> path,
+    float speed
+  ) {
+    if (path.Count == 0) {
+      return true;
+    }
+
+    var target = path[0];
+    var direction = (target - node.GlobalPosition).Normalized();
+
+    node.GlobalPosition += direction * speed;
+
+    if (node.GlobalPosition.DistanceTo(target) < 1) {
+      path.RemoveAt(0);
+    }
+
+    return path.Count == 0;
   }
 }
