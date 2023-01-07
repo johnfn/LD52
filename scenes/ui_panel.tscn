@@ -6,17 +6,23 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs4lf"]
 
 [node name="UiPanel" type="Panel"]
-offset_left = 4.0
-offset_top = 919.0
-offset_right = 995.0
-offset_bottom = 1199.0
+custom_minimum_size = Vector2(600, 300)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_1p6nn")
 script = ExtResource("1_ir2a3")
 
-[node name="UnitPanel" type="Panel" parent="."]
+[node name="UnitPanel" type="Control" parent="."]
 visible = false
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_1p6nn")
 
 [node name="SelectedUnitLabel" type="Label" parent="UnitPanel"]
@@ -34,9 +40,13 @@ theme = ExtResource("1_1p6nn")
 theme_override_font_sizes/font_size = 40
 text = "Stats"
 
-[node name="BuilderPanel" type="Panel" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="BuilderPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_1p6nn")
 
 [node name="SelectedUnitLabel" type="Label" parent="BuilderPanel"]
@@ -65,12 +75,14 @@ theme_override_font_sizes/font_size = 40
 text = "Resource
 Depot"
 
-[node name="BuildPanel" type="Panel" parent="."]
+[node name="BuildPanel" type="Control" parent="."]
 visible = false
-offset_left = -4.0
-offset_top = 61.0
-offset_right = 991.0
-offset_bottom = 280.0
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_1p6nn")
 
 [node name="ProgressLabel" type="Label" parent="BuildPanel"]
@@ -80,12 +92,14 @@ theme = ExtResource("1_1p6nn")
 theme_override_font_sizes/font_size = 40
 text = "Progress: 0 / 50"
 
-[node name="TownHallPanel" type="Panel" parent="."]
+[node name="TownHallPanel" type="Control" parent="."]
 visible = false
-offset_left = -9.0
-offset_top = 58.0
-offset_right = 986.0
-offset_bottom = 277.0
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_1p6nn")
 
 [node name="BuyGrasshopper" type="Button" parent="TownHallPanel"]

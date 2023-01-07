@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b2ioxh4mhw6y2"]
+[gd_scene load_steps=15 format=3 uid="uid://b2ioxh4mhw6y2"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Twig.cs" id="4_bcwt3"]
 [ext_resource type="Script" path="res://Camera.cs" id="4_po8t6"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="6_hqid7"]
+[ext_resource type="Theme" uid="uid://beulorra254b2" path="res://assets/UI/SimpleBox.tres" id="9_tyxdu"]
 [ext_resource type="PackedScene" uid="uid://drlyhbmyyfjva" path="res://scenes/ui_panel.tscn" id="9_vx6l0"]
 [ext_resource type="PackedScene" uid="uid://dwmu32upluapl" path="res://scenes/resource_panel.tscn" id="10_nmyny"]
 
@@ -113,6 +114,29 @@ shape = SubResource("RectangleShape2D_3o8ia")
 
 [node name="Static" type="CanvasLayer" parent="."]
 
-[node name="UiPanel" parent="Static" instance=ExtResource("9_vx6l0")]
+[node name="UIRoot" type="Control" parent="Static"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = 34.0
+offset_right = -43.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_tyxdu")
 
-[node name="ResourcePanel" parent="Static" instance=ExtResource("10_nmyny")]
+[node name="UiPanel" parent="Static/UIRoot" instance=ExtResource("9_vx6l0")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+grow_vertical = 0
+
+[node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
+layout_mode = 0

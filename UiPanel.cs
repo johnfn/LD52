@@ -14,26 +14,26 @@ public partial class UiPanel : Panel {
   public Sprite2D selectedBuilding = null;
   public BuildingType selectedBuildingType = BuildingType.None;
 
-  Panel townHallPanel;
-  Panel buildPanel;
+  Control townHallPanel;
+  Control buildPanel;
   Label progressLabel;
-  Panel unitPanel;
+  Control unitPanel;
   Label statsLabel;
   Label selectedUnitLabel;
   Label builderPanelLabel;
-  Panel builderPanel;
+  Control builderPanel;
   Button townHallButton;
   Button townHallBuyGrasshopperButton;
   Button depotButton;
 
   public override void _Ready() {
-	townHallPanel = GetNode<Panel>("TownHallPanel");
-	buildPanel = GetNode<Panel>("BuildPanel");
-	unitPanel = GetNode<Panel>("UnitPanel");
+	townHallPanel = GetNode<Control>("TownHallPanel");
+	buildPanel = GetNode<Control>("BuildPanel");
+	unitPanel = GetNode<Control>("UnitPanel");
 	progressLabel = GetNode<Label>("BuildPanel/ProgressLabel");
 	statsLabel = GetNode<Label>("UnitPanel/StatsLabel");
 	selectedUnitLabel = GetNode<Label>("UnitPanel/SelectedUnitLabel");
-	builderPanel = GetNode<Panel>("BuilderPanel");
+	builderPanel = GetNode<Control>("BuilderPanel");
 	builderPanelLabel = GetNode<Label>("BuilderPanel/SelectedUnitLabel");
 	townHallButton = GetNode<Button>("BuilderPanel/TownHallButton");
 	depotButton = GetNode<Button>("BuilderPanel/ResourceDepot");

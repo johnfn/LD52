@@ -42,7 +42,7 @@ public partial class TownHall : Sprite2D, IBuilding, ISelectable, ICollider {
 
   public override void _Ready() {
     _shape = GetNode<Area2D>("Area");
-    _uiPanel = GetNode<UiPanel>("/root/Root/Static/UiPanel");
+    _uiPanel = GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
     _antScene = GD.Load<PackedScene>("res://Scenes/ant.tscn");
   }
 
