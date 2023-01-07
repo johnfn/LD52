@@ -25,7 +25,7 @@ func _ready():
   )
 
   shape.connect("mouse_button_pressed", func (pos):
-    ui_panel.select(self)
+    ui_panel.Select(self)
   )
 
 func _process(delta):

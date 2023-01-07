@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2ioxh4mhw6y2"]
+[gd_scene load_steps=10 format=3 uid="uid://b2ioxh4mhw6y2"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
 [ext_resource type="PackedScene" uid="uid://dr36wj34htulv" path="res://scenes/ant.tscn" id="3_0h73t"]
+[ext_resource type="Script" path="res://Ant.cs" id="4_j2lkr"]
+[ext_resource type="Script" path="res://UiPanel.cs" id="5_fx2xo"]
 [ext_resource type="Script" path="res://Camera.gd" id="5_w81tg"]
-[ext_resource type="Script" path="res://UiPanel.gd" id="6_o2q21"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irmio"]
 size = Vector2(197, 1199.5)
@@ -56,6 +57,7 @@ centered = false
 
 [node name="Ant" parent="." instance=ExtResource("3_0h73t")]
 position = Vector2(199, 251)
+script = ExtResource("4_j2lkr")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(890, 606)
@@ -96,7 +98,7 @@ offset_left = 4.0
 offset_top = 919.0
 offset_right = 995.0
 offset_bottom = 1199.0
-script = ExtResource("6_o2q21")
+script = ExtResource("5_fx2xo")
 
 [node name="UnitPanel" type="Panel" parent="Static/UiPanel"]
 visible = false
