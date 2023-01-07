@@ -19,6 +19,7 @@ public partial class UiPanel : Control {
   Label progressLabel;
   Control unitPanel;
   Control builderPanel;
+  Control barracksPanel;
   Button townHallButton;
   Button townHallBuyGrasshopperButton;
   Button depotButton;
@@ -36,6 +37,7 @@ public partial class UiPanel : Control {
     buildPanel = selectionCommandsPanel.GetNode<Control>("BuildPanel");
     unitPanel = selectionCommandsPanel.GetNode<Control>("UnitPanel");
     builderPanel = selectionCommandsPanel.GetNode<Control>("BuilderPanel");
+    barracksPanel = selectionCommandsPanel.GetNode<Control>("BarracksPanel");
 
 
     // NameTag
@@ -90,6 +92,7 @@ public partial class UiPanel : Control {
     var buildPanelVisible = false;
     var unitPanelVisible = false;
     var builderPanelVisible = false;
+    var barracksPanelVisible = false;
 
     if (selectedUnit == null) {
       selectionNameLabel.Text = "Selected Unit: None";
@@ -124,6 +127,7 @@ public partial class UiPanel : Control {
     buildPanel.Visible = buildPanelVisible;
     unitPanel.Visible = unitPanelVisible;
     builderPanel.Visible = builderPanelVisible;
+    barracksPanel.Visible = barracksPanelVisible;
   }
 
   public override void _Input(InputEvent @event) {
