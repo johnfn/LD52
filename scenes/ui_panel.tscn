@@ -78,7 +78,6 @@ theme_override_font_sizes/font_size = 40
 text = "No Actions"
 
 [node name="BuilderPanel" type="Control" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,7 +107,18 @@ theme_override_font_sizes/font_size = 40
 text = "Resource
 Depot"
 
+[node name="BarracksButton" type="Button" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands/BuilderPanel"]
+layout_mode = 1
+offset_left = 440.0
+offset_top = 90.0
+offset_right = 643.0
+offset_bottom = 222.0
+theme_override_font_sizes/font_size = 40
+text = "Bugarrack
+Obama"
+
 [node name="BarracksPanel" type="Control" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
