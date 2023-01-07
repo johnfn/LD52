@@ -23,6 +23,7 @@ public partial class UiPanel : Control {
   Button townHallButton;
   Button townHallBuyGrasshopperButton;
   Button depotButton;
+  Button barracksButton;
 
   Panel selectionInfoPanel;
   Panel selectionCommandsPanel;
@@ -49,6 +50,7 @@ public partial class UiPanel : Control {
     progressLabel = buildPanel.GetNode<Label>("ProgressLabel");
     townHallButton = builderPanel.GetNode<Button>("TownHallButton");
     depotButton = builderPanel.GetNode<Button>("ResourceDepot");
+    barracksButton = builderPanel.GetNode<Button>("BarracksButton");
     townHallBuyGrasshopperButton = townHallPanel.GetNode<Button>("BuyGrasshopper");
 
 
@@ -66,8 +68,11 @@ public partial class UiPanel : Control {
     }));
 
     depotButton.Connect("pressed", Callable.From(() => {
-      GD.Print("Buy Depot");
       _beginBuilding(BuildingType.ResourceDepot);
+    }));
+
+    barracksButton.Connect("pressed", Callable.From(() => {
+      _beginBuilding(BuildingType.Barrachnid);
     }));
   }
 

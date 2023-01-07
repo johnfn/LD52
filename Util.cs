@@ -237,6 +237,18 @@ public class Util {
           description = "Your ants can drop off resources at a resource depot."
         }
       },
+
+      {
+        BuildingType.Barrachnid,
+        new BuildingStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 20,
+          meatCost = 0,
+          resourcePath = "res://scenes/bug_barracks.tscn",
+          description = "Train bug warriors to fight bug battles!"
+        }
+      },
     };
     }
   }
