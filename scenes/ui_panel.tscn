@@ -145,3 +145,24 @@ theme = ExtResource("1_1p6nn")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_rs4lf")
 text = "Buy Grasshopper (5 Meat)"
+
+[node name="ResourceDepotPanel" type="Control" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1p6nn")
+
+[node name="BuyGrasshopper" type="Button" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands/ResourceDepotPanel"]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 428.0
+offset_bottom = 87.0
+theme = ExtResource("1_1p6nn")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs4lf")
+text = "Buy Grasshopper (5 Meat)"
