@@ -23,3 +23,7 @@ window/size/viewport_height=1000
 [dotnet]
 
 project/assembly_name="LD52"
+
+[layer_names]
+
+2d_physics/layer_2="Collision"
