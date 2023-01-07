@@ -8,7 +8,18 @@ public enum ResourceType {
 public enum BuildingType {
   TownHall,
   ResourceDepot,
+  None,
 }
+
+public struct BuildingStats {
+  public float buildTime;
+  public int health;
+  public int twigCost;
+  public int meatCost;
+  public string resourcePath;
+  public string description;
+}
+
 
 public interface ISelectable {
   public bool isHoverable { get; set; }

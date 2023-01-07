@@ -12,6 +12,7 @@ public partial class UiPanel : Panel {
   public ISelectable selectedUnit = null;
   public ISelectable hoveredUnit = null;
   public Sprite2D selectedBuilding = null;
+  public BuildingType selectedBuildingType = BuildingType.None;
 
   Panel townHallPanel;
   Panel buildPanel;
@@ -57,24 +58,18 @@ public partial class UiPanel : Panel {
   }
 
   private void _beginBuilding(BuildingType buildingType) {
-    if (buildingType == BuildingType.TownHall) {
-      if (Globals.TwigCount > 50) {
-        selectedBuilding = GD.Load<PackedScene>("res://scenes/town_hall.tscn").Instantiate<Sprite2D>();
-        selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
+    var stats = Util.BuildingStats[buildingType];
 
-        GetNode("/root/Root").AddChild(selectedBuilding);
-        gameMode = GameMode.Build;
-      }
-    }
+    if (
+      Globals.TwigCount >= stats.twigCost &&
+      Globals.MeatCount >= stats.meatCost
+    ) {
+      selectedBuildingType = buildingType;
+      selectedBuilding = GD.Load<PackedScene>(stats.resourcePath).Instantiate<Sprite2D>();
+      selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
 
-    if (buildingType == BuildingType.ResourceDepot) {
-      if (Globals.TwigCount > 50) {
-        selectedBuilding = GD.Load<PackedScene>("res://scenes/resource_depot.tscn").Instantiate<Sprite2D>();
-        selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
-
-        GetNode("/root/Root").AddChild(selectedBuilding);
-        gameMode = GameMode.Build;
-      }
+      GetNode("/root/Root").AddChild(selectedBuilding);
+      gameMode = GameMode.Build;
     }
   }
 
@@ -130,11 +125,22 @@ public partial class UiPanel : Panel {
   }
 
   private void _placeBuilding() {
-    if (Globals.TwigCount > 50) {
-      Globals.TwigCount -= 50;
+    if (selectedBuildingType == BuildingType.None) {
+      return;
+    }
+
+    var stats = Util.BuildingStats[selectedBuildingType];
+
+    if (
+      Globals.TwigCount >= stats.twigCost &&
+      Globals.MeatCount >= stats.meatCost
+    ) {
+      Globals.TwigCount -= stats.twigCost;
+      Globals.MeatCount -= stats.meatCost;
 
       selectedBuilding.Modulate = new Color(1, 1, 1, 1);
       selectedBuilding = null;
+      selectedBuildingType = BuildingType.None;
       gameMode = GameMode.Command;
     } else {
       // TODO

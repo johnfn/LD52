@@ -210,4 +210,34 @@ public class Util {
 
     return path.Count == 0;
   }
+
+  public static Dictionary<BuildingType, BuildingStats> BuildingStats {
+    get {
+      return new Dictionary<BuildingType, BuildingStats>() {
+      {
+        BuildingType.TownHall,
+        new BuildingStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 50,
+          meatCost = 0,
+          resourcePath = "res://scenes/town_hall.tscn",
+          description = "The town hall is the center of your town. It is where you can build new buildings and recruit new villagers."
+        }
+      },
+
+      {
+        BuildingType.ResourceDepot,
+        new BuildingStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 20,
+          meatCost = 0,
+          resourcePath = "res://scenes/resource_depot.tscn",
+          description = "Your ants can drop off resources at a resource depot."
+        }
+      },
+    };
+    }
+  }
 }
