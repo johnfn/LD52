@@ -99,11 +99,6 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
         if (harvestState.resource.amount <= 0) {
           // Harvest complete!
 
-          // harvestState.status = HarvestStatus.Returning;
-          // harvestState.path = Util.Pathfind(GetTree(), GlobalPosition, _uiPanel.townHallGlobalPosition);
-
-          // TODO: Return to town hall, or another building.
-
           InventoryItem = new InventoryItem {
             resourceType = harvestState.resource.resourceType
           };
@@ -114,7 +109,8 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
             harvestState.path = Util.Pathfind(GetTree(), GlobalPosition, resourceDropoff.GlobalPosition);
             harvestState.status = HarvestStatus.Returning;
           } else {
-            // TODO: Show some sort of error
+            // TODO: Show some sort of error; probably it was destroyed or sth
+
             harvestState = null;
             _status = UnitStatus.Idle;
           }
@@ -126,7 +122,11 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
       var done = Util.WalkAlongPath(this, harvestState.path, _speed * (float)delta);
 
       if (done) {
-        harvestState.status = HarvestStatus.Harvesting;
+        InventoryItem = null;
+
+        harvestState.status = HarvestStatus.GoingToResource;
+        harvestState.path = Util.Pathfind(GetTree(), GlobalPosition, harvestState.resource.resourceGlobalPosition);
+
         return;
       }
     }

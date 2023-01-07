@@ -57,7 +57,6 @@ public class Util {
         f.Position = nextEnd;
 
         if (tree.Root.World2d.DirectSpaceState.IntersectPoint(f).Count == 0) {
-          GD.Print("Found safe end point" + i);
           return nextEnd;
         }
       }
