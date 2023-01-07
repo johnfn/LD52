@@ -23,6 +23,7 @@ public partial class UiPanel : Panel {
   Panel builderPanel;
   Button townHallButton;
   Button townHallBuyGrasshopperButton;
+  Button depotButton;
 
   public override void _Ready() {
     townHallPanel = GetNode<Panel>("TownHallPanel");
@@ -34,6 +35,7 @@ public partial class UiPanel : Panel {
     builderPanel = GetNode<Panel>("BuilderPanel");
     builderPanelLabel = GetNode<Label>("BuilderPanel/SelectedUnitLabel");
     townHallButton = GetNode<Button>("BuilderPanel/TownHallButton");
+    depotButton = GetNode<Button>("BuilderPanel/ResourceDepot");
     townHallBuyGrasshopperButton = GetNode<Button>("TownHallPanel/BuyGrasshopper");
 
     _showCommandUi();
@@ -47,12 +49,27 @@ public partial class UiPanel : Panel {
     townHallButton.Connect("pressed", Callable.From(() => {
       _beginBuilding(BuildingType.TownHall);
     }));
+
+    depotButton.Connect("pressed", Callable.From(() => {
+      GD.Print("Buy Depot");
+      _beginBuilding(BuildingType.ResourceDepot);
+    }));
   }
 
   private void _beginBuilding(BuildingType buildingType) {
     if (buildingType == BuildingType.TownHall) {
       if (Globals.TwigCount > 50) {
         selectedBuilding = GD.Load<PackedScene>("res://scenes/town_hall.tscn").Instantiate<Sprite2D>();
+        selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
+
+        GetNode("/root/Root").AddChild(selectedBuilding);
+        gameMode = GameMode.Build;
+      }
+    }
+
+    if (buildingType == BuildingType.ResourceDepot) {
+      if (Globals.TwigCount > 50) {
+        selectedBuilding = GD.Load<PackedScene>("res://scenes/resource_depot.tscn").Instantiate<Sprite2D>();
         selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
 
         GetNode("/root/Root").AddChild(selectedBuilding);

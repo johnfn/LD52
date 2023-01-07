@@ -7,6 +7,7 @@ public enum ResourceType {
 
 public enum BuildingType {
   TownHall,
+  ResourceDepot,
 }
 
 public interface ISelectable {
