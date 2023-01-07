@@ -9,19 +9,27 @@ public enum BuildingStatus {
   Building
 }
 
-public interface IBuilding {
-  public float buildProgress { get; set; }
-  public float buildTime { get; set; }
-  public string unitName { get; set; }
-  public BuildingStatus status { get; set; }
-}
+public partial class TownHall : Sprite2D, IBuilding, ISelectable {
 
-
-public partial class TownHall : Sprite2D, IBuilding {
+  // IBuilding
   public float buildProgress { get; set; } = 0;
   public float buildTime { get; set; } = 0.1f;
   public string unitName { get; set; } = "Town Hall";
   public BuildingStatus status { get; set; } = BuildingStatus.Idle;
+
+  // IHoverable
+  public bool isHoverable { get; set; } = true;
+  public int priority { get; set; } = 0;
+
+  public void OnHoverStart() {
+    Modulate = new Color(1, 1, 1, 0.5f);
+  }
+
+  public void OnHoverEnd() {
+    Modulate = new Color(1, 1, 1, 1f);
+  }
+
+  // Locals
 
   private Area2D _shape;
   private UiPanel _uiPanel;
@@ -31,18 +39,6 @@ public partial class TownHall : Sprite2D, IBuilding {
     _shape = GetNode<Area2D>("Area");
     _uiPanel = GetNode<UiPanel>("/root/Root/Static/UiPanel");
     _antScene = GD.Load<PackedScene>("res://Scenes/ant.tscn");
-
-    _shape.Connect("mouse_entered", Callable.From(() => {
-      Modulate = new Color(1, 1, 1, 0.5f);
-    }));
-
-    _shape.Connect("mouse_exited", Callable.From(() => {
-      Modulate = new Color(1, 1, 1, 1f);
-    }));
-
-    _shape.Connect("mouse_button_pressed", Callable.From((Vector2 pos) => {
-      _uiPanel.Select(this);
-    }));
   }
 
   public override void _Process(double delta) {
