@@ -44,3 +44,7 @@ func select(unit: Sprite2D):
   selected_unit = unit
 
   update_ui()
+
+func move(position: Vector2):
+  if selected_unit != null and selected_unit.name == "Ant":
+    selected_unit.move(position)
