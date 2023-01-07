@@ -36,7 +36,8 @@ func _process(delta):
       build_time = 0
 
 func buy_unit(name: String): 
-  status = "Building"
+  if name == "Grasshopper":
+    status = "Building"
 
-  build_progress = 0
-  build_time = 3
+    build_progress = 0
+    build_time = 3

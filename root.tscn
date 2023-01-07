@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2ioxh4mhw6y2"]
+[gd_scene load_steps=11 format=3 uid="uid://b2ioxh4mhw6y2"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
 [ext_resource type="Texture2D" uid="uid://mvp7k68868ra" path="res://assets/ant.png" id="3_a6xmt"]
 [ext_resource type="Texture2D" uid="uid://c0jfuwkt6bp3l" path="res://assets/town_hall.png" id="4_a8vu0"]
+[ext_resource type="Script" path="res://Ant.gd" id="4_oaqor"]
 [ext_resource type="Script" path="res://TownHall.gd" id="5_24mp2"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="6_hqid7"]
 [ext_resource type="Script" path="res://UiPanel.gd" id="6_o2q21"]
@@ -41,6 +42,15 @@ centered = false
 [node name="Ant" type="Sprite2D" parent="."]
 position = Vector2(199, 335)
 texture = ExtResource("3_a6xmt")
+script = ExtResource("4_oaqor")
+
+[node name="Area" type="Area2D" parent="Ant"]
+position = Vector2(5, 10)
+script = ExtResource("6_hqid7")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Ant/Area"]
+position = Vector2(9, -12)
+shape = SubResource("RectangleShape2D_anmcy")
 
 [node name="TownHall" type="Sprite2D" parent="."]
 position = Vector2(500, 275)
