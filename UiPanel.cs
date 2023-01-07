@@ -16,6 +16,7 @@ public partial class UiPanel : Panel {
   Panel unitPanel;
   Label statsLabel;
   Label selectedUnitLabel;
+  Label builderPanelLabel;
   Panel builderPanel;
   Button townHallButton;
   Button townHallBuyGrasshopperButton;
@@ -28,6 +29,7 @@ public partial class UiPanel : Panel {
     statsLabel = GetNode<Label>("UnitPanel/StatsLabel");
     selectedUnitLabel = GetNode<Label>("UnitPanel/SelectedUnitLabel");
     builderPanel = GetNode<Panel>("BuilderPanel");
+    builderPanelLabel = GetNode<Label>("BuilderPanel/SelectedUnitLabel");
     townHallButton = GetNode<Button>("BuilderPanel/TownHallButton");
     townHallBuyGrasshopperButton = GetNode<Button>("TownHallPanel/BuyGrasshopper");
 
@@ -55,16 +57,15 @@ public partial class UiPanel : Panel {
     var unitPanelVisible = false;
     var builderPanelVisible = false;
 
-    var selectedUnitName = "";
-
     if (selectedUnit == null) {
       selectedUnitLabel.Text = "Selected Unit: None";
     }
 
-    if (selectedUnit is IUnit u) {
-      selectedUnitLabel.Text = "Selected Unit: " + u.unitName;
-      selectedUnitName = u.unitName;
-    }
+    // if (selectedUnit is IUnit u) {
+    //   unitPanelVisible = true;
+    //   selectedUnitLabel.Text = "Selected Unit: " + u.unitName;
+    //   selectedUnitName = u.unitName;
+    // }
 
     if (selectedUnit is TownHall th) {
       if (th.status == BuildingStatus.Building) {
@@ -76,6 +77,7 @@ public partial class UiPanel : Panel {
 
     if (selectedUnit is Ant a) {
       builderPanelVisible = true;
+      builderPanelLabel.Text = "Selected Unit: " + a.unitName;
     }
 
     townHallPanel.Visible = townHallPanelVisible;
