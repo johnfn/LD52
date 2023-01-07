@@ -1,7 +1,10 @@
 using Godot;
 
 public enum UnitType {
-  Ant
+  Ant,
+  Beetle,
+  Scout,
+  Spit
 }
 
 public enum BuildingStatus {

@@ -50,9 +50,8 @@ public partial class UiPanel : Control {
     progressLabel = buildPanel.GetNode<Label>("ProgressLabel");
     townHallButton = builderPanel.GetNode<Button>("TownHallButton");
     depotButton = builderPanel.GetNode<Button>("ResourceDepot");
-    barracksButton = builderPanel.GetNode<Button>("BarracksButton");
     townHallBuyGrasshopperButton = townHallPanel.GetNode<Button>("BuyGrasshopper");
-
+    barracksButton = builderPanel.GetNode<Button>("BarracksButton");
 
 
     _showCommandUi();
@@ -73,6 +72,24 @@ public partial class UiPanel : Control {
 
     barracksButton.Connect("pressed", Callable.From(() => {
       _beginBuilding(BuildingType.Barrachnid);
+    }));
+
+    barracksPanel.GetNode<Button>("BeetleButton").Connect("pressed", Callable.From(() => {
+      if (selectedUnit is BugBarracks b) {
+        b.BuyUnit(UnitType.Beetle);
+      }
+    }));
+
+    barracksPanel.GetNode<Button>("ScoutButton").Connect("pressed", Callable.From(() => {
+      if (selectedUnit is BugBarracks b) {
+        b.BuyUnit(UnitType.Scout);
+      }
+    }));
+
+    barracksPanel.GetNode<Button>("SpitButton").Connect("pressed", Callable.From(() => {
+      if (selectedUnit is BugBarracks b) {
+        b.BuyUnit(UnitType.Spit);
+      }
     }));
   }
 
@@ -117,6 +134,11 @@ public partial class UiPanel : Control {
         townHallPanelVisible = true;
         selectionNameLabel.Text = "Town Hall";
       }
+    }
+
+    if (selectedUnit is BugBarracks bb) {
+      barracksPanelVisible = true;
+      selectionNameLabel.Text = "Barracks";
     }
 
     if (selectedUnit is Ant a) {

@@ -16,4 +16,8 @@ public partial class BugBarracks : Sprite2D, IBuilding, ISelectable {
   public void OnHoverEnd() {
     Modulate = new Color(1, 1, 1, 1f);
   }
+
+  public void BuyUnit(UnitType unitType) {
+    GD.Print("Buying unit " + unitType);
+  }
 }
