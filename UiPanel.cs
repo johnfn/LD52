@@ -119,6 +119,7 @@ public partial class UiPanel : Control {
             selectionNameLabel.Text = "Resource Depot";
         }
 
+
         if (selectedUnit is Ant a) {
             builderPanelVisible = true;
             selectionNameLabel.Text = a.unitName;

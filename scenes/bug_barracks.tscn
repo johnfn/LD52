@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dom6cu3ih8bb1"]
+
+[ext_resource type="Texture2D" uid="uid://dnbn5xv2tnqm5" path="res://assets/bugbarracks.png" id="1_q48bb"]
+[ext_resource type="Script" path="res://BugBarracks.cs" id="2_jrrdx"]
+[ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_ivv0c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
+size = Vector2(204, 169)
+
+[node name="BugBarracks" type="Sprite2D" groups=["resource_dropoff"]]
+position = Vector2(376, 791)
+texture = ExtResource("1_q48bb")
+script = ExtResource("2_jrrdx")
+
+[node name="Area" type="Area2D" parent="." groups=["collider"]]
+collision_layer = 3
+script = ExtResource("3_ivv0c")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area"]
+position = Vector2(9, -12)
+shape = SubResource("RectangleShape2D_kl8im")
