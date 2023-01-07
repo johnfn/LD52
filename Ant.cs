@@ -60,11 +60,13 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
   private Area2D _shape;
 
   private UiPanel _uiPanel;
-
+  private ResourcePanel _resourcePanel;
 
   public override void _Ready() {
     _shape = GetNode<Area2D>("Area");
+
     _uiPanel = GetNode<UiPanel>("/root/Root/Static/UiPanel");
+    _resourcePanel = GetNode<ResourcePanel>("/root/Root/Static/ResourcePanel");
   }
 
   public override void _Process(double delta) {
@@ -122,6 +124,14 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
       var done = Util.WalkAlongPath(this, harvestState.path, _speed * (float)delta);
 
       if (done) {
+        // Add to resources.
+
+        if (InventoryItem.resourceType == ResourceType.Twig) {
+          _resourcePanel.TwigCount += 5;
+        } else if (InventoryItem.resourceType == ResourceType.Meat) {
+          _resourcePanel.MeatCount += 5;
+        }
+
         InventoryItem = null;
 
         harvestState.status = HarvestStatus.GoingToResource;
@@ -159,7 +169,5 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
       status = HarvestStatus.GoingToResource,
       path = Util.Pathfind(GetTree(), GlobalPosition, resource.resourceGlobalPosition)
     };
-
-    GD.Print("Harvesting");
   }
 }

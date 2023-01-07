@@ -1,16 +1,21 @@
-[gd_scene format=3 uid="uid://dwmu32upluapl"]
+[gd_scene load_steps=2 format=3 uid="uid://dwmu32upluapl"]
+
+[ext_resource type="Script" path="res://ResourcePanel.cs" id="1_106si"]
 
 [node name="ResourcePanel" type="Panel"]
 offset_right = 1792.0
 offset_bottom = 73.0
+script = ExtResource("1_106si")
 
-[node name="Twig" type="Label" parent="."]
+[node name="TwigLabel" type="Label" parent="."]
+layout_mode = 0
 offset_right = 315.0
 offset_bottom = 62.0
 theme_override_font_sizes/font_size = 35
 text = "Twig: 5"
 
-[node name="Meat" type="Label" parent="."]
+[node name="MeatLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 385.0
 offset_right = 700.0
 offset_bottom = 62.0

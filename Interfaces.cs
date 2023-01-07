@@ -10,6 +10,7 @@ public interface ISelectable {
 
 public enum ResourceType {
   Twig,
+  Meat,
 }
 
 public interface IResource {
