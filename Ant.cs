@@ -5,6 +5,7 @@ using Godot;
 public enum UnitStatus {
   Idle,
   Moving,
+  Attacking,
   Harvesting
 }
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bab7ujmjijflk"]
 
 [ext_resource type="Texture2D" uid="uid://mvp7k68868ra" path="res://assets/ant.png" id="1_nat3h"]
-[ext_resource type="Script" path="res://Ant.cs" id="2_60w3i"]
+[ext_resource type="Script" path="res://FightingBug.cs" id="2_l330j"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_o24o3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
@@ -11,7 +11,8 @@ size = Vector2(188, 161.25)
 modulate = Color(0.270588, 1, 0.372549, 1)
 position = Vector2(76, 65)
 texture = ExtResource("1_nat3h")
-script = ExtResource("2_60w3i")
+script = ExtResource("2_l330j")
+unitType = 4
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(5, 10)

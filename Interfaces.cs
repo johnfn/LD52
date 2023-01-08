@@ -28,6 +28,8 @@ public struct UnitStats {
   public int meatCost;
   public string resourcePath;
   public string description;
+  public int attackCooldown;
+  public int damage;
 }
 
 public interface ISelectable {
@@ -48,7 +50,7 @@ public interface IResource {
 }
 
 public interface IUnit {
-  public string unitName { get; set; }
+  public string unitName { get; }
   public int health { get; set; }
 }
 

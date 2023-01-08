@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b2ioxh4mhw6y2"]
+[gd_scene load_steps=19 format=3 uid="uid://b2ioxh4mhw6y2"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://drlyhbmyyfjva" path="res://scenes/ui_panel.tscn" id="9_vx6l0"]
 [ext_resource type="PackedScene" uid="uid://dwmu32upluapl" path="res://scenes/resource_panel.tscn" id="10_nmyny"]
 [ext_resource type="Script" path="res://SelectionRect.cs" id="13_fuotw"]
+[ext_resource type="PackedScene" uid="uid://c5jobfql2jwj0" path="res://scenes/beetle.tscn" id="15_xik6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt062"]
 size = Vector2(188, 161.25)
@@ -137,7 +138,6 @@ grow_vertical = 2
 theme = ExtResource("9_tyxdu")
 
 [node name="UiPanel" parent="Static/UIRoot" instance=ExtResource("9_vx6l0")]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -148,7 +148,6 @@ offset_right = 150.0
 grow_vertical = 0
 
 [node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
-layout_mode = 0
 
 [node name="SelectionRect" type="Node2D" parent="."]
 script = ExtResource("13_fuotw")
@@ -156,3 +155,6 @@ script = ExtResource("13_fuotw")
 [node name="Rect" type="Line2D" parent="SelectionRect"]
 points = PackedVector2Array(0, 0, 50, 2.08165e-12)
 joint_mode = 2
+
+[node name="Ant2" parent="." instance=ExtResource("15_xik6a")]
+position = Vector2(825, 371)

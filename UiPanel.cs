@@ -150,6 +150,10 @@ public partial class UiPanel : Control {
       }
     }
 
+    if (selectedUnit is FightingBug fb) {
+      selectionNameLabel.Text = fb.unitName;
+    }
+
     townHallPanel.Visible = townHallPanelVisible;
     buildPanel.Visible = buildPanelVisible;
     unitPanel.Visible = unitPanelVisible;
@@ -224,6 +228,15 @@ public partial class UiPanel : Control {
         } else {
           if (selectedUnit is Ant a) {
             a.Move(Util.MousePosition(GetTree()));
+          }
+
+          if (selectedUnit is FightingBug fb) {
+            if (hoveredUnit is Enemy e) {
+              fb.Attack(e);
+            } else {
+              fb.Move(Util.MousePosition(GetTree()));
+
+            }
           }
         }
 
