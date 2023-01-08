@@ -6,7 +6,7 @@ using Godot;
 public class Util {
   public static int CELL_SIZE = 32;
   public static bool DEBUG = true;
-  public static bool DEBUG_PATH = true;
+  public static bool DEBUG_PATH = false;
 
   public static uint BUILDING_BITMASK = 0b10;
   public static uint UNIT_BITMASK = 0b100;
@@ -40,8 +40,6 @@ public class Util {
     var collisions = tree.Root.World2d.DirectSpaceState.IntersectPoint(f);
 
     if (collisions.Count == 0) {
-      GD.Print("Nothing to worry about!");
-
       return point;
     }
 
@@ -190,11 +188,12 @@ public class Util {
       return new List<Vector2>();
     }
 
-    var astarList= astar.GetPointPath(pointIds[start], pointIds[end]).ToList();
-    
-    foreach(Vector2 point in astarList){
-      DbgPoint(point, tree, new Color(1, 1, 1, 1f));
+    var astarList = astar.GetPointPath(pointIds[start], pointIds[end]).ToList();
 
+    if (DEBUG_PATH) {
+      foreach (Vector2 point in astarList) {
+        DbgPoint(point, tree, new Color(1, 1, 1, 1f));
+      }
     }
 
     return astarList;
@@ -213,7 +212,11 @@ public class Util {
     var target = path[0];
     var direction = (target - node.GlobalPosition).Normalized();
 
-    node.GlobalPosition += direction * speed;
+    if (node.GlobalPosition.DistanceTo(target) < speed) {
+      node.GlobalPosition = target;
+    } else {
+      node.GlobalPosition += direction * speed;
+    }
 
     if (node.GlobalPosition.DistanceTo(target) < 1) {
       path.RemoveAt(0);

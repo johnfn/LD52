@@ -22,7 +22,11 @@ public partial class Actions : Node {
       tree.Root.GetNode<Node2D>("Root").AddChild(Globals.selectedBuilding);
       Globals.gameMode = GameMode.Build;
     } else {
-      errorPopup.ShowError("Not enough Twigs or Meat to build this.");
+      if (Globals.TwigCount < stats.twigCost) {
+        errorPopup.ShowError("Not enough Twigs to build this.");
+      } else if (Globals.MeatCount < stats.meatCost) {
+        errorPopup.ShowError("Not enough Meat to build this.");
+      }
     }
   }
 

@@ -93,6 +93,7 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
   private UiPanel _uiPanel;
   private ResourcePanel _resourcePanel;
   public BuildBuildingStatus BuildingStatus = BuildBuildingStatus.None;
+  public ProgressBar ProgressBar => GetNode<ProgressBar>("ProgressBar");
 
   public override void _Ready() {
     var stats = Util.UnitStats[UnitType.Ant];
@@ -106,6 +107,8 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
   }
 
   public override void _Process(double delta) {
+    ProgressBar.Visible = harvestState != null && harvestState.status == HarvestStatus.Harvesting;
+
     if (_status == UnitStatus.Moving) {
       var done = Util.WalkAlongPath(this, _path, _speed * (float)delta);
 
@@ -163,28 +166,28 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
     if (harvestState.status == HarvestStatus.Harvesting) {
       harvestState.harvestProgress += (float)delta;
 
+      ProgressBar.SetProgress(harvestState.harvestProgress / harvestState.harvestTime);
+
       if (harvestState.harvestProgress >= harvestState.harvestTime) {
         harvestState.resource.amount -= 1;
         harvestState.harvestProgress = 0;
 
-        if (harvestState.resource.amount <= 0) {
-          // Harvest complete!
+        // Harvest complete!
 
-          InventoryItem = new InventoryItem {
-            resourceType = harvestState.resource.resourceType
-          };
+        InventoryItem = new InventoryItem {
+          resourceType = harvestState.resource.resourceType
+        };
 
-          var resourceDropoff = FindNearestResourceDropoff();
+        var resourceDropoff = FindNearestResourceDropoff();
 
-          if (resourceDropoff != null) {
-            harvestState.path = Util.Pathfind(GetTree(), GlobalPosition, resourceDropoff.GlobalPosition);
-            harvestState.status = HarvestStatus.Returning;
-          } else {
-            // TODO: Show some sort of error; probably it was destroyed or sth
+        if (resourceDropoff != null) {
+          harvestState.path = Util.Pathfind(GetTree(), GlobalPosition, resourceDropoff.GlobalPosition);
+          harvestState.status = HarvestStatus.Returning;
+        } else {
+          // TODO: Show some sort of error; probably it was destroyed or sth
 
-            harvestState = null;
-            _status = UnitStatus.Idle;
-          }
+          harvestState = null;
+          _status = UnitStatus.Idle;
         }
       }
     }
