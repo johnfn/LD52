@@ -96,6 +96,8 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
   public ProgressBar ProgressBar => GetNode<ProgressBar>("ProgressBar");
   public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
 
+  public ProgressBar healthBar => GetNode<ProgressBar>("HealthBar");
+
   public override void _Ready() {
     var stats = Util.UnitStats[UnitType.Ant];
 

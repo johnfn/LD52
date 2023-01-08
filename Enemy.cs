@@ -25,6 +25,8 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
 
   public EnemyStatus _status = EnemyStatus.SeekingTarget;
 
+  public ProgressBar healthBar => GetNode<ProgressBar>("HealthBar");
+
   public int _speed = 500;
   private float _attackCooldownMax;
   private float _attackCooldownCurrent;

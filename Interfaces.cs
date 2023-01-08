@@ -63,6 +63,7 @@ public interface IDamageable {
   public int maxHealth { get; set; }
   public void Damage(int amount);
   public Node2D node { get; }
+  public ProgressBar healthBar { get; }
 }
 
 public interface IBuilding {

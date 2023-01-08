@@ -22,6 +22,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
   public Node2D node { get => this; }
   private Color _originalModColor;
   public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
+  public ProgressBar healthBar => GetNode<ProgressBar>("HealthBar");
 
   public string selectionText {
     get {

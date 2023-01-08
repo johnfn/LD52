@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dc46ttjpit4rn"]
+[gd_scene load_steps=7 format=3 uid="uid://dc46ttjpit4rn"]
 
 [ext_resource type="Texture2D" uid="uid://dnbn5xv2tnqm5" path="res://assets/bugbarracks.png" id="1_q48bb"]
 [ext_resource type="Script" path="res://TrainingBuilding.cs" id="2_11bal"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_ivv0c"]
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="4_iiyuk"]
+[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="5_u8xlh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
@@ -28,3 +29,7 @@ script = ExtResource("3_ivv0c")
 [node name="CollisionShape" type="CollisionShape2D" parent="Area"]
 position = Vector2(9, -12)
 shape = SubResource("RectangleShape2D_kl8im")
+
+[node name="HealthBar" parent="." instance=ExtResource("5_u8xlh")]
+modulate = Color(0, 1, 0.12549, 1)
+position = Vector2(-71, -97)

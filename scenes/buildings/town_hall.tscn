@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dorjg41xf3w54"]
+[gd_scene load_steps=7 format=3 uid="uid://dorjg41xf3w54"]
 
 [ext_resource type="Texture2D" uid="uid://c0jfuwkt6bp3l" path="res://assets/town_hall.png" id="1_edfkt"]
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="2_fopnh"]
 [ext_resource type="Script" path="res://TrainingBuilding.cs" id="2_ocy4t"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_othbg"]
+[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="5_30u3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
@@ -27,3 +28,7 @@ scale = Vector2(4.44, 4.44)
 [node name="Graphic" type="Sprite2D" parent="."]
 position = Vector2(113, 114)
 texture = ExtResource("1_edfkt")
+
+[node name="HealthBar" parent="." instance=ExtResource("5_30u3w")]
+modulate = Color(0, 1, 0.12549, 1)
+position = Vector2(-71, -97)

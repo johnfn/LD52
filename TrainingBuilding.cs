@@ -20,6 +20,7 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
 
   [Export]
   public bool IsBugBarracks;
+  public ProgressBar healthBar => GetNode<ProgressBar>("HealthBar");
 
   // ISelectable
   public Dictionary<string, Action> actions {
