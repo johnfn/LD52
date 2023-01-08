@@ -8,6 +8,9 @@ public class Util {
   public static bool DEBUG = true;
   public static bool DEBUG_PATH = false;
 
+  public static uint BUILDING_BITMASK = 0b10;
+  public static uint UNIT_BITMASK = 0b100;
+
   public static Vector2 MousePosition(SceneTree tree) {
     return tree.Root.GetNode<Node2D>("Root").GetLocalMousePosition();
   }
@@ -23,7 +26,8 @@ public class Util {
   // is not colliding with anything instead.
   public static Vector2 FindSafeSpaceNear(
     SceneTree tree,
-    Vector2 point
+    Vector2 point,
+    bool avoidUnits = false
   ) {
     var f = new PhysicsPointQueryParameters2D();
 
@@ -31,7 +35,7 @@ public class Util {
     f.Exclude = new Godot.Collections.Array<RID>();
     f.CollideWithAreas = true;
     f.CollideWithBodies = true;
-    f.CollisionMask = 2;
+    f.CollisionMask = avoidUnits ? BUILDING_BITMASK | UNIT_BITMASK : BUILDING_BITMASK;
 
     var collisions = tree.Root.World2d.DirectSpaceState.IntersectPoint(f);
 

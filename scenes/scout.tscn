@@ -15,6 +15,7 @@ script = ExtResource("2_lwa3n")
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(5, 10)
+collision_layer = 5
 script = ExtResource("3_iexxq")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Area"]

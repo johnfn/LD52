@@ -65,7 +65,7 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
         var scene = GD.Load<PackedScene>(unitStats.resourcePath);
         var newUnit = scene.Instantiate<Node2D>();
 
-        newUnit.Position = Util.FindSafeSpaceNear(GetTree(), GlobalPosition);
+        newUnit.Position = Util.FindSafeSpaceNear(GetTree(), GlobalPosition, true);
 
         GetParent().AddChild(newUnit);
 

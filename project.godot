@@ -49,4 +49,5 @@ CamRight={
 
 [layer_names]
 
-2d_physics/layer_2="Collision"
+2d_physics/layer_2="BuildingCollision"
+2d_physics/layer_3="UnitCollision"
