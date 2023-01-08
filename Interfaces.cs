@@ -21,6 +21,14 @@ public struct BuildingStats {
   public string description;
 }
 
+public struct UnitStats {
+  public float buildTime;
+  public int health;
+  public int twigCost;
+  public int meatCost;
+  public string resourcePath;
+  public string description;
+}
 
 public interface ISelectable {
   public bool isHoverable { get; set; }

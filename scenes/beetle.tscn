@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5jobfql2jwj0"]
+
+[ext_resource type="Texture2D" uid="uid://mvp7k68868ra" path="res://assets/ant.png" id="1_xwud6"]
+[ext_resource type="Script" path="res://Ant.cs" id="2_4o4nf"]
+[ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_0e81p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
+size = Vector2(188, 161.25)
+
+[node name="Ant" type="Sprite2D"]
+modulate = Color(1, 0.270588, 0.439216, 1)
+position = Vector2(76, 65)
+texture = ExtResource("1_xwud6")
+script = ExtResource("2_4o4nf")
+
+[node name="Area" type="Area2D" parent="."]
+position = Vector2(5, 10)
+script = ExtResource("3_0e81p")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area"]
+position = Vector2(13, -1)
+shape = SubResource("RectangleShape2D_wx0nu")

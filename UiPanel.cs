@@ -75,19 +75,19 @@ public partial class UiPanel : Control {
     }));
 
     barracksPanel.GetNode<Button>("BeetleButton").Connect("pressed", Callable.From(() => {
-      if (selectedUnit is BugBarracks b) {
+      if (selectedUnit is TrainingBuilding b) {
         b.BuyUnit(UnitType.Beetle);
       }
     }));
 
     barracksPanel.GetNode<Button>("ScoutButton").Connect("pressed", Callable.From(() => {
-      if (selectedUnit is BugBarracks b) {
+      if (selectedUnit is TrainingBuilding b) {
         b.BuyUnit(UnitType.Scout);
       }
     }));
 
     barracksPanel.GetNode<Button>("SpitButton").Connect("pressed", Callable.From(() => {
-      if (selectedUnit is BugBarracks b) {
+      if (selectedUnit is TrainingBuilding b) {
         b.BuyUnit(UnitType.Spit);
       }
     }));
@@ -137,7 +137,6 @@ public partial class UiPanel : Control {
         } else {
           townHallPanelVisible = true;
           selectionNameLabel.Text = "Town Hall";
-
         }
       }
     }

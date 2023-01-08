@@ -252,4 +252,58 @@ public class Util {
     };
     }
   }
+
+  public static Dictionary<UnitType, UnitStats> UnitStats {
+    get {
+      return new Dictionary<UnitType, UnitStats>() {
+      {
+        UnitType.Ant,
+        new UnitStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 50,
+          meatCost = 0,
+          resourcePath = "res://scenes/ant.tscn",
+          description = "Ants are awesome"
+        }
+      },
+
+      {
+        UnitType.Beetle,
+        new UnitStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 20,
+          meatCost = 0,
+          resourcePath = "res://scenes/beetle.tscn",
+          description = "Beetles are awesome"
+        }
+      },
+
+      {
+        UnitType.Scout,
+        new UnitStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 20,
+          meatCost = 0,
+          resourcePath = "res://scenes/scout.tscn",
+          description = "Scouts are awesome"
+        }
+      },
+
+      {
+        UnitType.Spit,
+        new UnitStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 20,
+          meatCost = 0,
+          resourcePath = "res://scenes/spitbug.tscn",
+          description = "Spit bugs are disgusting and they should all die"
+        }
+      },
+    };
+    }
+  }
 }

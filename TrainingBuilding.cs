@@ -1,6 +1,7 @@
 using Godot;
 
 public enum UnitType {
+  None,
   Ant,
   Beetle,
   Scout,
@@ -27,6 +28,7 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
   // IHoverable
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;
+  public UnitType currentBuildingUnitType { get; set; } = UnitType.None;
   public Area2D colliderShape {
     get {
       return _shape;
@@ -61,11 +63,15 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
         status = BuildingStatus.Idle;
         buildProgress = 0;
 
-        var ant = _antScene.Instantiate<Ant>();
+        var unitStats = Util.UnitStats[currentBuildingUnitType];
+        var scene = GD.Load<PackedScene>(unitStats.resourcePath);
+        var newUnit = _antScene.Instantiate<Node2D>();
 
-        ant.Position = Util.FindSafeSpaceNear(GetTree(), GlobalPosition);
+        newUnit.Position = Util.FindSafeSpaceNear(GetTree(), GlobalPosition);
 
-        GetParent().AddChild(ant);
+        GetParent().AddChild(newUnit);
+
+        currentBuildingUnitType = UnitType.None;
       }
     }
   }
@@ -75,5 +81,6 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
 
     buildProgress = 0;
     buildTime = 0.1f;
+    currentBuildingUnitType = unit;
   }
 }
