@@ -67,7 +67,7 @@ public partial class FightingBug : Sprite2D, IUnit, ISelectable {
 
   private void _ProcessAttack(double delta) {
     // If the target died, stop.
-    if (_attackTarget == null) {
+    if (_attackTarget == null || !IsInstanceValid(_attackTarget)) {
       _status = UnitStatus.Idle;
       return;
     }
