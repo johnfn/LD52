@@ -95,6 +95,7 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
   public BuildBuildingStatus BuildingStatus = BuildBuildingStatus.None;
   public ProgressBar ProgressBar => GetNode<ProgressBar>("ProgressBar");
   public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
+  public Node2D HeldTwig => GetNode<Node2D>("HeldTwig");
 
   public ProgressBar healthBar => GetNode<ProgressBar>("HealthBar");
 
@@ -109,6 +110,7 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
     _resourcePanel = GetNode<ResourcePanel>("/root/Root/Static/UIRoot/ResourcePanel");
 
     SelectionCircle.Unit = this;
+    HeldTwig.Visible = false;
   }
 
   public override void _Process(double delta) {
@@ -183,6 +185,8 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
           resourceType = harvestState.resource.resourceType
         };
 
+        HeldTwig.Visible = true;
+
         var resourceDropoff = FindNearestResourceDropoff();
 
         if (resourceDropoff != null) {
@@ -209,10 +213,16 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
           Globals.MeatCount += 5;
         }
 
+        HeldTwig.Visible = false;
+
         InventoryItem = null;
 
         harvestState.status = HarvestStatus.GoingToResource;
         harvestState.path = Util.Pathfind(GetTree(), GlobalPosition, harvestState.resource.resourceGlobalPosition);
+
+        var floatyResource = GD.Load<PackedScene>("res://scenes/floaty_resource.tscn").Instantiate<FloatingResource>();
+        floatyResource.GlobalPosition = GlobalPosition;
+        GetTree().Root.AddChild(floatyResource);
 
         return;
       }
