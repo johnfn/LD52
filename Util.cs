@@ -260,9 +260,7 @@ public class Util {
   public static Dictionary<UnitType, UnitStats> UnitStats {
     get {
       return new Dictionary<UnitType, UnitStats>() {
-      {
-        UnitType.Ant,
-        new UnitStats() {
+        [UnitType.Ant] = new UnitStats() {
           buildTime = 5f,
           health = 100,
           twigCost = 50,
@@ -271,51 +269,44 @@ public class Util {
           damage = 1,
           resourcePath = "res://scenes/ant.tscn",
           description = "Ants are awesome"
-        }
-      },
+        },
 
-      {
-        UnitType.Beetle,
-        new UnitStats() {
-          buildTime = 5f,
-          health = 100,
-          twigCost = 20,
-          meatCost = 0,
-          attackCooldown = 100,
-          damage = 5,
-          resourcePath = "res://scenes/beetle.tscn",
-          description = "Beetles are awesome"
-        }
-      },
+        [UnitType.Beetle] =
+          new UnitStats() {
+            buildTime = 5f,
+            health = 100,
+            twigCost = 20,
+            meatCost = 0,
+            attackCooldown = 100,
+            damage = 5,
+            resourcePath = "res://scenes/beetle.tscn",
+            description = "Beetles are awesome"
+          },
 
-      {
-        UnitType.Scout,
-        new UnitStats() {
-          buildTime = 5f,
-          health = 100,
-          twigCost = 20,
-          meatCost = 0,
-          attackCooldown = 200,
-          damage = 3,
-          resourcePath = "res://scenes/scout.tscn",
-          description = "Scouts are awesome"
-        }
-      },
+        [UnitType.Scout] =
+          new UnitStats() {
+            buildTime = 5f,
+            health = 100,
+            twigCost = 20,
+            meatCost = 0,
+            attackCooldown = 200,
+            damage = 3,
+            resourcePath = "res://scenes/scout.tscn",
+            description = "Scouts are awesome"
+          },
 
-      {
-        UnitType.Spit,
-        new UnitStats() {
-          buildTime = 5f,
-          health = 100,
-          twigCost = 20,
-          meatCost = 0,
-          attackCooldown = 50,
-          damage = 5,
-          resourcePath = "res://scenes/spitbug.tscn",
-          description = "Spit bugs are disgusting and they should all die"
-        }
-      },
-    };
+        [UnitType.Spit] =
+          new UnitStats() {
+            buildTime = 5f,
+            health = 100,
+            twigCost = 20,
+            meatCost = 0,
+            attackCooldown = 50,
+            damage = 5,
+            resourcePath = "res://scenes/spitbug.tscn",
+            description = "Spit bugs are disgusting and they should all die"
+          }
+      };
     }
   }
 }

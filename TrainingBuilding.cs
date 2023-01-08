@@ -26,24 +26,26 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
     get {
       if (!IsBugBarracks) {
         return new Dictionary<string, Action>() {
-          ["Beetle"] = (delegate () {
+          ["Beetle"] = () => {
             if (Globals.selectedUnit is TrainingBuilding th) {
               th.BuyUnit(UnitType.Ant);
             }
-          }),
+          },
         };
       }
 
       return new Dictionary<string, Action>() {
-        ["Beetle"] = (delegate () {
+        ["Beetle"] = () => {
           BuyUnit(UnitType.Beetle);
-        }),
-        ["Scout"] = (delegate () {
+        },
+
+        ["Scout"] = () => {
           BuyUnit(UnitType.Scout);
-        }),
-        ["Spit"] = (delegate () {
+        },
+
+        ["Spit"] = () => {
           BuyUnit(UnitType.Spit);
-        }),
+        },
       };
     }
   }
