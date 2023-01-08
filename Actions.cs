@@ -31,32 +31,39 @@ public partial class Actions : Node {
   }
 
 
-  public static void placeBuilding() {
+  public static void placeBuilding(UiPanel uiPanel) {
     if (Globals.selectedBuildingType == BuildingType.None) {
       return;
     }
 
     if (Globals.selectedUnit is Ant a) {
       var stats = Util.BuildingStats[Globals.selectedBuildingType];
+      var isSafe = uiPanel.IsBuildingInSafeLocation(Globals.selectedBuilding);
 
-      if (
-        Globals.TwigCount >= stats.twigCost &&
-        Globals.MeatCount >= stats.meatCost
-      ) {
-        Globals.TwigCount -= stats.twigCost;
-        Globals.MeatCount -= stats.meatCost;
-
-        a.Build(Globals.selectedBuildingType, Globals.selectedBuilding.Position);
-
-        Globals.selectedBuilding.QueueFree();
-
-        Globals.gameMode = GameMode.Command;
-      } else {
-        errorPopup.ShowError("Not enough Twigs or Meat to build this.");
+      if (!isSafe) {
+        errorPopup.ShowError("Make sure the area for your building is clear.");
+        return;
       }
 
+      if (Globals.TwigCount < stats.twigCost) {
+        errorPopup.ShowError("Not enough Twigs to build this.");
+        return;
+      }
+
+      if (Globals.MeatCount < stats.meatCost) {
+        errorPopup.ShowError("Not enough Meat to build this.");
+        return;
+      }
+
+      Globals.TwigCount -= stats.twigCost;
+      Globals.MeatCount -= stats.meatCost;
+
+      a.Build(Globals.selectedBuildingType, Globals.selectedBuilding.Position);
+
+      Globals.selectedBuilding.QueueFree();
+
+      Globals.gameMode = GameMode.Command;
     }
   }
-
 }
 

@@ -192,7 +192,7 @@ public partial class UiPanel : Control {
 
     if (Globals.gameMode == GameMode.Build) {
       if (mouseEvent.ButtonIndex == MouseButton.Left) {
-        Actions.placeBuilding();
+        Actions.placeBuilding(this);
 
         return;
       }
@@ -251,10 +251,7 @@ public partial class UiPanel : Control {
 
   private void _handleMouseMove(InputEventMouseMotion mouseMotionEvent) {
     if (Globals.gameMode == GameMode.Build) {
-      var pos = Util.MousePosition(GetTree());
-      var roundedTo32 = new Vector2((int)(pos.x / 32) * 32, (int)(pos.y / 32) * 32);
-
-      Globals.selectedBuilding.Position = roundedTo32;
+      _updateSelectedBuildingPosition(mouseMotionEvent);
     }
 
     if (Globals.gameMode == GameMode.Command) {
@@ -271,6 +268,62 @@ public partial class UiPanel : Control {
           Globals.hoveredUnit.OnHoverStart();
         }
       }
+    }
+  }
+
+  public bool IsBuildingInSafeLocation(Node2D building) {
+    var buildingArea = building.GetNode<Area2D>("Area");
+    var param = new PhysicsPointQueryParameters2D();
+
+    // param.Position = point;
+    param.Exclude = new Godot.Collections.Array<RID>();
+    param.CollideWithAreas = true;
+    param.CollideWithBodies = true;
+    param.CollisionMask = Util.BUILDING_BITMASK;
+    param.Exclude = new Godot.Collections.Array<RID>(new List<RID> { buildingArea.GetRid() });
+
+    var collisionShape = building.GetNode<CollisionShape2D>("Area/CollisionShape");
+    var shape = collisionShape.Shape;
+
+    Vector2 bounds;
+
+    if (shape is RectangleShape2D rectangle) {
+      bounds = rectangle.Size;
+    } else {
+      GD.Print("Error - non-rectangle shape");
+
+      return false;
+    }
+
+    var topLeft = new Vector2(building.Position.x - bounds.x / 2, building.Position.y - bounds.y / 2);
+
+    for (var x = topLeft.x; x < topLeft.x + bounds.x; x += Util.CELL_SIZE) {
+      for (var y = topLeft.y; y < topLeft.y + bounds.y; y += Util.CELL_SIZE) {
+        var point = new Vector2(x, y);
+
+        param.Position = point;
+
+        var collisions = GetWorld2d().DirectSpaceState.IntersectPoint(param);
+
+        if (collisions.Count > 0) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  private void _updateSelectedBuildingPosition(InputEventMouseMotion ev) {
+    var pos = Util.MousePosition(GetTree());
+    var roundedTo32 = new Vector2((int)(pos.x / 32) * 32, (int)(pos.y / 32) * 32);
+
+    Globals.selectedBuilding.Position = roundedTo32;
+
+    if (!IsBuildingInSafeLocation(Globals.selectedBuilding)) {
+      Globals.selectedBuilding.Modulate = new Color(1, 0, 0, 0.5f);
+    } else {
+      Globals.selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
     }
   }
 
