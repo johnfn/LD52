@@ -8,7 +8,7 @@
 size = Vector2(204, 169)
 
 [node name="ResourceDepot" type="Sprite2D" groups=["building", "resource_dropoff"]]
-position = Vector2(605, 792)
+position = Vector2(92, 96)
 texture = ExtResource("1_i6fab")
 script = ExtResource("2_sfpc8")
 

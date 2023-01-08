@@ -9,7 +9,7 @@ public class BuildingState {
 }
 
 
-public partial class ConstructionSite : Sprite2D, ISelectable {
+public partial class ConstructionSite : Node2D, ISelectable {
   public Dictionary<string, Action> actions => new Dictionary<string, Action>();
 
   public bool isHoverable { get; set; } = true;
