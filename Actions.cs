@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 
 
@@ -33,21 +32,25 @@ public partial class Actions : Node {
       return;
     }
 
-    var stats = Util.BuildingStats[Globals.selectedBuildingType];
+    if (Globals.selectedUnit is Ant a) {
+      var stats = Util.BuildingStats[Globals.selectedBuildingType];
 
-    if (
-      Globals.TwigCount >= stats.twigCost &&
-      Globals.MeatCount >= stats.meatCost
-    ) {
-      Globals.TwigCount -= stats.twigCost;
-      Globals.MeatCount -= stats.meatCost;
+      if (
+        Globals.TwigCount >= stats.twigCost &&
+        Globals.MeatCount >= stats.meatCost
+      ) {
+        Globals.TwigCount -= stats.twigCost;
+        Globals.MeatCount -= stats.meatCost;
 
-      Globals.selectedBuilding.Modulate = new Color(1, 1, 1, 1);
-      Globals.selectedBuilding = null;
-      Globals.selectedBuildingType = BuildingType.None;
-      Globals.gameMode = GameMode.Command;
-    } else {
-      errorPopup.ShowError("Not enough Twigs or Meat to build this.");
+        a.Build(Globals.selectedBuildingType, Globals.selectedBuilding.Position);
+
+        Globals.selectedBuilding.QueueFree();
+
+        Globals.gameMode = GameMode.Command;
+      } else {
+        errorPopup.ShowError("Not enough Twigs or Meat to build this.");
+      }
+
     }
   }
 

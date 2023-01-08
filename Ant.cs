@@ -7,6 +7,7 @@ public enum UnitStatus {
   Idle,
   Moving,
   Attacking,
+  Building,
   Harvesting
 }
 
@@ -84,6 +85,13 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
   private UiPanel _uiPanel;
   private ResourcePanel _resourcePanel;
 
+  // In progress building stuff
+  private BuildingType _selectedBuildingType = BuildingType.None;
+  private float _buildProgress = 0;
+  private float _buildTime = 0;
+  private Node2D _constructionNode = null;
+
+
   public override void _Ready() {
     var stats = Util.UnitStats[UnitType.Ant];
 
@@ -104,6 +112,24 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
       }
     } else if (_status == UnitStatus.Harvesting) {
       _processHarvest(delta);
+    } else if (_status == UnitStatus.Building) {
+      _processBuild(delta);
+    }
+  }
+
+  private void _processBuild(double delta) {
+    _buildProgress += (float)delta;
+
+    if (_buildProgress >= _buildTime) {
+      _buildProgress = 0;
+      _status = UnitStatus.Idle;
+
+      GD.Print("Done");
+
+      // var building = Building.CreateBuilding(_selectedBuildingType);
+      // building.GlobalPosition = GlobalPosition;
+
+      // GetTree().CurrentScene.AddChild(building);
     }
   }
 
@@ -203,5 +229,12 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
     if (health <= 0) {
       QueueFree();
     }
+  }
+
+  public void Build(BuildingType buildingType, Vector2 position) {
+    _status = UnitStatus.Building;
+
+    _constructionNode = GD.Load<PackedScene>("res://Scenes/construction.tscn").Instantiate<Node2D>();
+    _constructionNode.GlobalPosition = position;
   }
 }

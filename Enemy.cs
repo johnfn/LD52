@@ -41,7 +41,7 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
   public override void _Ready() {
     health = 10;
     maxHealth = 10;
-    _damageAmount = 5;
+    _damageAmount = 1;
 
     _attackCooldownCurrent = 0;
     _attackCooldownMax = 1;
@@ -52,8 +52,6 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
   private IDamageable _target;
 
   public override void _Process(double delta) {
-    GD.Print(_status);
-
     if (
       _status == EnemyStatus.Attacking &&
       (_target == null || _target.health <= 0 || !IsInstanceValid(_target.node))
@@ -85,7 +83,7 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
       }
 
       if (closestTarget == null) {
-        GD.Print("No target");
+        // GD.Print("No target");
 
         return;
       }
