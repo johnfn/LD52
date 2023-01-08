@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b2ioxh4mhw6y2"]
+[gd_scene load_steps=18 format=3 uid="uid://b2ioxh4mhw6y2"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Camera.cs" id="4_po8t6"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="6_hqid7"]
 [ext_resource type="PackedScene" uid="uid://dc46ttjpit4rn" path="res://scenes/bug_barracks.tscn" id="7_5gmsh"]
+[ext_resource type="PackedScene" uid="uid://bf6tor4dkolmi" path="res://scenes/enemy.tscn" id="9_mliv3"]
 [ext_resource type="Theme" uid="uid://beulorra254b2" path="res://assets/UI/SimpleBox.tres" id="9_tyxdu"]
 [ext_resource type="PackedScene" uid="uid://drlyhbmyyfjva" path="res://scenes/ui_panel.tscn" id="9_vx6l0"]
 [ext_resource type="PackedScene" uid="uid://dwmu32upluapl" path="res://scenes/resource_panel.tscn" id="10_nmyny"]
@@ -85,6 +86,9 @@ position = Vector2(613, 353)
 [node name="Ant" parent="." instance=ExtResource("3_0h73t")]
 position = Vector2(1038, 392)
 
+[node name="Enemy" parent="." instance=ExtResource("9_mliv3")]
+position = Vector2(733, 571)
+
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(890, 606)
 current = true
@@ -133,6 +137,7 @@ grow_vertical = 2
 theme = ExtResource("9_tyxdu")
 
 [node name="UiPanel" parent="Static/UIRoot" instance=ExtResource("9_vx6l0")]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -143,6 +148,7 @@ offset_right = 150.0
 grow_vertical = 0
 
 [node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
+layout_mode = 0
 
 [node name="SelectionRect" type="Node2D" parent="."]
 script = ExtResource("13_fuotw")
