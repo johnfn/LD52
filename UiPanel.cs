@@ -207,6 +207,12 @@ public partial class UiPanel : Control {
           if (Globals.selectedUnit is Ant a) {
             a.Harvest(resource);
           }
+        } else if (hoveredUnit is ConstructionSite c) {
+          if (Globals.selectedUnit is Ant a) {
+            a.ContinueToBuild(c);
+          } else {
+            Actions.errorPopup.ShowError("Only a worker ant can build.");
+          }
         } else {
           if (Globals.selectedUnit is Ant a) {
             a.Move(Util.MousePosition(GetTree()));

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://hmv7g4oylrng"]
+[gd_scene load_steps=6 format=3 uid="uid://hmv7g4oylrng"]
 
 [ext_resource type="Texture2D" uid="uid://pwjxgbd5ngr4" path="res://assets/construction.png" id="1_c6gww"]
 [ext_resource type="Script" path="res://ConstructionSite.cs" id="2_4t866"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_0vxmg"]
+[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="4_j5gv1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ghaw"]
 size = Vector2(188, 161.25)
@@ -14,9 +15,11 @@ script = ExtResource("2_4t866")
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(5, 10)
-collision_layer = 5
+collision_layer = 3
 script = ExtResource("3_0vxmg")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Area"]
 position = Vector2(13, -1)
 shape = SubResource("RectangleShape2D_0ghaw")
+
+[node name="ProgressBar" parent="." instance=ExtResource("4_j5gv1")]

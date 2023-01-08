@@ -18,7 +18,12 @@ public partial class ConstructionSite : Sprite2D, ISelectable {
 
   public string selectionText => "A construction site." + System.Environment.NewLine + "Build time: " + BuildingState.BuildTime + System.Environment.NewLine + "Build progress: " + BuildingState.BuildProgress;
 
-  public BuildingState BuildingState;
+  public BuildingState BuildingState = null;
+  public ProgressBar ProgressBar;
+
+  public override void _Ready() {
+    ProgressBar = GetNode<ProgressBar>("ProgressBar");
+  }
 
   public void OnHoverEnd() {
     Modulate = new Color(1, 1, 1, 1f);
@@ -26,5 +31,13 @@ public partial class ConstructionSite : Sprite2D, ISelectable {
 
   public void OnHoverStart() {
     Modulate = new Color(1, 1, 1, 0.5f);
+  }
+
+  public override void _Process(double delta) {
+    if (BuildingState == null) {
+      return;
+    }
+
+    ProgressBar.SetProgress(BuildingState.BuildProgress / BuildingState.BuildTime);
   }
 }

@@ -268,4 +268,11 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
     ConstructionSite.GlobalPosition = buildingPosition;
     _path = Util.Pathfind(GetTree(), GlobalPosition, buildingPosition);
   }
+
+  public void ContinueToBuild(ConstructionSite c) {
+    _status = UnitStatus.Building;
+    ConstructionSite = c;
+    BuildingStatus = BuildBuildingStatus.MovingToBuild;
+    _path = Util.Pathfind(GetTree(), GlobalPosition, ConstructionSite.GlobalPosition);
+  }
 }

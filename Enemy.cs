@@ -122,7 +122,7 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
       } else {
         _target.Damage(_damageAmount);
         _attackCooldownCurrent = _attackCooldownMax;
-        
+
         attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
         attackTween.TweenInterval(.05);
         attackTween.TweenProperty(this, "scale", 1f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);

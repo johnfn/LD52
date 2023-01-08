@@ -5,7 +5,7 @@ using Godot;
 public partial class Actions : Node {
 
   public static SceneTree tree;
-  private static ErrorPopup errorPopup => tree.Root.GetNode<ErrorPopup>("Root/Static/UIRoot/error_panel");
+  public static ErrorPopup errorPopup => tree.Root.GetNode<ErrorPopup>("Root/Static/UIRoot/error_panel");
 
   public static void selectBuilding(BuildingType buildingType) {
     var stats = Util.BuildingStats[buildingType];
