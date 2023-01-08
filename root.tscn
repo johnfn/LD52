@@ -14,7 +14,9 @@
 [ext_resource type="Theme" uid="uid://beulorra254b2" path="res://assets/UI/SimpleBox.tres" id="9_tyxdu"]
 [ext_resource type="PackedScene" uid="uid://drlyhbmyyfjva" path="res://scenes/ui_panel.tscn" id="9_vx6l0"]
 [ext_resource type="PackedScene" uid="uid://dwmu32upluapl" path="res://scenes/resource_panel.tscn" id="10_nmyny"]
+[ext_resource type="PackedScene" uid="uid://cdkvvd75v1ayp" path="res://scenes/error_panel.tscn" id="13_71qpp"]
 [ext_resource type="Script" path="res://SelectionRect.cs" id="13_fuotw"]
+[ext_resource type="PackedScene" uid="uid://ctrb1n4wlapv6" path="res://scenes/error_pane.tscn" id="14_wu0pv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt062"]
 size = Vector2(188, 161.25)
@@ -149,6 +151,15 @@ offset_right = 150.0
 grow_vertical = 0
 
 [node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
+
+[node name="error_panel" parent="Static/UIRoot" instance=ExtResource("13_71qpp")]
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 0.4
+grow_vertical = 1
+ErrorPaneScene = ExtResource("14_wu0pv")
 
 [node name="SelectionRect" type="Node2D" parent="."]
 script = ExtResource("13_fuotw")
