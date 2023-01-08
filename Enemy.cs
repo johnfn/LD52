@@ -62,7 +62,7 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
   public override void _Process(double delta) {
     if (
       _status == EnemyStatus.Attacking &&
-      (_target == null || _target.health <= 0 || !IsInstanceValid(_target.node))
+      (_target == null || _target.health <= 0 || !IsInstanceValid(_target.node) || _target.node.GlobalPosition.DistanceTo(GlobalPosition) > 100)
     ) {
       _status = EnemyStatus.SeekingTarget;
       _target = null;
@@ -103,6 +103,11 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
       );
       _status = EnemyStatus.WalkingTowardsTarget;
       _target = closestTarget;
+
+      // Units are not collideable so don't walk into them
+      if (_target.node.IsInGroup(GroupNames.GoodUnit)) {
+        _path = _path.SkipLast(2).ToList();
+      }
 
       return;
     }

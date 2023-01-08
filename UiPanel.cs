@@ -273,45 +273,25 @@ public partial class UiPanel : Control {
 
   public bool IsBuildingInSafeLocation(Node2D building) {
     var buildingArea = building.GetNode<Area2D>("Area");
-    var param = new PhysicsPointQueryParameters2D();
+    var collisionShape = building.GetNode<CollisionShape2D>("Area/CollisionShape");
+    var param = new PhysicsShapeQueryParameters2D();
 
-    // param.Position = point;
-    param.Exclude = new Godot.Collections.Array<RID>();
     param.CollideWithAreas = true;
     param.CollideWithBodies = true;
     param.CollisionMask = Util.BUILDING_BITMASK;
+    param.Transform = building.GlobalTransform;
     param.Exclude = new Godot.Collections.Array<RID>(new List<RID> { buildingArea.GetRid() });
+    param.Shape = collisionShape.Shape;
 
-    var collisionShape = building.GetNode<CollisionShape2D>("Area/CollisionShape");
-    var shape = collisionShape.Shape;
+    var collisions = GetWorld2d().DirectSpaceState.IntersectShape(param);
 
-    Vector2 bounds;
+    foreach (var collision in collisions) {
+      var n = (Node2D)collision["collider"];
 
-    if (shape is RectangleShape2D rectangle) {
-      bounds = rectangle.Size;
-    } else {
-      GD.Print("Error - non-rectangle shape");
-
-      return false;
+      GD.Print(n.Name);
     }
 
-    var topLeft = new Vector2(building.Position.x - bounds.x / 2, building.Position.y - bounds.y / 2);
-
-    for (var x = topLeft.x; x < topLeft.x + bounds.x; x += Util.CELL_SIZE) {
-      for (var y = topLeft.y; y < topLeft.y + bounds.y; y += Util.CELL_SIZE) {
-        var point = new Vector2(x, y);
-
-        param.Position = point;
-
-        var collisions = GetWorld2d().DirectSpaceState.IntersectPoint(param);
-
-        if (collisions.Count > 0) {
-          return false;
-        }
-      }
-    }
-
-    return true;
+    return collisions.Count == 0;
   }
 
   private void _updateSelectedBuildingPosition(InputEventMouseMotion ev) {
@@ -319,6 +299,10 @@ public partial class UiPanel : Control {
     var roundedTo32 = new Vector2((int)(pos.x / 32) * 32, (int)(pos.y / 32) * 32);
 
     Globals.selectedBuilding.Position = roundedTo32;
+
+    GD.Print(
+      IsBuildingInSafeLocation(Globals.selectedBuilding)
+    );
 
     if (!IsBuildingInSafeLocation(Globals.selectedBuilding)) {
       Globals.selectedBuilding.Modulate = new Color(1, 0, 0, 0.5f);
