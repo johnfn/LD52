@@ -6,6 +6,7 @@ using System;
 public partial class Actions : Node {
 
   public static SceneTree tree;
+  private static ErrorPopup errorPopup => tree.Root.GetNode<ErrorPopup>("Root/Static/UIRoot/error_panel");
 
   public static void selectBuilding(BuildingType buildingType) {
     var stats = Util.BuildingStats[buildingType];
@@ -22,7 +23,7 @@ public partial class Actions : Node {
       tree.Root.GetNode<Node2D>("Root").AddChild(Globals.selectedBuilding);
       Globals.gameMode = GameMode.Build;
     } else {
-      GD.Print("Not enough Twigs or Meat to build this.");
+      errorPopup.ShowError("Not enough Twigs or Meat to build this.");
     }
   }
 
@@ -46,9 +47,7 @@ public partial class Actions : Node {
       Globals.selectedBuildingType = BuildingType.None;
       Globals.gameMode = GameMode.Command;
     } else {
-      // TODO
-
-      GD.Print("Not enough twigs");
+      errorPopup.ShowError("Not enough Twigs or Meat to build this.");
     }
   }
 

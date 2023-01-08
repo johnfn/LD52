@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 
 public partial class ErrorPopup : Node
@@ -35,7 +37,6 @@ public partial class ErrorPopup : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        ShowError("This is a test error");
     }
 
     private double timer = 0.0;
@@ -52,7 +53,7 @@ public partial class ErrorPopup : Node
         }
         
         // Calls CleanUpError on each expired error
-        foreach (var error in m_ErrorPanes)
+        foreach (var error in m_ErrorPanes.ToImmutableList())
         {
             if (error.ExpiresAt < DateTime.Now)
             {
