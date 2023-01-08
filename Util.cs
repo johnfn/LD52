@@ -262,7 +262,7 @@ public class Util {
       return new Dictionary<UnitType, UnitStats>() {
         [UnitType.Ant] = new UnitStats() {
           buildTime = 5f,
-          health = 100,
+          health = 10,
           twigCost = 50,
           meatCost = 0,
           attackCooldown = 100,
@@ -274,7 +274,7 @@ public class Util {
         [UnitType.Beetle] =
           new UnitStats() {
             buildTime = 5f,
-            health = 100,
+            health = 10,
             twigCost = 20,
             meatCost = 0,
             attackCooldown = 100,
@@ -286,7 +286,7 @@ public class Util {
         [UnitType.Scout] =
           new UnitStats() {
             buildTime = 5f,
-            health = 100,
+            health = 10,
             twigCost = 20,
             meatCost = 0,
             attackCooldown = 200,
@@ -298,7 +298,7 @@ public class Util {
         [UnitType.Spit] =
           new UnitStats() {
             buildTime = 5f,
-            health = 100,
+            health = 10,
             twigCost = 20,
             meatCost = 0,
             attackCooldown = 50,

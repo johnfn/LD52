@@ -55,6 +55,14 @@ offset_right = 40.0
 offset_bottom = 21.0
 text = "This is a unit! What unit? Who knows! Unit's data, stats, etc, will go here."
 
+[node name="HealthLabel" type="Label" parent="VBoxContainer/SelectionDataAndCommands/SelectionData"]
+layout_mode = 1
+offset_left = 7.0
+offset_top = 54.0
+offset_right = 615.0
+offset_bottom = 78.0
+text = "This is a unit! What unit? Who knows! Unit's data, stats, etc, will go here."
+
 [node name="SelectionCommands" type="Panel" parent="VBoxContainer/SelectionDataAndCommands"]
 layout_mode = 2
 size_flags_horizontal = 3

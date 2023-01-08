@@ -60,6 +60,7 @@ public interface IResource {
 public interface IUnit {
   public string unitName { get; }
   public int health { get; set; }
+  public int maxHealth { get; set; }
 }
 
 public interface IBuilding {

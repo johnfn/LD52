@@ -62,7 +62,7 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
 
   // IUnit
   public string unitName { get; set; } = "Ant";
-  public int health { get; set; } = 10;
+  public int health { get; set; }
 
   private int _speed = 500;
   private UnitStatus _status = UnitStatus.Idle;
@@ -75,6 +75,7 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
 
   // Worker stuff
   public InventoryItem InventoryItem { get; private set; } = null;
+  public int maxHealth { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
   private Area2D _shape;
 
@@ -82,8 +83,12 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
   private ResourcePanel _resourcePanel;
 
   public override void _Ready() {
-    _shape = GetNode<Area2D>("Area");
+    var stats = Util.UnitStats[UnitType.Ant];
 
+    health = stats.health;
+    maxHealth = stats.health;
+
+    _shape = GetNode<Area2D>("Area");
     _uiPanel = GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
     _resourcePanel = GetNode<ResourcePanel>("/root/Root/Static/UIRoot/ResourcePanel");
   }

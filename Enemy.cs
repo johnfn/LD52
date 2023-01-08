@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System;
 
-public partial class Enemy : Sprite2D, ISelectable {
+public partial class Enemy : Sprite2D, ISelectable, IUnit {
 
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
 
@@ -11,7 +11,8 @@ public partial class Enemy : Sprite2D, ISelectable {
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;
 
-  private int _health = 10;
+  public int health { get; set; }
+  public int maxHealth { get; set; }
 
   public string name { get; set; } = "Enemy";
 
@@ -21,7 +22,11 @@ public partial class Enemy : Sprite2D, ISelectable {
     }
   }
 
+  public string unitName => "Enemy";
+
   public override void _Ready() {
+    health = 10;
+    maxHealth = 10;
   }
 
   public override void _Process(double delta) {
@@ -36,11 +41,9 @@ public partial class Enemy : Sprite2D, ISelectable {
   }
 
   public void Damage(int amount) {
-    _health -= amount;
+    health -= amount;
 
-    GD.Print("Enemy health is now: " + _health);
-
-    if (_health <= 0) {
+    if (health <= 0) {
       QueueFree();
     }
   }

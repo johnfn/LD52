@@ -30,6 +30,7 @@ public partial class UiPanel : Control {
   Label selectionNameLabel;
 
   Label selectionLabel;
+  Label healthLabel;
 
   Actions actions;
 
@@ -39,6 +40,7 @@ public partial class UiPanel : Control {
     // Panels
     selectionCommandsPanel = GetNode<Panel>("VBoxContainer/SelectionDataAndCommands/SelectionCommands");
     selectionLabel = GetNode<Label>("VBoxContainer/SelectionDataAndCommands/SelectionData/Label");
+    healthLabel = GetNode<Label>("VBoxContainer/SelectionDataAndCommands/SelectionData/HealthLabel");
     genericPanel = selectionCommandsPanel.GetNode<VBoxContainer>("GenericPanel");
     townHallPanel = selectionCommandsPanel.GetNode<Control>("TownHallPanel");
     resourceDepotPanel = selectionCommandsPanel.GetNode<Control>("ResourceDepotPanel");
@@ -105,6 +107,8 @@ public partial class UiPanel : Control {
 
 
   private void _showCommandUi() {
+    GD.Print("update");
+
     if (Globals.selectedUnit == null) {
       selectionNameLabel.Text = "Selected Unit: None";
     }
@@ -136,15 +140,16 @@ public partial class UiPanel : Control {
 
     if (Globals.selectedUnit is IUnit u) {
       selectionNameLabel.Text = u.unitName;
-    }
 
+      GD.Print("Health: " + u.health + "/" + u.maxHealth);
+      healthLabel.Text = "Health: " + u.health + "/" + u.maxHealth;
+    }
 
     if (Globals.selectedUnit is TrainingBuilding th) {
       if (th.status == BuildingStatus.Building) {
         selectionNameLabel.Text += "Producing units...)";
       }
     }
-
 
     if (Globals.selectedUnit is Ant a) {
       selectionNameLabel.Text = a.unitName;
@@ -159,7 +164,6 @@ public partial class UiPanel : Control {
     }
 
     if (Globals.selectedUnit is ISelectable ss) {
-      GD.Print("Yeet");
       selectionLabel.Text = ss.selectionText;
     }
   }
@@ -288,8 +292,6 @@ public partial class UiPanel : Control {
 
 
   public override void _Process(double delta) {
-    if (Globals.gameMode == GameMode.Build) {
-      _showCommandUi();
-    }
+    _showCommandUi();
   }
 }

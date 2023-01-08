@@ -53,6 +53,7 @@ public partial class FightingBug : Sprite2D, IUnit, ISelectable {
     }
   }
   public int health { get; set; }
+  public int maxHealth { get; set; }
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;
   public string name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -63,6 +64,8 @@ public partial class FightingBug : Sprite2D, IUnit, ISelectable {
     var stats = Util.UnitStats[unitType];
 
     health = stats.health;
+    maxHealth = stats.health;
+
     _attackCooldownMax = stats.attackCooldown;
     _damage = stats.damage;
 
