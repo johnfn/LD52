@@ -38,6 +38,9 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
     }),
   };
 
+  public string name { get; set; } = "Ant";
+
+
   // IHoverable
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;
@@ -49,7 +52,6 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
   public void OnHoverEnd() {
     Modulate = new Color(1, 1, 1, 1f);
   }
-
 
   // IUnit
   public string unitName { get; set; } = "Ant";

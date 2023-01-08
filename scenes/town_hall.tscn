@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://i6od1cr3x623"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Texture2D" uid="uid://c0jfuwkt6bp3l" path="res://assets/town_hall.png" id="1_edfkt"]
-[ext_resource type="Script" path="res://TownHall.cs" id="2_ocy4t"]
+[ext_resource type="Script" path="res://TrainingBuilding.cs" id="2_ocy4t"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_othbg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]

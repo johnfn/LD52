@@ -18,9 +18,11 @@ public partial class UiPanel : Control {
   Label progressLabel;
   Control unitPanel;
   Control builderPanel;
+  Control barracksPanel;
   Button townHallButton;
   Button townHallBuyGrasshopperButton;
   Button depotButton;
+  Button barracksButton;
 
   Panel selectionInfoPanel;
   Panel selectionCommandsPanel;
@@ -40,6 +42,7 @@ public partial class UiPanel : Control {
     buildPanel = selectionCommandsPanel.GetNode<Control>("BuildPanel");
     unitPanel = selectionCommandsPanel.GetNode<Control>("UnitPanel");
     builderPanel = selectionCommandsPanel.GetNode<Control>("BuilderPanel");
+    barracksPanel = selectionCommandsPanel.GetNode<Control>("BarracksPanel");
 
 
     // NameTag
@@ -52,7 +55,7 @@ public partial class UiPanel : Control {
     townHallButton = builderPanel.GetNode<Button>("TownHallButton");
     depotButton = builderPanel.GetNode<Button>("ResourceDepot");
     townHallBuyGrasshopperButton = townHallPanel.GetNode<Button>("BuyGrasshopper");
-
+    barracksButton = builderPanel.GetNode<Button>("BarracksButton");
 
     _showCommandUi();
 
@@ -68,6 +71,31 @@ public partial class UiPanel : Control {
 
     // depotButton.Connect("pressed", Callable.From(() => {
     //     _beginBuilding(BuildingType.ResourceDepot);
+    // }));
+    // depotButton.Connect("pressed", Callable.From(() => {
+    //   _beginBuilding(BuildingType.ResourceDepot);
+    // }));
+
+    // barracksButton.Connect("pressed", Callable.From(() => {
+    //   _beginBuilding(BuildingType.Barrachnid);
+    // }));
+
+    // barracksPanel.GetNode<Button>("BeetleButton").Connect("pressed", Callable.From(() => {
+    //   if (selectedUnit is TrainingBuilding b) {
+    //     b.BuyUnit(UnitType.Beetle);
+    //   }
+    // }));
+
+    // barracksPanel.GetNode<Button>("ScoutButton").Connect("pressed", Callable.From(() => {
+    //   if (selectedUnit is TrainingBuilding b) {
+    //     b.BuyUnit(UnitType.Scout);
+    //   }
+    // }));
+
+    // barracksPanel.GetNode<Button>("SpitButton").Connect("pressed", Callable.From(() => {
+    //   if (selectedUnit is TrainingBuilding b) {
+    //     b.BuyUnit(UnitType.Spit);
+    //   }
     // }));
   }
 
@@ -96,21 +124,21 @@ public partial class UiPanel : Control {
       }
     }
 
+    selectionNameLabel.Text = "Unknown";
 
-    if (Globals.selectedUnit is TownHall th) {
+    if (Globals.selectedUnit is IBuilding b) {
+      selectionNameLabel.Text = b.unitName;
+    }
+
+    if (Globals.selectedUnit is IUnit u) {
+      selectionNameLabel.Text = u.unitName;
+    }
+
+
+    if (Globals.selectedUnit is TrainingBuilding th) {
       if (th.status == BuildingStatus.Building) {
-        selectionNameLabel.Text = "Town Hall (Producing units...)";
-      } else {
-        selectionNameLabel.Text = "Town Hall";
+        selectionNameLabel.Text += "Producing units...)";
       }
-    }
-
-    if (Globals.selectedUnit is BugBarracks b) {
-      selectionNameLabel.Text = "Barracks";
-    }
-
-    if (Globals.selectedUnit is ResourceDepot rd) {
-      selectionNameLabel.Text = "Resource Depot";
     }
 
 

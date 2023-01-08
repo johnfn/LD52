@@ -5,6 +5,8 @@ public partial class ResourceDepot : Sprite2D, IBuilding, ISelectable {
 
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>();
 
+  public string name { get; set; } = "Resource Depot";
+
   public float buildProgress { get; set; } = 0;
   public float buildTime { get; set; } = 5f;
   public string unitName { get; set; } = "Resource Depot";

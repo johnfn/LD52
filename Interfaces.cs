@@ -3,59 +3,69 @@ using System.Collections.Generic;
 using System;
 
 public enum ResourceType {
-    Twig,
-    Meat,
+  Twig,
+  Meat,
 }
 
 public enum BuildingType {
-    TownHall,
-    ResourceDepot,
-    Barrachnid,
-    None,
+  TownHall,
+  ResourceDepot,
+  Barrachnid,
+  None,
 }
 
 public struct BuildingStats {
-    public float buildTime;
-    public int health;
-    public int twigCost;
-    public int meatCost;
-    public string resourcePath;
-    public string description;
+  public float buildTime;
+  public int health;
+  public int twigCost;
+  public int meatCost;
+  public string resourcePath;
+  public string description;
 }
 
+public struct UnitStats {
+  public float buildTime;
+  public int health;
+  public int twigCost;
+  public int meatCost;
+  public string resourcePath;
+  public string description;
+}
 
 public interface ISelectable {
-    public Dictionary<string, Action> actions { get; set; }
+  public Dictionary<string, Action> actions { get; set; }
 
-    public bool isHoverable { get; set; }
-    /** Unused today */
-    public int priority { get; set; }
+  public bool isHoverable { get; set; }
+  /** Unused today */
+  public int priority { get; set; }
 
-    public void OnHoverEnd();
-    public void OnHoverStart();
+  public void OnHoverEnd();
+  public void OnHoverStart();
+
+  public string name { get; set; }
 
 }
 
 
 public interface IResource {
-    public int amount { get; set; }
-    public float harvestTime { get; set; }
-    public Vector2 resourceGlobalPosition { get; }
-    public ResourceType resourceType { get; set; }
+  public int amount { get; set; }
+  public float harvestTime { get; set; }
+  public Vector2 resourceGlobalPosition { get; }
+  public ResourceType resourceType { get; set; }
 }
 
 public interface IUnit {
-    public string unitName { get; set; }
-    public int health { get; set; }
+  public string unitName { get; set; }
+  public int health { get; set; }
 }
 
 public interface IBuilding {
-    public float buildProgress { get; set; }
-    public float buildTime { get; set; }
-    public string unitName { get; set; }
-    public BuildingStatus status { get; set; }
+  public float buildProgress { get; set; }
+  public float buildTime { get; set; }
+  public string unitName { get; }
+  public BuildingStatus status { get; set; }
 }
 
 public interface ICollider {
-    public Area2D colliderShape { get; }
+  public Area2D colliderShape { get; }
 }

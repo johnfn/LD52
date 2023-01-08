@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System;
 
 public enum UnitType {
-  Ant
+  None,
+  Ant,
+  Beetle,
+  Scout,
+  Spit
 }
 
 public enum BuildingStatus {
@@ -11,27 +15,35 @@ public enum BuildingStatus {
   Building
 }
 
-public partial class TownHall : Sprite2D, IBuilding, ISelectable, ICollider {
+// This is currently either TrainingBuilding or BugBarracks
+public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, ICollider {
+
+  [Export]
+  public bool IsBugBarracks;
 
   // ISelectable
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
     ["Ant"] = (delegate () {
-      if (Globals.selectedUnit is TownHall th) {
+      if (Globals.selectedUnit is TrainingBuilding th) {
         th.BuyUnit(UnitType.Ant);
       }
     }),
   };
 
+  public string name { get; set; } = "Training Building";
+
+
 
   // IBuilding
   public float buildProgress { get; set; } = 0;
   public float buildTime { get; set; } = 0.1f;
-  public string unitName { get; set; } = "Town Hall";
+  public string unitName { get; } = "Town Hall";
   public BuildingStatus status { get; set; } = BuildingStatus.Idle;
 
   // IHoverable
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;
+  public UnitType currentBuildingUnitType { get; set; } = UnitType.None;
   public Area2D colliderShape {
     get {
       return _shape;
@@ -50,12 +62,10 @@ public partial class TownHall : Sprite2D, IBuilding, ISelectable, ICollider {
 
   private Area2D _shape;
   private UiPanel _uiPanel;
-  private PackedScene _antScene;
 
   public override void _Ready() {
     _shape = GetNode<Area2D>("Area");
     _uiPanel = GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
-    _antScene = GD.Load<PackedScene>("res://Scenes/ant.tscn");
   }
 
   public override void _Process(double delta) {
@@ -66,20 +76,24 @@ public partial class TownHall : Sprite2D, IBuilding, ISelectable, ICollider {
         status = BuildingStatus.Idle;
         buildProgress = 0;
 
-        var ant = _antScene.Instantiate<Ant>();
+        var unitStats = Util.UnitStats[currentBuildingUnitType];
+        var scene = GD.Load<PackedScene>(unitStats.resourcePath);
+        var newUnit = scene.Instantiate<Node2D>();
 
-        ant.Position = Position + new Vector2(0, 150);
-        GetParent().AddChild(ant);
+        newUnit.Position = Util.FindSafeSpaceNear(GetTree(), GlobalPosition, true);
+
+        GetParent().AddChild(newUnit);
+
+        currentBuildingUnitType = UnitType.None;
       }
     }
   }
 
   public void BuyUnit(UnitType unit) {
-    if (unit == UnitType.Ant) {
-      status = BuildingStatus.Building;
+    status = BuildingStatus.Building;
 
-      buildProgress = 0;
-      buildTime = 0.1f;
-    }
+    buildProgress = 0;
+    buildTime = 0.1f;
+    currentBuildingUnitType = unit;
   }
 }

@@ -8,6 +8,9 @@ public class Util {
   public static bool DEBUG = true;
   public static bool DEBUG_PATH = false;
 
+  public static uint BUILDING_BITMASK = 0b10;
+  public static uint UNIT_BITMASK = 0b100;
+
   public static Vector2 MousePosition(SceneTree tree) {
     return tree.Root.GetNode<Node2D>("Root").GetLocalMousePosition();
   }
@@ -19,31 +22,32 @@ public class Util {
     );
   }
 
-  // If end is already on top of a collision, find a safe end point which is not
-  // colliding with anything instead.
-  private static Vector2 _getSafeEnd(
+  // If end is already on top of a collision, find a safe point near it, which
+  // is not colliding with anything instead.
+  public static Vector2 FindSafeSpaceNear(
     SceneTree tree,
-    Vector2 initialEnd
+    Vector2 point,
+    bool avoidUnits = false
   ) {
     var f = new PhysicsPointQueryParameters2D();
 
-    f.Position = initialEnd;
+    f.Position = point;
     f.Exclude = new Godot.Collections.Array<RID>();
     f.CollideWithAreas = true;
     f.CollideWithBodies = true;
-    f.CollisionMask = 2;
+    f.CollisionMask = avoidUnits ? BUILDING_BITMASK | UNIT_BITMASK : BUILDING_BITMASK;
 
     var collisions = tree.Root.World2d.DirectSpaceState.IntersectPoint(f);
 
     if (collisions.Count == 0) {
       GD.Print("Nothing to worry about!");
 
-      return initialEnd;
+      return point;
     }
 
-    // spiral around initialEnd until we find a safe point
+    // spiral around point until we find a new point which does not collide with anything
 
-    var end = initialEnd;
+    var end = point;
 
     for (var i = 0; i < 20; i++) {
       foreach (var direction in new List<Vector2>() {
@@ -91,7 +95,7 @@ public class Util {
     var start = RoundToCell(initialStart);
     var end = RoundToCell(initialEnd);
 
-    end = _getSafeEnd(tree, end);
+    end = FindSafeSpaceNear(tree, end);
 
     if (end == Vector2.Inf) {
       GD.Print("Could not find a path");
@@ -235,6 +239,72 @@ public class Util {
           meatCost = 0,
           resourcePath = "res://scenes/resource_depot.tscn",
           description = "Your ants can drop off resources at a resource depot."
+        }
+      },
+
+      {
+        BuildingType.Barrachnid,
+        new BuildingStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 20,
+          meatCost = 0,
+          resourcePath = "res://scenes/bug_barracks.tscn",
+          description = "Train bug warriors to fight bug battles!"
+        }
+      },
+    };
+    }
+  }
+
+  public static Dictionary<UnitType, UnitStats> UnitStats {
+    get {
+      return new Dictionary<UnitType, UnitStats>() {
+      {
+        UnitType.Ant,
+        new UnitStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 50,
+          meatCost = 0,
+          resourcePath = "res://scenes/ant.tscn",
+          description = "Ants are awesome"
+        }
+      },
+
+      {
+        UnitType.Beetle,
+        new UnitStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 20,
+          meatCost = 0,
+          resourcePath = "res://scenes/beetle.tscn",
+          description = "Beetles are awesome"
+        }
+      },
+
+      {
+        UnitType.Scout,
+        new UnitStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 20,
+          meatCost = 0,
+          resourcePath = "res://scenes/scout.tscn",
+          description = "Scouts are awesome"
+        }
+      },
+
+      {
+        UnitType.Spit,
+        new UnitStats() {
+          buildTime = 5f,
+          health = 100,
+          twigCost = 20,
+          meatCost = 0,
+          resourcePath = "res://scenes/spitbug.tscn",
+          description = "Spit bugs are disgusting and they should all die"
         }
       },
     };
