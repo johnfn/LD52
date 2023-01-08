@@ -4,9 +4,7 @@ using System;
 
 public partial class Enemy : Sprite2D, ISelectable, IUnit {
 
-  public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
-
-  };
+  public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() { };
 
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;

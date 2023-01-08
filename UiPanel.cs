@@ -107,8 +107,6 @@ public partial class UiPanel : Control {
 
 
   private void _showCommandUi() {
-    GD.Print("update");
-
     if (Globals.selectedUnit == null) {
       selectionNameLabel.Text = "Selected Unit: None";
     }
@@ -131,7 +129,9 @@ public partial class UiPanel : Control {
         label.Connect("pressed", Godot.Callable.From(item.Value));
       }
     }
+  }
 
+  private void _updateLabels() {
     selectionNameLabel.Text = "Unknown";
 
     if (Globals.selectedUnit is IBuilding b) {
@@ -141,7 +141,6 @@ public partial class UiPanel : Control {
     if (Globals.selectedUnit is IUnit u) {
       selectionNameLabel.Text = u.unitName;
 
-      GD.Print("Health: " + u.health + "/" + u.maxHealth);
       healthLabel.Text = "Health: " + u.health + "/" + u.maxHealth;
     }
 
@@ -292,6 +291,10 @@ public partial class UiPanel : Control {
 
 
   public override void _Process(double delta) {
-    _showCommandUi();
+    if (Globals.gameMode == GameMode.Build) {
+      _showCommandUi();
+    }
+
+    _updateLabels();
   }
 }

@@ -16,7 +16,7 @@ public enum BuildingStatus {
 }
 
 // This is currently either TrainingBuilding or BugBarracks
-public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, ICollider {
+public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, ICollider, IUnit {
 
   [Export]
   public bool IsBugBarracks;
@@ -53,7 +53,7 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
   public string selectionText {
     get {
       if (!IsBugBarracks) {
-        return "Stuff!";
+        return "Town Hall info goes here";
       } else {
         return "Boring bug barracks blorg";
       }
@@ -87,6 +87,9 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
     }
   }
 
+  public int health { get; set; }
+  public int maxHealth { get; set; }
+
   public void OnHoverStart() {
     Modulate = new Color(1, 1, 1, 0.5f);
   }
@@ -101,6 +104,10 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
   private UiPanel _uiPanel;
 
   public override void _Ready() {
+    var stats = Util.BuildingStats[
+      IsBugBarracks ? BuildingType.Barrachnid : BuildingType.TownHall
+      ];
+
     _shape = GetNode<Area2D>("Area");
     _uiPanel = GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
   }
