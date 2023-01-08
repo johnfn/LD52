@@ -62,7 +62,7 @@ public interface IDamageable {
   public int health { get; set; }
   public int maxHealth { get; set; }
 
-  public void Damage(int amount) {
+  public void Damage(int amount, Node2D source) {
     health -= amount;
 
     this.healthBar.SetProgress((float)health / (float)maxHealth);

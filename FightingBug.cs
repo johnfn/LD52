@@ -119,7 +119,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
         _attackCooldownCurrent = _attackCooldownMax;
 
         if (_attackTarget is IDamageable id) {
-          id.Damage(_damage);
+          id.Damage(_damage, this);
         }
 
         AnimateAttack();
@@ -155,5 +155,25 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
     //attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
     //attackTween.TweenInterval(.05);
     //attackTween.TweenProperty(this, "scale", 1f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
+  }
+
+  public void Damage(int amount, Node2D source) {
+    // This crashes Godot instantly!
+    // IDamageable id = this;
+    // id.Damage(amount, source);
+
+    health -= amount;
+
+    this.healthBar.SetProgress((float)health / (float)maxHealth);
+
+    if (health <= 0) {
+      node.QueueFree();
+    }
+
+    if (this._status != UnitStatus.Attacking) {
+      if (source is Enemy e) {
+        Attack(e);
+      }
+    }
   }
 }

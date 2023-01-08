@@ -129,7 +129,9 @@ public partial class Enemy : Node2D, ISelectable, IDamageable {
       if (_attackCooldownCurrent > 0) {
         _attackCooldownCurrent -= (float)delta;
       } else {
-        _target.Damage(_damageAmount);
+        GD.Print("Bef");
+        _target.Damage(_damageAmount, this);
+        GD.Print("Aft");
         _attackCooldownCurrent = _attackCooldownMax;
 
         //attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
