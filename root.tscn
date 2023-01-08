@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Script" path="res://Root.cs" id="1_38of0"]
-[ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
 [ext_resource type="PackedScene" uid="uid://dr36wj34htulv" path="res://scenes/ant.tscn" id="3_0h73t"]
+[ext_resource type="PackedScene" uid="uid://c53hvbe0eljly" path="res://rock.tscn" id="3_4crhu"]
 [ext_resource type="Texture2D" uid="uid://b8mb4qw711v5s" path="res://assets/twig.png" id="3_xixoj"]
 [ext_resource type="PackedScene" uid="uid://dorjg41xf3w54" path="res://scenes/town_hall.tscn" id="4_21wg8"]
 [ext_resource type="Script" path="res://Twig.cs" id="4_bcwt3"]
@@ -35,40 +35,20 @@ script = ExtResource("1_38of0")
 [node name="Map" type="Node2D" parent="."]
 script = ExtResource("1_6y1nh")
 
-[node name="Rock" type="Sprite2D" parent="Map"]
-position = Vector2(2.08165e-12, 2.08165e-12)
-texture = ExtResource("1_hrow8")
-centered = false
+[node name="Rock" parent="Map" instance=ExtResource("3_4crhu")]
+position = Vector2(250, 231)
 
-[node name="Rock5" type="Sprite2D" parent="Map"]
-position = Vector2(847, -226)
-texture = ExtResource("1_hrow8")
-centered = false
+[node name="Rock2" parent="Map" instance=ExtResource("3_4crhu")]
+position = Vector2(231, 400)
 
-[node name="Rock2" type="Sprite2D" parent="Map"]
-position = Vector2(113, 14)
-texture = ExtResource("1_hrow8")
-centered = false
+[node name="Rock3" parent="Map" instance=ExtResource("3_4crhu")]
+position = Vector2(384, 185)
 
-[node name="Rock3" type="Sprite2D" parent="Map"]
-position = Vector2(363, 475)
-texture = ExtResource("1_hrow8")
-centered = false
+[node name="Rock4" parent="Map" instance=ExtResource("3_4crhu")]
+position = Vector2(548, 87)
 
-[node name="Rock6" type="Sprite2D" parent="Map"]
-position = Vector2(1265, 658)
-texture = ExtResource("1_hrow8")
-centered = false
-
-[node name="Rock7" type="Sprite2D" parent="Map"]
-position = Vector2(-388, 754)
-texture = ExtResource("1_hrow8")
-centered = false
-
-[node name="Rock4" type="Sprite2D" parent="Map"]
-position = Vector2(240, 10)
-texture = ExtResource("1_hrow8")
-centered = false
+[node name="Rock5" parent="Map" instance=ExtResource("3_4crhu")]
+position = Vector2(650, -46)
 
 [node name="Twig" type="Sprite2D" parent="Map"]
 position = Vector2(1334, 376)
@@ -140,6 +120,7 @@ grow_vertical = 2
 theme = ExtResource("9_tyxdu")
 
 [node name="UiPanel" parent="Static/UIRoot" instance=ExtResource("9_vx6l0")]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -150,8 +131,10 @@ offset_right = 150.0
 grow_vertical = 0
 
 [node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
+layout_mode = 0
 
 [node name="error_panel" parent="Static/UIRoot" instance=ExtResource("13_71qpp")]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 0.05

@@ -6,7 +6,7 @@ using Godot;
 public class Util {
   public static int CELL_SIZE = 32;
   public static bool DEBUG = true;
-  public static bool DEBUG_PATH = false;
+  public static bool DEBUG_PATH = true;
 
   public static uint BUILDING_BITMASK = 0b10;
   public static uint UNIT_BITMASK = 0b100;

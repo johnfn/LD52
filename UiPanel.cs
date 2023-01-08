@@ -184,11 +184,11 @@ public partial class UiPanel : Control {
       return;
     }
 
-    if (mouseEvent.ButtonIndex == MouseButton.Right) {
+    if (mouseEvent.ButtonIndex == MouseButton.Right && Globals.selectedUnit != null) {
       var clickAnimation = GD.Load<PackedScene>("res://scenes/click_animation.tscn").Instantiate<ClickAnimation>();
       GetTree().Root.AddChild(clickAnimation);
       clickAnimation.Play();
-      clickAnimation.GlobalPosition = mouseEvent.GlobalPosition;
+      clickAnimation.GlobalPosition = Util.MousePosition(GetTree());
     }
 
     if (Globals.gameMode == GameMode.Build) {
