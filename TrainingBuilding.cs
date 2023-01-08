@@ -1,4 +1,6 @@
 using Godot;
+using System.Collections.Generic;
+using System;
 
 public enum UnitType {
   None,
@@ -13,11 +15,24 @@ public enum BuildingStatus {
   Building
 }
 
-// This is currently either TownHall or BugBarracks
+// This is currently either TrainingBuilding or BugBarracks
 public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, ICollider {
 
   [Export]
   public bool IsBugBarracks;
+
+  // ISelectable
+  public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
+    ["Ant"] = (delegate () {
+      if (Globals.selectedUnit is TrainingBuilding th) {
+        th.BuyUnit(UnitType.Ant);
+      }
+    }),
+  };
+
+  public string name { get; set; } = "Training Building";
+
+
 
   // IBuilding
   public float buildProgress { get; set; } = 0;

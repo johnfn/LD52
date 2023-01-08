@@ -1,15 +1,17 @@
 using Godot;
 using System.Collections.Generic;
 using System;
-public partial class ResourceDepot : Sprite2D, IBuilding, ISelectable {
+
+
+public partial class BugBarracks : Sprite2D, IBuilding, ISelectable {
 
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>();
 
-  public string name { get; set; } = "Resource Depot";
+  public string name { get; set; } = "Barracks";
 
   public float buildProgress { get; set; } = 0;
   public float buildTime { get; set; } = 5f;
-  public string unitName { get; set; } = "Resource Depot";
+  public string unitName { get; set; } = "BugBarracks";
   public BuildingStatus status { get; set; } = BuildingStatus.Idle;
 
   public bool isHoverable { get; set; } = true;
@@ -22,4 +24,5 @@ public partial class ResourceDepot : Sprite2D, IBuilding, ISelectable {
   public void OnHoverEnd() {
     Modulate = new Color(1, 1, 1, 1f);
   }
+
 }

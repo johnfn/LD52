@@ -1,20 +1,23 @@
 [gd_scene load_steps=19 format=3 uid="uid://b2ioxh4mhw6y2"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
+[ext_resource type="Script" path="res://Root.cs" id="1_38of0"]
 [ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
 [ext_resource type="PackedScene" uid="uid://dr36wj34htulv" path="res://scenes/ant.tscn" id="3_0h73t"]
 [ext_resource type="Texture2D" uid="uid://b8mb4qw711v5s" path="res://assets/twig.png" id="3_xixoj"]
-[ext_resource type="PackedScene" path="res://scenes/town_hall.tscn" id="4_21wg8"]
+[ext_resource type="PackedScene" uid="uid://i6od1cr3x623" path="res://scenes/town_hall.tscn" id="4_21wg8"]
 [ext_resource type="Script" path="res://Twig.cs" id="4_bcwt3"]
 [ext_resource type="Script" path="res://Camera.cs" id="4_po8t6"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="6_hqid7"]
-[ext_resource type="PackedScene" uid="uid://dc46ttjpit4rn" path="res://scenes/bug_barracks.tscn" id="7_5gmsh"]
-[ext_resource type="PackedScene" uid="uid://bf6tor4dkolmi" path="res://scenes/enemy.tscn" id="9_mliv3"]
+[ext_resource type="PackedScene" path="res://scenes/bug_barracks.tscn" id="7_5gmsh"]
+[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="9_mliv3"]
 [ext_resource type="Theme" uid="uid://beulorra254b2" path="res://assets/UI/SimpleBox.tres" id="9_tyxdu"]
 [ext_resource type="PackedScene" uid="uid://drlyhbmyyfjva" path="res://scenes/ui_panel.tscn" id="9_vx6l0"]
 [ext_resource type="PackedScene" uid="uid://dwmu32upluapl" path="res://scenes/resource_panel.tscn" id="10_nmyny"]
+[ext_resource type="PackedScene" uid="uid://cdkvvd75v1ayp" path="res://scenes/error_panel.tscn" id="13_71qpp"]
 [ext_resource type="Script" path="res://SelectionRect.cs" id="13_fuotw"]
 [ext_resource type="PackedScene" uid="uid://c5jobfql2jwj0" path="res://scenes/beetle.tscn" id="15_xik6a"]
+[ext_resource type="PackedScene" uid="uid://ctrb1n4wlapv6" path="res://scenes/error_pane.tscn" id="14_wu0pv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt062"]
 size = Vector2(188, 161.25)
@@ -26,6 +29,7 @@ size = Vector2(197, 1199.5)
 size = Vector2(1801, 186.5)
 
 [node name="Root" type="Node2D"]
+script = ExtResource("1_38of0")
 
 [node name="Map" type="Node2D" parent="."]
 script = ExtResource("1_6y1nh")
@@ -148,6 +152,15 @@ offset_right = 150.0
 grow_vertical = 0
 
 [node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
+
+[node name="error_panel" parent="Static/UIRoot" instance=ExtResource("13_71qpp")]
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 0.4
+grow_vertical = 1
+ErrorPaneScene = ExtResource("14_wu0pv")
 
 [node name="SelectionRect" type="Node2D" parent="."]
 script = ExtResource("13_fuotw")

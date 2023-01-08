@@ -1,6 +1,13 @@
 using Godot;
+using System.Collections.Generic;
+using System;
 
 public partial class Twig : Sprite2D, ISelectable, IResource {
+
+  public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>();
+
+  public string name { get; set; } = "Twig";
+
   // IHoverable
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;

@@ -223,7 +223,7 @@ public class Util {
         new BuildingStats() {
           buildTime = 5f,
           health = 100,
-          twigCost = 50,
+          twigCost = 0,
           meatCost = 0,
           resourcePath = "res://scenes/town_hall.tscn",
           description = "The town hall is the center of your town. It is where you can build new buildings and recruit new villagers."

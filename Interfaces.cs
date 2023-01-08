@@ -1,4 +1,6 @@
 using Godot;
+using System.Collections.Generic;
+using System;
 
 public enum ResourceType {
   Twig,
@@ -33,12 +35,17 @@ public struct UnitStats {
 }
 
 public interface ISelectable {
+  public Dictionary<string, Action> actions { get; set; }
+
   public bool isHoverable { get; set; }
   /** Unused today */
   public int priority { get; set; }
 
   public void OnHoverEnd();
   public void OnHoverStart();
+
+  public string name { get; set; }
+
 }
 
 

@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(188, 161.25)
 
-[node name="Ant" type="Sprite2D"]
+[node name="Ant2" type="Sprite2D"]
 modulate = Color(1, 0.270588, 0.439216, 1)
 position = Vector2(76, 65)
 texture = ExtResource("1_xwud6")

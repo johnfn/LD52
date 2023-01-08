@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -19,6 +20,15 @@ public partial class FightingBug : Sprite2D, IUnit, ISelectable {
   private int _damage = 0;
   private List<Vector2> _path = new List<Vector2>();
 
+  public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
+    // ["Town Hall"] = (delegate () {
+    //   Actions.selectBuilding(BuildingType.TownHall);
+    // }),
+    // ["Resource Depot"] = (delegate () {
+    //   Actions.selectBuilding(BuildingType.ResourceDepot);
+    // }),
+  };
+
   public string unitName {
     get {
       return unitType.ToString();
@@ -27,6 +37,7 @@ public partial class FightingBug : Sprite2D, IUnit, ISelectable {
   public int health { get; set; }
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;
+  public string name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
   private int _speed = 500;
 

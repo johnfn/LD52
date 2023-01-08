@@ -15,6 +15,10 @@ run/main_scene="res://root.tscn"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Actions="*res://Actions.cs"
+
 [display]
 
 window/size/viewport_width=1800

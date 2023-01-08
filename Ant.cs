@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using Godot;
 
 public enum UnitStatus {
@@ -28,6 +29,18 @@ public class InventoryItem {
 }
 
 public partial class Ant : Sprite2D, IUnit, ISelectable {
+
+  public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
+    ["Town Hall"] = (delegate () {
+      Actions.selectBuilding(BuildingType.TownHall);
+    }),
+    ["Resource Depot"] = (delegate () {
+      Actions.selectBuilding(BuildingType.ResourceDepot);
+    }),
+  };
+
+  public string name { get; set; } = "Ant";
+
 
   // IHoverable
   public bool isHoverable { get; set; } = true;
