@@ -176,6 +176,27 @@ public partial class UiPanel : Control {
     if (@event is InputEventMouseMotion mouseMotionEvent) {
       _handleMouseMove(mouseMotionEvent);
     }
+
+    if (@event is InputEventKey keyEvent) {
+      _handleKey(keyEvent);
+    }
+  }
+
+  private void _handleKey(InputEventKey keyEvent) {
+    if (keyEvent.Pressed) {
+      if (keyEvent.Keycode == Key.Escape) {
+        _cancelBuilding();
+      }
+    }
+  }
+
+  private void _cancelBuilding() {
+    if (Globals.gameMode == GameMode.Build) {
+      Globals.gameMode = GameMode.Command;
+      Globals.selectedBuilding.QueueFree();
+      Globals.selectedBuildingType = BuildingType.None;
+      Globals.selectedBuilding = null;
+    }
   }
 
   private void _handleMouseDown(InputEventMouseButton mouseEvent) {
@@ -287,8 +308,6 @@ public partial class UiPanel : Control {
 
     foreach (var collision in collisions) {
       var n = (Node2D)collision["collider"];
-
-      GD.Print(n.Name);
     }
 
     return collisions.Count == 0;
@@ -299,10 +318,6 @@ public partial class UiPanel : Control {
     var roundedTo32 = new Vector2((int)(pos.x / 32) * 32, (int)(pos.y / 32) * 32);
 
     Globals.selectedBuilding.Position = roundedTo32;
-
-    GD.Print(
-      IsBuildingInSafeLocation(Globals.selectedBuilding)
-    );
 
     if (!IsBuildingInSafeLocation(Globals.selectedBuilding)) {
       Globals.selectedBuilding.Modulate = new Color(1, 0, 0, 0.5f);

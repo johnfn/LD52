@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bf6tor4dkolmi"]
+[gd_scene load_steps=7 format=3 uid="uid://bf6tor4dkolmi"]
 
+[ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="1_omtas"]
 [ext_resource type="Texture2D" uid="uid://cfgp3vm5jedux" path="res://assets/enemy.png" id="1_vfpyn"]
 [ext_resource type="Script" path="res://Enemy.cs" id="2_1ca0s"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_j0axm"]
@@ -8,13 +9,19 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(188, 161.25)
 
-[node name="Enemy" type="Sprite2D"]
-position = Vector2(1038, 392)
-texture = ExtResource("1_vfpyn")
+[node name="Enemy" type="Node2D"]
 script = ExtResource("2_1ca0s")
 
+[node name="SelectionCircle" parent="." instance=ExtResource("1_omtas")]
+position = Vector2(11, 45)
+scale = Vector2(2.28, 1.69852)
+
+[node name="Enemy" type="Sprite2D" parent="."]
+position = Vector2(2, 7)
+texture = ExtResource("1_vfpyn")
+
 [node name="Area" type="Area2D" parent="."]
-position = Vector2(5, 10)
+position = Vector2(7, 17)
 collision_layer = 5
 script = ExtResource("3_j0axm")
 
@@ -24,4 +31,4 @@ shape = SubResource("RectangleShape2D_wx0nu")
 
 [node name="HealthBar" parent="." instance=ExtResource("4_32j13")]
 modulate = Color(0, 1, 0.12549, 1)
-position = Vector2(-71, -97)
+position = Vector2(0, -71)

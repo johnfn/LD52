@@ -10,7 +10,7 @@ public enum EnemyStatus {
 }
 
 
-public partial class Enemy : Sprite2D, ISelectable, IDamageable {
+public partial class Enemy : Node2D, ISelectable, IDamageable {
 
   public Node2D node { get => this; }
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() { };
@@ -20,6 +20,7 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
 
   public int health { get; set; }
   public int maxHealth { get; set; }
+  public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
 
   public string name { get; set; } = "Enemy";
 
@@ -53,6 +54,8 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
     _originalModColor = Modulate;
     //takeDamageTween = CreateTween();
     //attackTween = CreateTween();
+
+    SelectionCircle.Unit = this;
   }
 
   private List<Vector2> _path;
@@ -142,11 +145,9 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
   }
 
   public void OnHoverStart() {
-    Modulate = new Color(1, 1, 1, 0.5f);
   }
 
   public void OnHoverEnd() {
-    Modulate = new Color(1, 1, 1, 1f);
   }
 
   //takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
