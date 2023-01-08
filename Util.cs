@@ -235,7 +235,7 @@ public class Util {
           health = 10,
           twigCost = 0,
           meatCost = 0,
-          resourcePath = "res://scenes/town_hall.tscn",
+          resourcePath = "res://scenes/buildings/town_hall.tscn",
           description = "The town hall is the center of your town. It is where you can build new buildings and recruit new villagers."
         }
       },
@@ -247,7 +247,7 @@ public class Util {
           health = 10,
           twigCost = 20,
           meatCost = 0,
-          resourcePath = "res://scenes/resource_depot.tscn",
+          resourcePath = "res://scenes/buildings/resource_depot.tscn",
           description = "Your ants can drop off resources at a resource depot."
         }
       },
@@ -259,7 +259,7 @@ public class Util {
           health = 10,
           twigCost = 20,
           meatCost = 0,
-          resourcePath = "res://scenes/bug_barracks.tscn",
+          resourcePath = "res://scenes/buildings/bug_barracks.tscn",
           description = "Train bug warriors to fight bug battles!"
         }
       },
@@ -277,7 +277,7 @@ public class Util {
           meatCost = 0,
           attackCooldown = 100,
           damage = 1,
-          resourcePath = "res://scenes/ant.tscn",
+          resourcePath = "res://scenes/units/ant.tscn",
           description = "Ants are awesome"
         },
 
@@ -289,7 +289,7 @@ public class Util {
             meatCost = 0,
             attackCooldown = 100,
             damage = 5,
-            resourcePath = "res://scenes/beetle.tscn",
+            resourcePath = "res://scenes/units/beetle.tscn",
             description = "Beetles are awesome"
           },
 
@@ -301,7 +301,7 @@ public class Util {
             meatCost = 0,
             attackCooldown = 200,
             damage = 3,
-            resourcePath = "res://scenes/scout.tscn",
+            resourcePath = "res://scenes/units/scout.tscn",
             description = "Scouts are awesome"
           },
 
@@ -313,7 +313,7 @@ public class Util {
             meatCost = 0,
             attackCooldown = 50,
             damage = 5,
-            resourcePath = "res://scenes/spitbug.tscn",
+            resourcePath = "res://scenes/units/spitbug.tscn",
             description = "Spit bugs are disgusting and they should all die"
           }
       };
