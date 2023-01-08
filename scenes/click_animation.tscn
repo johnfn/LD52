@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://0jynu6kq8c2r"]
+
+[ext_resource type="Texture2D" uid="uid://c71ft8d6y7o7q" path="res://assets/fullcircle.png" id="1_dhmse"]
+[ext_resource type="Script" path="res://ClickAnimation.cs" id="1_f4bgw"]
+
+[sub_resource type="Animation" id="Animation_2cfln"]
+resource_name = "Play"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphic:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 0.378929),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphic:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ceqi7"]
+_data = {
+"Play": SubResource("Animation_2cfln")
+}
+
+[node name="ClickAnimation" type="Node2D"]
+position = Vector2(0.999969, 0.999985)
+script = ExtResource("1_f4bgw")
+
+[node name="Graphic" type="Sprite2D" parent="."]
+self_modulate = Color(0.164706, 1, 0.027451, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_dhmse")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ceqi7")
+}
