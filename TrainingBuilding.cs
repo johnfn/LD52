@@ -47,12 +47,10 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
 
   private Area2D _shape;
   private UiPanel _uiPanel;
-  private PackedScene _antScene;
 
   public override void _Ready() {
     _shape = GetNode<Area2D>("Area");
     _uiPanel = GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
-    _antScene = GD.Load<PackedScene>("res://Scenes/ant.tscn");
   }
 
   public override void _Process(double delta) {
@@ -65,7 +63,7 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
 
         var unitStats = Util.UnitStats[currentBuildingUnitType];
         var scene = GD.Load<PackedScene>(unitStats.resourcePath);
-        var newUnit = _antScene.Instantiate<Node2D>();
+        var newUnit = scene.Instantiate<Node2D>();
 
         newUnit.Position = Util.FindSafeSpaceNear(GetTree(), GlobalPosition);
 
