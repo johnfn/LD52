@@ -59,6 +59,14 @@ text = "This is a unit! What unit? Who knows! Unit's data, stats, etc, will go h
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="GenericPanel" type="VBoxContainer" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="UnitPanel" type="Control" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands"]
 visible = false
 layout_mode = 1
@@ -108,7 +116,48 @@ theme_override_font_sizes/font_size = 40
 text = "Resource
 Depot"
 
+[node name="BarracksPanel" type="Control" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1p6nn")
+
+[node name="BeetleButton" type="Button" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands/BarracksPanel"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 84.0
+offset_right = 148.0
+offset_bottom = 216.0
+theme = ExtResource("1_1p6nn")
+theme_override_font_sizes/font_size = 40
+text = "Beetle"
+
+[node name="ScoutButton" type="Button" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands/BarracksPanel"]
+layout_mode = 1
+offset_left = 183.0
+offset_top = 85.0
+offset_right = 368.0
+offset_bottom = 217.0
+theme_override_font_sizes/font_size = 40
+text = "Scout
+Bug"
+
+[node name="SpitButton" type="Button" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands/BarracksPanel"]
+layout_mode = 1
+offset_left = 398.0
+offset_top = 79.0
+offset_right = 583.0
+offset_bottom = 211.0
+theme_override_font_sizes/font_size = 40
+text = "Spit
+Bug"
+
 [node name="BuildPanel" type="Control" parent="VBoxContainer/SelectionDataAndCommands/SelectionCommands"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

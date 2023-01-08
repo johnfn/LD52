@@ -2,17 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-public enum GameMode {
-    Build,
-    Command,
-}
+
 
 public partial class UiPanel : Control {
-    public GameMode gameMode = GameMode.Command;
-    public ISelectable selectedUnit = null;
     public ISelectable hoveredUnit = null;
-    public Sprite2D selectedBuilding = null;
-    public BuildingType selectedBuildingType = BuildingType.None;
+    // public Sprite2D selectedBuilding = null;
+    // public BuildingType selectedBuildingType = BuildingType.None;
+
+    VBoxContainer genericPanel;
+
 
     Control townHallPanel;
     Control resourceDepotPanel;
@@ -29,10 +27,14 @@ public partial class UiPanel : Control {
 
     Label selectionNameLabel;
 
+    Actions actions;
+
     public override void _Ready() {
+        actions = GetNode<Actions>("/root/Actions");
 
         // Panels
         selectionCommandsPanel = GetNode<Panel>("VBoxContainer/SelectionDataAndCommands/SelectionCommands");
+        genericPanel = selectionCommandsPanel.GetNode<VBoxContainer>("GenericPanel");
         townHallPanel = selectionCommandsPanel.GetNode<Control>("TownHallPanel");
         resourceDepotPanel = selectionCommandsPanel.GetNode<Control>("ResourceDepotPanel");
         buildPanel = selectionCommandsPanel.GetNode<Control>("BuildPanel");
@@ -52,76 +54,67 @@ public partial class UiPanel : Control {
         townHallBuyGrasshopperButton = townHallPanel.GetNode<Button>("BuyGrasshopper");
 
 
-
         _showCommandUi();
 
-        townHallBuyGrasshopperButton.Connect("pressed", Callable.From(() => {
-            if (selectedUnit is TownHall th) {
-                th.BuyUnit(UnitType.Ant);
-            }
-        }));
+        // townHallBuyGrasshopperButton.Connect("pressed", Callable.From(() => {
+        //     if (Globals.selectedUnit is TownHall th) {
+        //         th.BuyUnit(UnitType.Ant);
+        //     }
+        // }));
 
-        townHallButton.Connect("pressed", Callable.From(() => {
-            _beginBuilding(BuildingType.TownHall);
-        }));
+        // townHallButton.Connect("pressed", Callable.From(() => {
+        //     _beginBuilding(BuildingType.TownHall);
+        // }));
 
-        depotButton.Connect("pressed", Callable.From(() => {
-            GD.Print("Buy Depot");
-            _beginBuilding(BuildingType.ResourceDepot);
-        }));
+        // depotButton.Connect("pressed", Callable.From(() => {
+        //     _beginBuilding(BuildingType.ResourceDepot);
+        // }));
     }
 
-    private void _beginBuilding(BuildingType buildingType) {
-        var stats = Util.BuildingStats[buildingType];
 
-        if (
-          Globals.TwigCount >= stats.twigCost &&
-          Globals.MeatCount >= stats.meatCost
-        ) {
-            selectedBuildingType = buildingType;
-            selectedBuilding = GD.Load<PackedScene>(stats.resourcePath).Instantiate<Sprite2D>();
-            selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
-
-            GetNode("/root/Root").AddChild(selectedBuilding);
-            gameMode = GameMode.Build;
-        }
-    }
 
     private void _showCommandUi() {
-        var townHallPanelVisible = false;
-        var buildPanelVisible = false;
-        var unitPanelVisible = false;
-        var builderPanelVisible = false;
-        var resourceDepotPanelVisible = false;
-
-        if (selectedUnit == null) {
+        if (Globals.selectedUnit == null) {
             selectionNameLabel.Text = "Selected Unit: None";
         }
 
-        // if (selectedUnit is IUnit u) {
+        // if (Globals.selectedUnit is IUnit u) {
         //   unitPanelVisible = true;
         //   selectionNameLabel.Text = "Selected Unit: " + u.unitName;
-        //   selectedUnitName = u.unitName;
+        //   Globals.selectedUnitName = u.unitName;
         // }
 
-        if (selectedUnit is TownHall th) {
+        if (Globals.selectedUnit is ISelectable s) {
+            foreach (var child in genericPanel.GetChildren()) {
+                genericPanel.RemoveChild(child);
+            }
+            foreach (var item in Globals.selectedUnit.actions) {
+                var label = new Button();
+                label.Text = item.Key;
+                genericPanel.AddChild(label);
+                label.Connect("pressed", Godot.Callable.From(item.Value));
+            }
+        }
+
+
+        if (Globals.selectedUnit is TownHall th) {
             if (th.status == BuildingStatus.Building) {
-                buildPanelVisible = true;
                 selectionNameLabel.Text = "Town Hall (Producing units...)";
             } else {
-                townHallPanelVisible = true;
                 selectionNameLabel.Text = "Town Hall";
             }
         }
 
-        if (selectedUnit is ResourceDepot rd) {
-            resourceDepotPanelVisible = true;
+        if (Globals.selectedUnit is BugBarracks b) {
+            selectionNameLabel.Text = "Barracks";
+        }
+
+        if (Globals.selectedUnit is ResourceDepot rd) {
             selectionNameLabel.Text = "Resource Depot";
         }
 
 
-        if (selectedUnit is Ant a) {
-            builderPanelVisible = true;
+        if (Globals.selectedUnit is Ant a) {
             selectionNameLabel.Text = a.unitName;
 
             if (a.InventoryItem != null) {
@@ -129,10 +122,6 @@ public partial class UiPanel : Control {
             }
         }
 
-        townHallPanel.Visible = townHallPanelVisible;
-        buildPanel.Visible = buildPanelVisible;
-        unitPanel.Visible = unitPanelVisible;
-        builderPanel.Visible = builderPanelVisible;
     }
 
     public override void _Input(InputEvent @event) {
@@ -147,60 +136,36 @@ public partial class UiPanel : Control {
         }
     }
 
-    private void _placeBuilding() {
-        if (selectedBuildingType == BuildingType.None) {
-            return;
-        }
-
-        var stats = Util.BuildingStats[selectedBuildingType];
-
-        if (
-          Globals.TwigCount >= stats.twigCost &&
-          Globals.MeatCount >= stats.meatCost
-        ) {
-            Globals.TwigCount -= stats.twigCost;
-            Globals.MeatCount -= stats.meatCost;
-
-            selectedBuilding.Modulate = new Color(1, 1, 1, 1);
-            selectedBuilding = null;
-            selectedBuildingType = BuildingType.None;
-            gameMode = GameMode.Command;
-        } else {
-            // TODO
-
-            GD.Print("Not enough twigs");
-        }
-    }
 
     private void _handleMouseDown(InputEventMouseButton mouseEvent) {
         if (!mouseEvent.Pressed) {
             return;
         }
 
-        if (gameMode == GameMode.Build) {
+        if (Globals.gameMode == GameMode.Build) {
             if (mouseEvent.ButtonIndex == MouseButton.Left) {
-                _placeBuilding();
+                Actions.placeBuilding();
 
                 return;
             }
         }
 
-        if (gameMode == GameMode.Command) {
+        if (Globals.gameMode == GameMode.Command) {
             // Issue action like Move
 
             if (mouseEvent.ButtonIndex == MouseButton.Right) {
-                if (selectedUnit == null) {
+                if (Globals.selectedUnit == null) {
                     return;
                 }
 
                 var hoveredUnit = GetHoveredUnit();
 
                 if (hoveredUnit is IResource resource) {
-                    if (selectedUnit is Ant a) {
+                    if (Globals.selectedUnit is Ant a) {
                         a.Harvest(resource);
                     }
                 } else {
-                    if (selectedUnit is Ant a) {
+                    if (Globals.selectedUnit is Ant a) {
                         a.Move(Util.MousePosition(GetTree()));
                     }
                 }
@@ -214,7 +179,7 @@ public partial class UiPanel : Control {
                 var unit = GetHoveredUnit();
 
                 if (unit is ISelectable s) {
-                    selectedUnit = s;
+                    Globals.selectedUnit = s;
                     _showCommandUi();
                 }
             }
@@ -222,14 +187,14 @@ public partial class UiPanel : Control {
     }
 
     private void _handleMouseMove(InputEventMouseMotion mouseMotionEvent) {
-        if (gameMode == GameMode.Build) {
+        if (Globals.gameMode == GameMode.Build) {
             var pos = Util.MousePosition(GetTree());
             var roundedTo32 = new Vector2((int)(pos.x / 32) * 32, (int)(pos.y / 32) * 32);
 
-            selectedBuilding.Position = roundedTo32;
+            Globals.selectedBuilding.Position = roundedTo32;
         }
 
-        if (gameMode == GameMode.Command) {
+        if (Globals.gameMode == GameMode.Command) {
             var prevHoveredUnit = hoveredUnit;
 
             hoveredUnit = GetHoveredUnit();
@@ -272,8 +237,9 @@ public partial class UiPanel : Control {
         return best;
     }
 
+
     public override void _Process(double delta) {
-        if (gameMode == GameMode.Command) {
+        if (Globals.gameMode == GameMode.Build) {
             _showCommandUi();
         }
     }
