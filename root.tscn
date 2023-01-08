@@ -1,26 +1,22 @@
-[gd_scene load_steps=22 format=3 uid="uid://befuau0tho0ni"]
+[gd_scene load_steps=20 format=3 uid="uid://b2ioxh4mhw6y2"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Script" path="res://Root.cs" id="1_38of0"]
 [ext_resource type="PackedScene" uid="uid://dr36wj34htulv" path="res://scenes/units/ant.tscn" id="3_0h73t"]
-[ext_resource type="PackedScene" uid="uid://c53hvbe0eljly" path="res://rock.tscn" id="3_4crhu"]
-[ext_resource type="Texture2D" uid="uid://b8mb4qw711v5s" path="res://assets/twig.png" id="3_xixoj"]
+[ext_resource type="PackedScene" path="res://rock.tscn" id="3_4crhu"]
 [ext_resource type="PackedScene" uid="uid://dorjg41xf3w54" path="res://scenes/buildings/town_hall.tscn" id="4_21wg8"]
-[ext_resource type="Script" path="res://Twig.cs" id="4_bcwt3"]
+[ext_resource type="Texture2D" uid="uid://dxvo5na4nb2ff" path="res://background1.png" id="4_bw8bu"]
 [ext_resource type="Script" path="res://Camera.cs" id="4_po8t6"]
-[ext_resource type="Script" path="res://ClickableArea2D.gd" id="6_hqid7"]
+[ext_resource type="PackedScene" uid="uid://c0pgkco0kk6ah" path="res://scenes/twig_source.tscn" id="5_b4qjw"]
 [ext_resource type="PackedScene" uid="uid://dc46ttjpit4rn" path="res://scenes/buildings/bug_barracks.tscn" id="7_5gmsh"]
 [ext_resource type="Theme" uid="uid://beulorra254b2" path="res://assets/UI/SimpleBox.tres" id="9_tyxdu"]
 [ext_resource type="PackedScene" uid="uid://drlyhbmyyfjva" path="res://scenes/buildings/ui_panel.tscn" id="9_vx6l0"]
 [ext_resource type="PackedScene" uid="uid://dwmu32upluapl" path="res://scenes/resource_panel.tscn" id="10_nmyny"]
-[ext_resource type="PackedScene" uid="uid://butb8nk3j7nsg" path="res://scenes/error_panel.tscn" id="13_71qpp"]
+[ext_resource type="PackedScene" path="res://scenes/error_panel.tscn" id="13_71qpp"]
 [ext_resource type="Script" path="res://SelectionRect.cs" id="13_fuotw"]
 [ext_resource type="PackedScene" path="res://scenes/error_pane.tscn" id="14_wu0pv"]
 [ext_resource type="PackedScene" uid="uid://c5jobfql2jwj0" path="res://scenes/units/beetle.tscn" id="15_xik6a"]
-[ext_resource type="PackedScene" uid="uid://bf6tor4dkolmi" path="res://scenes/enemy.tscn" id="20_koe4t"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pt062"]
-size = Vector2(188, 161.25)
+[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="20_koe4t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irmio"]
 size = Vector2(197, 1199.5)
@@ -37,6 +33,24 @@ position = Vector2(1435, 719)
 [node name="Map" type="Node2D" parent="."]
 script = ExtResource("1_6y1nh")
 
+[node name="BG1" type="Sprite2D" parent="Map"]
+position = Vector2(-1030, 618)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG2" type="Sprite2D" parent="Map"]
+position = Vector2(249.57, 618)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG3" type="Sprite2D" parent="Map"]
+position = Vector2(1515, 615)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG4" type="Sprite2D" parent="Map"]
+position = Vector2(2794.57, 618)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
 [node name="Rock" parent="Map" instance=ExtResource("3_4crhu")]
 position = Vector2(250, 231)
 
@@ -52,24 +66,13 @@ position = Vector2(548, 87)
 [node name="Rock5" parent="Map" instance=ExtResource("3_4crhu")]
 position = Vector2(650, -46)
 
-[node name="Twig" type="Sprite2D" parent="Map"]
-position = Vector2(1334, 376)
-texture = ExtResource("3_xixoj")
-script = ExtResource("4_bcwt3")
-
-[node name="Area" type="Area2D" parent="Map/Twig"]
-position = Vector2(-11, 0)
-script = ExtResource("6_hqid7")
-
-[node name="CollisionShape" type="CollisionShape2D" parent="Map/Twig/Area"]
-position = Vector2(13, -1)
-shape = SubResource("RectangleShape2D_pt062")
-
 [node name="TownHall" parent="Map" instance=ExtResource("4_21wg8")]
 position = Vector2(376, 791)
 
 [node name="BugBarracks" parent="Map" instance=ExtResource("7_5gmsh")]
 position = Vector2(613, 353)
+
+[node name="TwigSource" parent="Map" instance=ExtResource("5_b4qjw")]
 
 [node name="Ant" parent="." instance=ExtResource("3_0h73t")]
 position = Vector2(1038, 392)

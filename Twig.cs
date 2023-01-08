@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System;
 
-public partial class Twig : Sprite2D, ISelectable, IResource {
+public partial class Twig : Node2D, ISelectable, IResource {
 
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>();
 
@@ -31,14 +31,16 @@ public partial class Twig : Sprite2D, ISelectable, IResource {
   public float harvestTime { get; set; } = Util.DEBUG ? 1f : 5f;
 
   public void OnHoverStart() {
-    Modulate = new Color(1, 1, 1, 0.5f);
+    sprite.Modulate = new Color(1, 1, 1, 0.5f);
   }
 
   public void OnHoverEnd() {
-    Modulate = new Color(1, 1, 1, 1f);
+    sprite.Modulate = new Color(1, 1, 1, 1f);
   }
 
+  Sprite2D sprite;
   public override void _Ready() {
+    sprite = GetNode<Sprite2D>("Graphic");
   }
 
   public override void _Process(double delta) {

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0pgkco0kk6ah"]
+
+[ext_resource type="Script" path="res://Twig.cs" id="2_1hpto"]
+[ext_resource type="Texture2D" uid="uid://2iccl17ekfru" path="res://assets/resource_matches.png" id="2_5wsy3"]
+[ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_1ci7r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pt062"]
+size = Vector2(188, 161.25)
+
+[node name="TwigSource" type="Node2D"]
+script = ExtResource("2_1hpto")
+
+[node name="Graphic" type="Sprite2D" parent="."]
+position = Vector2(1334, 376)
+texture = ExtResource("2_5wsy3")
+
+[node name="Area" type="Area2D" parent="."]
+position = Vector2(1323, 376)
+script = ExtResource("3_1ci7r")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area"]
+position = Vector2(13, -1)
+shape = SubResource("RectangleShape2D_pt062")
