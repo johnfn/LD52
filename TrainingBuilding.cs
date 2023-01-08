@@ -148,12 +148,4 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
     buildTime = 0.1f;
     currentBuildingUnitType = unit;
   }
-
-  public void Damage(int amount) {
-    health -= amount;
-
-    if (health <= 0) {
-      QueueFree();
-    }
-  }
 }

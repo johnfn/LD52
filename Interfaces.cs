@@ -61,7 +61,15 @@ public interface IDamageable {
   public string unitName { get; }
   public int health { get; set; }
   public int maxHealth { get; set; }
-  public void Damage(int amount);
+
+  public void Damage(int amount) {
+    health -= amount;
+
+    if (health <= 0) {
+      node.QueueFree();
+    }
+  }
+
   public Node2D node { get; }
   public ProgressBar healthBar { get; }
 }

@@ -248,14 +248,6 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
     };
   }
 
-  public void Damage(int amount) {
-    health -= amount;
-
-    if (health <= 0) {
-      QueueFree();
-    }
-  }
-
   public void Build(BuildingType buildingType, Vector2 buildingPosition) {
     var stats = Util.BuildingStats[buildingType];
 

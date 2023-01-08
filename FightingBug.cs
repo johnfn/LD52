@@ -117,7 +117,11 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
         _attackCooldownCurrent -= 1;
       } else {
         _attackCooldownCurrent = _attackCooldownMax;
-        _attackTarget.Damage(_damage);
+
+        if (_attackTarget is IDamageable id) {
+          id.Damage(_damage);
+        }
+
         AnimateAttack();
       }
     }
@@ -143,17 +147,10 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
     _attackTarget = target;
   }
 
-  public void Damage(int amount) {
-    health -= amount;
+  //takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
+  //takeDamageTween.TweenInterval(.1);
+  //takeDamageTween.TweenProperty(this, "modulate", _originalModColor, .05).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
 
-    //takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
-    //takeDamageTween.TweenInterval(.1);
-    //takeDamageTween.TweenProperty(this, "modulate", _originalModColor, .05).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
-
-    if (health <= 0) {
-      QueueFree();
-    }
-  }
   private void AnimateAttack() {
     //attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
     //attackTween.TweenInterval(.05);

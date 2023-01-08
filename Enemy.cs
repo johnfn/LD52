@@ -144,17 +144,7 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
     Modulate = new Color(1, 1, 1, 1f);
   }
 
-  public void Damage(int amount) {
-    health -= amount;
-
-    //takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
-    //takeDamageTween.TweenInterval(.1);
-    //takeDamageTween.TweenProperty(this, "modulate", _originalModColor, .05).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
-
-    GD.Print("Enemy health is now: " + health);
-
-    if (health <= 0) {
-      QueueFree();
-    }
-  }
+  //takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
+  //takeDamageTween.TweenInterval(.1);
+  //takeDamageTween.TweenProperty(this, "modulate", _originalModColor, .05).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
 }
