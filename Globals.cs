@@ -5,7 +5,6 @@ public enum GameMode {
 }
 
 public class Globals {
-
   public static BuildingType selectedBuildingType;
   public static Node2D selectedBuilding;
 
@@ -16,6 +15,8 @@ public class Globals {
   public static int TwigCount { get; set; } = Util.DEBUG ? 100 : 0;
   public static int MeatCount { get; set; } = 0;
 
+  public static int TwigHarvestRate = 1;
+  public static int MeatHarvestRate = 1;
 }
 
 public class GroupNames {

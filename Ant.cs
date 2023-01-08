@@ -208,9 +208,9 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
         // Add to resources.
 
         if (InventoryItem.resourceType == ResourceType.Twig) {
-          Globals.TwigCount += 5;
+          Globals.TwigCount += Globals.TwigHarvestRate;
         } else if (InventoryItem.resourceType == ResourceType.Meat) {
-          Globals.MeatCount += 5;
+          Globals.MeatCount += Globals.MeatHarvestRate;
         }
 
         HeldTwig.Visible = false;
