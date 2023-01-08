@@ -22,22 +22,47 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
   public bool IsBugBarracks;
 
   // ISelectable
-  public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
-    ["Ant"] = (delegate () {
-      if (Globals.selectedUnit is TrainingBuilding th) {
-        th.BuyUnit(UnitType.Ant);
+  public Dictionary<string, Action> actions {
+    get {
+      if (!IsBugBarracks) {
+        return new Dictionary<string, Action>() {
+          ["Beetle"] = (delegate () {
+            if (Globals.selectedUnit is TrainingBuilding th) {
+              th.BuyUnit(UnitType.Ant);
+            }
+          }),
+        };
       }
-    }),
-  };
+
+      return new Dictionary<string, Action>() {
+        ["Beetle"] = (delegate () {
+          BuyUnit(UnitType.Beetle);
+        }),
+        ["Scout"] = (delegate () {
+          BuyUnit(UnitType.Scout);
+        }),
+        ["Spit"] = (delegate () {
+          BuyUnit(UnitType.Spit);
+        }),
+      };
+    }
+  }
+
 
   public string name { get; set; } = "Training Building";
-
-
 
   // IBuilding
   public float buildProgress { get; set; } = 0;
   public float buildTime { get; set; } = 0.1f;
-  public string unitName { get; } = "Town Hall";
+  public string unitName {
+    get {
+      if (IsBugBarracks) {
+        return "BugBarracks";
+      } else {
+        return "Town Hall";
+      }
+    }
+  }
   public BuildingStatus status { get; set; } = BuildingStatus.Idle;
 
   // IHoverable

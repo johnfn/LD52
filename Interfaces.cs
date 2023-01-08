@@ -35,7 +35,7 @@ public struct UnitStats {
 }
 
 public interface ISelectable {
-  public Dictionary<string, Action> actions { get; set; }
+  public Dictionary<string, Action> actions { get; }
 
   public bool isHoverable { get; set; }
   /** Unused today */
