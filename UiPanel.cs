@@ -5,7 +5,6 @@ using Godot;
 
 
 public partial class UiPanel : Control {
-  public ISelectable hoveredUnit = null;
   // public Sprite2D selectedBuilding = null;
   // public BuildingType selectedBuildingType = BuildingType.None;
 
@@ -201,13 +200,13 @@ public partial class UiPanel : Control {
           return;
         }
 
-        var hoveredUnit = GetHoveredUnit();
+        Globals.hoveredUnit = GetHoveredUnit();
 
-        if (hoveredUnit is IResource resource) {
+        if (Globals.hoveredUnit is IResource resource) {
           if (Globals.selectedUnit is Ant a) {
             a.Harvest(resource);
           }
-        } else if (hoveredUnit is ConstructionSite c) {
+        } else if (Globals.hoveredUnit is ConstructionSite c) {
           if (Globals.selectedUnit is Ant a) {
             a.ContinueToBuild(c);
           } else {
@@ -219,7 +218,7 @@ public partial class UiPanel : Control {
           }
 
           if (Globals.selectedUnit is FightingBug fb) {
-            if (hoveredUnit is Enemy e) {
+            if (Globals.hoveredUnit is Enemy e) {
               fb.Attack(e);
             } else {
               fb.Move(Util.MousePosition(GetTree()));
@@ -253,17 +252,17 @@ public partial class UiPanel : Control {
     }
 
     if (Globals.gameMode == GameMode.Command) {
-      var prevHoveredUnit = hoveredUnit;
+      var prevHoveredUnit = Globals.hoveredUnit;
 
-      hoveredUnit = GetHoveredUnit();
+      Globals.hoveredUnit = GetHoveredUnit();
 
-      if (prevHoveredUnit != hoveredUnit) {
+      if (prevHoveredUnit != Globals.hoveredUnit) {
         if (prevHoveredUnit != null) {
           prevHoveredUnit.OnHoverEnd();
         }
 
-        if (hoveredUnit != null) {
-          hoveredUnit.OnHoverStart();
+        if (Globals.hoveredUnit != null) {
+          Globals.hoveredUnit.OnHoverStart();
         }
       }
     }

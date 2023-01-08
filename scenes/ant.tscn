@@ -1,20 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://dr36wj34htulv"]
+[gd_scene load_steps=7 format=3 uid="uid://dr36wj34htulv"]
 
 [ext_resource type="Texture2D" uid="uid://mvp7k68868ra" path="res://assets/ant.png" id="1_stg67"]
 [ext_resource type="Script" path="res://Ant.cs" id="2_uvaca"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_yorjn"]
 [ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="4_ojxw3"]
+[ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="5_e7mwg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(188, 161.25)
 
-[node name="Ant" type="Sprite2D" groups=["good_unit"]]
-position = Vector2(76, 65)
-texture = ExtResource("1_stg67")
+[node name="Ant" type="Node2D"]
 script = ExtResource("2_uvaca")
 
+[node name="SelectionCircle" parent="." instance=ExtResource("5_e7mwg")]
+position = Vector2(90, 77)
+scale = Vector2(1.88, 1.88)
+
+[node name="Graphic" type="Sprite2D" parent="." groups=["good_unit"]]
+position = Vector2(76, 65)
+texture = ExtResource("1_stg67")
+
 [node name="Area" type="Area2D" parent="."]
-position = Vector2(5, 10)
+position = Vector2(81, 75)
 collision_layer = 5
 script = ExtResource("3_yorjn")
 
@@ -23,3 +30,4 @@ position = Vector2(13, -1)
 shape = SubResource("RectangleShape2D_wx0nu")
 
 [node name="ProgressBar" parent="." instance=ExtResource("4_ojxw3")]
+position = Vector2(21, -26)

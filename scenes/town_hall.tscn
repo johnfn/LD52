@@ -1,21 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://dorjg41xf3w54"]
+[gd_scene load_steps=6 format=3 uid="uid://dorjg41xf3w54"]
 
 [ext_resource type="Texture2D" uid="uid://c0jfuwkt6bp3l" path="res://assets/town_hall.png" id="1_edfkt"]
+[ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="2_fopnh"]
 [ext_resource type="Script" path="res://TrainingBuilding.cs" id="2_ocy4t"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_othbg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
 
-[node name="TownHall" type="Sprite2D" groups=["building", "resource_dropoff"]]
-position = Vector2(500, 275)
-texture = ExtResource("1_edfkt")
+[node name="TownHall" type="Node2D"]
 script = ExtResource("2_ocy4t")
 
 [node name="Area" type="Area2D" parent="." groups=["collider"]]
+position = Vector2(113, 114)
 collision_layer = 3
 script = ExtResource("3_othbg")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Area"]
 position = Vector2(9, -12)
 shape = SubResource("RectangleShape2D_kl8im")
+
+[node name="SelectionCircle" parent="." instance=ExtResource("2_fopnh")]
+position = Vector2(107, 172)
+scale = Vector2(4.44, 4.44)
+
+[node name="Graphic" type="Sprite2D" parent="." groups=["building", "resource_dropoff"]]
+position = Vector2(113, 114)
+texture = ExtResource("1_edfkt")

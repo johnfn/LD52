@@ -16,7 +16,7 @@ public enum BuildingStatus {
 }
 
 // This is currently either TrainingBuilding or BugBarracks
-public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, ICollider, IDamageable {
+public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollider, IDamageable {
 
   [Export]
   public bool IsBugBarracks;
@@ -92,6 +92,8 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
   public int health { get; set; }
   public int maxHealth { get; set; }
 
+  public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
+
   public void OnHoverStart() {
     Modulate = new Color(1, 1, 1, 0.5f);
   }
@@ -108,12 +110,13 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
   public override void _Ready() {
     var stats = Util.BuildingStats[
       IsBugBarracks ? BuildingType.Barrachnid : BuildingType.TownHall
-      ];
+    ];
 
     health = stats.health;
     maxHealth = stats.health;
     _shape = GetNode<Area2D>("Area");
     _uiPanel = GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
+    SelectionCircle.Unit = this;
   }
 
   public override void _Process(double delta) {

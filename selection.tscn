@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1gkkxnag5xos"]
+
+[ext_resource type="Texture2D" uid="uid://dwhg58bllvs3v" path="res://assets/semicircle.png" id="1_obf01"]
+[ext_resource type="Script" path="res://SelectionCircle.cs" id="1_wbo1k"]
+[ext_resource type="Texture2D" uid="uid://c71ft8d6y7o7q" path="res://assets/fullcircle.png" id="2_5chii"]
+
+[node name="SelectionCircle" type="Node2D"]
+script = ExtResource("1_wbo1k")
+
+[node name="Semicircle" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("1_obf01")
+
+[node name="Fullcircle" type="Sprite2D" parent="."]
+position = Vector2(3, -4)
+texture = ExtResource("2_5chii")

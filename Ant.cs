@@ -35,7 +35,7 @@ public class InventoryItem {
   public ResourceType resourceType { get; set; }
 }
 
-public partial class Ant : Sprite2D, IDamageable, ISelectable {
+public partial class Ant : Node2D, IDamageable, ISelectable {
 
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
     ["Town Hall"] = (delegate () {
@@ -94,6 +94,7 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
   private ResourcePanel _resourcePanel;
   public BuildBuildingStatus BuildingStatus = BuildBuildingStatus.None;
   public ProgressBar ProgressBar => GetNode<ProgressBar>("ProgressBar");
+  public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
 
   public override void _Ready() {
     var stats = Util.UnitStats[UnitType.Ant];
@@ -104,6 +105,8 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
     _shape = GetNode<Area2D>("Area");
     _uiPanel = GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
     _resourcePanel = GetNode<ResourcePanel>("/root/Root/Static/UIRoot/ResourcePanel");
+
+    SelectionCircle.Unit = this;
   }
 
   public override void _Process(double delta) {

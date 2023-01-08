@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Godot;
-using static Godot.Tween;
 
 public enum AttackStatus {
   None,
@@ -9,7 +8,7 @@ public enum AttackStatus {
   Attacking
 }
 
-public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
+public partial class FightingBug : Node2D, IDamageable, ISelectable {
   [Export]
   public UnitType unitType;
 
@@ -22,6 +21,7 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
   private List<Vector2> _path = new List<Vector2>();
   public Node2D node { get => this; }
   private Color _originalModColor;
+  public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
 
   public string selectionText {
     get {
@@ -41,14 +41,7 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
     }
   }
 
-  public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
-    // ["Town Hall"] = (delegate () {
-    //   Actions.selectBuilding(BuildingType.TownHall);
-    // }),
-    // ["Resource Depot"] = (delegate () {
-    //   Actions.selectBuilding(BuildingType.ResourceDepot);
-    // }),
-  };
+  public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() { };
 
   public string unitName {
     get {
@@ -66,12 +59,11 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
   private Tween attackTween;
   private Tween takeDamageTween;
 
-  public override void _Ready()
-  {
+  public override void _Ready() {
     _originalModColor = Modulate;
     //attackTween = CreateTween();
     //takeDamageTween = CreateTween();
-    
+
     var stats = Util.UnitStats[unitType];
 
     health = stats.health;
@@ -79,8 +71,7 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
 
     _attackCooldownMax = stats.attackCooldown;
     _damage = stats.damage;
-
-    GD.Print("damage is" + _damage);
+    SelectionCircle.Unit = this;
   }
 
   public override void _Process(double delta) {
@@ -132,11 +123,11 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
   }
 
   public void OnHoverEnd() {
-    Modulate = new Color(1, 1, 1, 1f);
+    // Modulate = new Color(1, 1, 1, 1f);
   }
 
   public void OnHoverStart() {
-    Modulate = new Color(1, 1, 1, 0.5f);
+    // Modulate = new Color(1, 1, 1, 0.5f);
   }
 
   public void Move(Vector2 destination) {
@@ -162,8 +153,7 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
       QueueFree();
     }
   }
-  private void AnimateAttack()
-  {
+  private void AnimateAttack() {
     //attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
     //attackTween.TweenInterval(.05);
     //attackTween.TweenProperty(this, "scale", 1f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);

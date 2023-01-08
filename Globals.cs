@@ -10,6 +10,7 @@ public class Globals {
   public static Sprite2D selectedBuilding;
 
   public static ISelectable selectedUnit;
+  public static ISelectable hoveredUnit = null;
   public static GameMode gameMode = GameMode.Command;
 
   public static int TwigCount { get; set; } = Util.DEBUG ? 100 : 0;
