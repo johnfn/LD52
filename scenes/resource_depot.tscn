@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
 
-[node name="ResourceDepot" type="Sprite2D" groups=["resource_dropoff"]]
+[node name="ResourceDepot" type="Sprite2D" groups=["building", "resource_dropoff"]]
 position = Vector2(605, 792)
 texture = ExtResource("1_i6fab")
 script = ExtResource("2_sfpc8")

@@ -28,7 +28,7 @@ public class InventoryItem {
   public ResourceType resourceType { get; set; }
 }
 
-public partial class Ant : Sprite2D, IUnit, ISelectable {
+public partial class Ant : Sprite2D, IDamageable, ISelectable {
 
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
     ["Town Hall"] = (delegate () {
@@ -38,6 +38,8 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
       Actions.selectBuilding(BuildingType.ResourceDepot);
     }),
   };
+
+  public Node2D node { get => this; }
 
   public string name { get; set; } = "Ant";
 
@@ -167,7 +169,7 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
   }
 
   public Node2D FindNearestResourceDropoff() {
-    var results = GetTree().GetNodesInGroup("resource_dropoff").ToList().OrderBy((a_) => {
+    var results = GetTree().GetNodesInGroup(GroupNames.ResourceDropoff).ToList().OrderBy((a_) => {
       if (a_ is Node2D a) {
         return GlobalPosition.DistanceTo(a.GlobalPosition);
       }
@@ -193,5 +195,13 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
       status = HarvestStatus.GoingToResource,
       path = Util.Pathfind(GetTree(), GlobalPosition, resource.resourceGlobalPosition)
     };
+  }
+
+  public void Damage(int amount) {
+    health -= amount;
+
+    if (health <= 0) {
+      QueueFree();
+    }
   }
 }

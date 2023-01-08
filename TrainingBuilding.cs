@@ -16,7 +16,7 @@ public enum BuildingStatus {
 }
 
 // This is currently either TrainingBuilding or BugBarracks
-public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, ICollider, IUnit {
+public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, ICollider, IDamageable {
 
   [Export]
   public bool IsBugBarracks;
@@ -49,6 +49,8 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
       };
     }
   }
+
+  public Node2D node { get => this; }
 
   public string selectionText {
     get {
@@ -108,6 +110,8 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
       IsBugBarracks ? BuildingType.Barrachnid : BuildingType.TownHall
       ];
 
+    health = stats.health;
+    maxHealth = stats.health;
     _shape = GetNode<Area2D>("Area");
     _uiPanel = GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
   }
@@ -139,5 +143,13 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
     buildProgress = 0;
     buildTime = 0.1f;
     currentBuildingUnitType = unit;
+  }
+
+  public void Damage(int amount) {
+    health -= amount;
+
+    if (health <= 0) {
+      QueueFree();
+    }
   }
 }

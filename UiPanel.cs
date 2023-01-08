@@ -138,7 +138,7 @@ public partial class UiPanel : Control {
       selectionNameLabel.Text = b.unitName;
     }
 
-    if (Globals.selectedUnit is IUnit u) {
+    if (Globals.selectedUnit is IDamageable u) {
       selectionNameLabel.Text = u.unitName;
 
       healthLabel.Text = "Health: " + u.health + "/" + u.maxHealth;

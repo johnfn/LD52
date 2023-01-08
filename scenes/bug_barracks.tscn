@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
 
-[node name="BugBarracks" type="Sprite2D" groups=["resource_dropoff"]]
+[node name="BugBarracks" type="Sprite2D" groups=["building", "resource_dropoff"]]
 position = Vector2(376, 791)
 texture = ExtResource("1_q48bb")
 script = ExtResource("2_11bal")

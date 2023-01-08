@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://dorjg41xf3w54"]
 
 [ext_resource type="Texture2D" uid="uid://c0jfuwkt6bp3l" path="res://assets/town_hall.png" id="1_edfkt"]
 [ext_resource type="Script" path="res://TrainingBuilding.cs" id="2_ocy4t"]
@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
 
-[node name="TownHall" type="Sprite2D" groups=["resource_dropoff"]]
+[node name="TownHall" type="Sprite2D" groups=["building", "resource_dropoff"]]
 position = Vector2(500, 275)
 texture = ExtResource("1_edfkt")
 script = ExtResource("2_ocy4t")

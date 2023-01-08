@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://da4wt66vugmy" path="res://assets/rock.png" id="1_hrow8"]
 [ext_resource type="PackedScene" uid="uid://dr36wj34htulv" path="res://scenes/ant.tscn" id="3_0h73t"]
 [ext_resource type="Texture2D" uid="uid://b8mb4qw711v5s" path="res://assets/twig.png" id="3_xixoj"]
-[ext_resource type="PackedScene" path="res://scenes/town_hall.tscn" id="4_21wg8"]
+[ext_resource type="PackedScene" uid="uid://dorjg41xf3w54" path="res://scenes/town_hall.tscn" id="4_21wg8"]
 [ext_resource type="Script" path="res://Twig.cs" id="4_bcwt3"]
 [ext_resource type="Script" path="res://Camera.cs" id="4_po8t6"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="6_hqid7"]

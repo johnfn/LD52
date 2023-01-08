@@ -57,10 +57,12 @@ public interface IResource {
   public ResourceType resourceType { get; set; }
 }
 
-public interface IUnit {
+public interface IDamageable {
   public string unitName { get; }
   public int health { get; set; }
   public int maxHealth { get; set; }
+  public void Damage(int amount);
+  public Node2D node { get; }
 }
 
 public interface IBuilding {

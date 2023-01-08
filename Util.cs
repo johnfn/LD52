@@ -83,14 +83,14 @@ public class Util {
     Vector2 initialEnd
   ) {
     if (DEBUG_PATH) {
-      var dbgs = tree.GetNodesInGroup("Debug");
+      var dbgs = tree.GetNodesInGroup(GroupNames.Debug);
 
       foreach (Node2D dbg in dbgs) {
         dbg.QueueFree();
       }
     }
 
-    var allColliders = tree.GetNodesInGroup("collider");
+    var allColliders = tree.GetNodesInGroup(GroupNames.Collider);
 
     var start = RoundToCell(initialStart);
     var end = RoundToCell(initialEnd);
@@ -222,7 +222,7 @@ public class Util {
         BuildingType.TownHall,
         new BuildingStats() {
           buildTime = 5f,
-          health = 100,
+          health = 10,
           twigCost = 0,
           meatCost = 0,
           resourcePath = "res://scenes/town_hall.tscn",
@@ -234,7 +234,7 @@ public class Util {
         BuildingType.ResourceDepot,
         new BuildingStats() {
           buildTime = 5f,
-          health = 100,
+          health = 10,
           twigCost = 20,
           meatCost = 0,
           resourcePath = "res://scenes/resource_depot.tscn",
@@ -246,7 +246,7 @@ public class Util {
         BuildingType.Barrachnid,
         new BuildingStats() {
           buildTime = 5f,
-          health = 100,
+          health = 10,
           twigCost = 20,
           meatCost = 0,
           resourcePath = "res://scenes/bug_barracks.tscn",

@@ -8,7 +8,7 @@ public enum AttackStatus {
   Attacking
 }
 
-public partial class FightingBug : Sprite2D, IUnit, ISelectable {
+public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
   [Export]
   public UnitType unitType;
 
@@ -19,6 +19,7 @@ public partial class FightingBug : Sprite2D, IUnit, ISelectable {
   private int _attackCooldownCurrent = 0;
   private int _damage = 0;
   private List<Vector2> _path = new List<Vector2>();
+  public Node2D node { get => this; }
 
   public string selectionText {
     get {
@@ -137,5 +138,13 @@ public partial class FightingBug : Sprite2D, IUnit, ISelectable {
     _attackStatus = AttackStatus.GoingToTarget;
     _path = Util.Pathfind(GetTree(), GlobalPosition, target.GlobalPosition);
     _attackTarget = target;
+  }
+
+  public void Damage(int amount) {
+    health -= amount;
+
+    if (health <= 0) {
+      QueueFree();
+    }
   }
 }
