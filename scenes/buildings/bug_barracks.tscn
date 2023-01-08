@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://TrainingBuilding.cs" id="2_11bal"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_ivv0c"]
-[ext_resource type="Texture2D" uid="uid://dhcg2xbmf2l1a" path="res://assets/building_barracks.png" id="3_ugue1"]
-[ext_resource type="PackedScene" path="res://selection.tscn" id="4_iiyuk"]
-[ext_resource type="PackedScene" uid="uid://dvxv7570gmnd2" path="res://progress_bar.tscn" id="5_u8xlh"]
+[ext_resource type="Texture2D" uid="uid://c177uwhg2g3ev" path="res://assets/building_barracks.png" id="3_ugue1"]
+[ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="4_iiyuk"]
+[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="5_u8xlh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xkp2o"]
 radius = 196.041

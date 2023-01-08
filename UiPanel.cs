@@ -340,6 +340,17 @@ public partial class UiPanel : Control {
       .Select(x => (Node2D)x["collider"])
       .ToList();
 
+    // Topmost first
+    collisions.Sort((a, b) => {
+      var result = a.IsGreaterThan(b);
+
+      if (result) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+
     ISelectable best = null;
 
     // TODO: Maybe handle priority or something
