@@ -50,8 +50,8 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
     _attackCooldownCurrent = 0;
     _attackCooldownMax = 1;
     _originalModColor = Modulate;
-    takeDamageTween = CreateTween();
-    attackTween = CreateTween();
+    //takeDamageTween = CreateTween();
+    //attackTween = CreateTween();
   }
 
   private List<Vector2> _path;
@@ -123,9 +123,9 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
         _target.Damage(_damageAmount);
         _attackCooldownCurrent = _attackCooldownMax;
         
-        attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
-        attackTween.TweenInterval(.05);
-        attackTween.TweenProperty(this, "scale", 1f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
+        //attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
+        //attackTween.TweenInterval(.05);
+        //attackTween.TweenProperty(this, "scale", 1f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
 
         if (_target.health <= 0) {
           _status = EnemyStatus.SeekingTarget;
@@ -146,9 +146,9 @@ public partial class Enemy : Sprite2D, ISelectable, IDamageable {
   public void Damage(int amount) {
     health -= amount;
 
-    takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
-    takeDamageTween.TweenInterval(.1);
-    takeDamageTween.TweenProperty(this, "modulate", _originalModColor, .05).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
+    //takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
+    //takeDamageTween.TweenInterval(.1);
+    //takeDamageTween.TweenProperty(this, "modulate", _originalModColor, .05).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
 
     GD.Print("Enemy health is now: " + health);
 
