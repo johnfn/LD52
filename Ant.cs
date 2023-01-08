@@ -11,6 +11,12 @@ public enum UnitStatus {
   Harvesting
 }
 
+public enum BuildBuildingStatus {
+  None,
+  MovingToBuild,
+  Building
+}
+
 public enum HarvestStatus {
   GoingToResource,
   Harvesting,
@@ -27,6 +33,14 @@ public class HarvestState {
 
 public class InventoryItem {
   public ResourceType resourceType { get; set; }
+}
+
+public class BuildingState {
+  public BuildingType SelectedBuildingType = BuildingType.None;
+  public float BuildProgress = 0;
+  public float BuildTime = 0;
+  public Node2D ConstructionNode = null;
+  public BuildBuildingStatus BuildingStatus = BuildBuildingStatus.None;
 }
 
 public partial class Ant : Sprite2D, IDamageable, ISelectable {
@@ -66,6 +80,7 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
   // IUnit
   public string unitName { get; set; } = "Ant";
   public int health { get; set; }
+  public int maxHealth { get; set; }
 
   private int _speed = 500;
   private UnitStatus _status = UnitStatus.Idle;
@@ -78,18 +93,13 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
 
   // Worker stuff
   public InventoryItem InventoryItem { get; private set; } = null;
-  public int maxHealth { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
   private Area2D _shape;
 
   private UiPanel _uiPanel;
   private ResourcePanel _resourcePanel;
 
-  // In progress building stuff
-  private BuildingType _selectedBuildingType = BuildingType.None;
-  private float _buildProgress = 0;
-  private float _buildTime = 0;
-  private Node2D _constructionNode = null;
+  private BuildingState _buildingState;
 
 
   public override void _Ready() {
@@ -118,18 +128,33 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
   }
 
   private void _processBuild(double delta) {
-    _buildProgress += (float)delta;
+    if (_buildingState.BuildingStatus == BuildBuildingStatus.MovingToBuild) {
+      var done = Util.WalkAlongPath(this, _path, _speed * (float)delta);
 
-    if (_buildProgress >= _buildTime) {
-      _buildProgress = 0;
-      _status = UnitStatus.Idle;
+      if (done) {
+        _buildingState.BuildingStatus = BuildBuildingStatus.Building;
+      }
 
-      GD.Print("Done");
+      return;
+    }
 
-      // var building = Building.CreateBuilding(_selectedBuildingType);
-      // building.GlobalPosition = GlobalPosition;
+    if (_buildingState.BuildingStatus == BuildBuildingStatus.Building) {
+      _buildingState.BuildProgress += (float)delta;
 
-      // GetTree().CurrentScene.AddChild(building);
+      if (_buildingState.BuildProgress >= _buildingState.BuildTime) {
+        _status = UnitStatus.Idle;
+
+        var buildingPosition = _buildingState.ConstructionNode.GlobalPosition;
+        _buildingState.ConstructionNode.QueueFree();
+
+        var buildingStats = Util.BuildingStats[_buildingState.SelectedBuildingType];
+        var building = GD.Load<PackedScene>(buildingStats.resourcePath).Instantiate() as Node2D;
+
+        GetTree().Root.AddChild(building);
+        building.GlobalPosition = buildingPosition;
+
+        _buildingState = new BuildingState();
+      }
     }
   }
 
@@ -231,10 +256,23 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
     }
   }
 
-  public void Build(BuildingType buildingType, Vector2 position) {
+  public void Build(BuildingType buildingType, Vector2 buildingPosition) {
+    var stats = Util.BuildingStats[buildingType];
+
     _status = UnitStatus.Building;
 
-    _constructionNode = GD.Load<PackedScene>("res://Scenes/construction.tscn").Instantiate<Node2D>();
-    _constructionNode.GlobalPosition = position;
+    _buildingState = new BuildingState {
+      BuildingStatus = BuildBuildingStatus.MovingToBuild,
+      BuildProgress = 0,
+      BuildTime = stats.buildTime,
+      ConstructionNode = GD.Load<PackedScene>("res://Scenes/construction.tscn").Instantiate<Node2D>(),
+      SelectedBuildingType = buildingType
+    };
+
+
+    GetTree().Root.AddChild(_buildingState.ConstructionNode);
+
+    _buildingState.ConstructionNode.GlobalPosition = buildingPosition;
+    _path = Util.Pathfind(GetTree(), GlobalPosition, buildingPosition);
   }
 }
