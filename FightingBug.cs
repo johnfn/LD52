@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using static Godot.Tween;
 
 public enum AttackStatus {
   None,
@@ -20,6 +21,7 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
   private int _damage = 0;
   private List<Vector2> _path = new List<Vector2>();
   public Node2D node { get => this; }
+  private Color _originalModColor;
 
   public string selectionText {
     get {
@@ -61,7 +63,15 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
 
   private int _speed = 500;
 
-  public override void _Ready() {
+  private Tween attackTween;
+  private Tween takeDamageTween;
+
+  public override void _Ready()
+  {
+    _originalModColor = Modulate;
+    attackTween = CreateTween();
+    takeDamageTween = CreateTween();
+    
     var stats = Util.UnitStats[unitType];
 
     health = stats.health;
@@ -116,6 +126,7 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
       } else {
         _attackCooldownCurrent = _attackCooldownMax;
         _attackTarget.Damage(_damage);
+        AnimateAttack();
       }
     }
   }
@@ -143,8 +154,18 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
   public void Damage(int amount) {
     health -= amount;
 
+    takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
+    takeDamageTween.TweenInterval(.1);
+    takeDamageTween.TweenProperty(this, "modulate", _originalModColor, .05).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
+
     if (health <= 0) {
       QueueFree();
     }
+  }
+  private void AnimateAttack()
+  {
+    attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
+    attackTween.TweenInterval(.05);
+    attackTween.TweenProperty(this, "scale", 1f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
   }
 }
