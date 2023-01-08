@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(188, 161.25)
 
-[node name="Ant" type="Node2D"]
+[node name="Ant" type="Node2D" groups=["good_unit"]]
 position = Vector2(-1, 7)
 script = ExtResource("2_uvaca")
 
@@ -17,7 +17,7 @@ script = ExtResource("2_uvaca")
 position = Vector2(-2, 6)
 scale = Vector2(1.88, 1.88)
 
-[node name="Graphic" type="Sprite2D" parent="." groups=["good_unit"]]
+[node name="Graphic" type="Sprite2D" parent="."]
 position = Vector2(-16, -6)
 texture = ExtResource("1_stg67")
 

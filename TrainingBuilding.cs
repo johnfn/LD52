@@ -26,7 +26,7 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
     get {
       if (!IsBugBarracks) {
         return new Dictionary<string, Action>() {
-          ["Beetle"] = () => {
+          ["Ant"] = () => {
             if (Globals.selectedUnit is TrainingBuilding th) {
               th.BuyUnit(UnitType.Ant);
             }

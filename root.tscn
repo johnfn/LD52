@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://befuau0tho0ni"]
+[gd_scene load_steps=24 format=3 uid="uid://befuau0tho0ni"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Script" path="res://Root.cs" id="1_38of0"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c5jobfql2jwj0" path="res://scenes/units/beetle.tscn" id="15_xik6a"]
 [ext_resource type="PackedScene" uid="uid://hmv7g4oylrng" path="res://scenes/construction.tscn" id="18_h3505"]
 [ext_resource type="PackedScene" uid="uid://0jynu6kq8c2r" path="res://scenes/click_animation.tscn" id="19_g1sdw"]
+[ext_resource type="PackedScene" uid="uid://bf6tor4dkolmi" path="res://scenes/enemy.tscn" id="20_koe4t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt062"]
 size = Vector2(188, 161.25)
@@ -120,7 +121,6 @@ grow_vertical = 2
 theme = ExtResource("9_tyxdu")
 
 [node name="UiPanel" parent="Static/UIRoot" instance=ExtResource("9_vx6l0")]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -131,10 +131,8 @@ offset_right = 150.0
 grow_vertical = 0
 
 [node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
-layout_mode = 0
 
 [node name="error_panel" parent="Static/UIRoot" instance=ExtResource("13_71qpp")]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 0.05
@@ -156,3 +154,6 @@ position = Vector2(928, 636)
 [node name="Construction" parent="." instance=ExtResource("18_h3505")]
 
 [node name="ClickAnimation" parent="." instance=ExtResource("19_g1sdw")]
+
+[node name="Enemy" parent="." instance=ExtResource("20_koe4t")]
+position = Vector2(1382, 672)

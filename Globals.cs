@@ -7,7 +7,7 @@ public enum GameMode {
 public class Globals {
 
   public static BuildingType selectedBuildingType;
-  public static Sprite2D selectedBuilding;
+  public static Node2D selectedBuilding;
 
   public static ISelectable selectedUnit;
   public static ISelectable hoveredUnit = null;

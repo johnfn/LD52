@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
 
-[node name="BugBarracks" type="Node2D"]
+[node name="BugBarracks" type="Node2D" groups=["building"]]
 script = ExtResource("2_11bal")
 IsBugBarracks = true
 
@@ -16,7 +16,7 @@ IsBugBarracks = true
 position = Vector2(88, 134)
 scale = Vector2(2.38513, 2.38513)
 
-[node name="Graphic" type="Sprite2D" parent="." groups=["building", "resource_dropoff"]]
+[node name="Graphic" type="Sprite2D" parent="."]
 position = Vector2(86, 90)
 texture = ExtResource("1_q48bb")
 

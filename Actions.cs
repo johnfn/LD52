@@ -15,7 +15,7 @@ public partial class Actions : Node {
       Globals.MeatCount >= stats.meatCost
     ) {
       Globals.selectedBuildingType = buildingType;
-      Globals.selectedBuilding = GD.Load<PackedScene>(stats.resourcePath).Instantiate<Sprite2D>();
+      Globals.selectedBuilding = GD.Load<PackedScene>(stats.resourcePath).Instantiate<Node2D>();
       Globals.selectedBuilding.Modulate = new Color(1, 1, 1, 0.5f);
 
 

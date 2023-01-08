@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
 
-[node name="TownHall" type="Node2D"]
+[node name="TownHall" type="Node2D" groups=["building", "resource_dropoff"]]
 script = ExtResource("2_ocy4t")
 
 [node name="Area" type="Area2D" parent="." groups=["collider"]]
@@ -24,6 +24,6 @@ shape = SubResource("RectangleShape2D_kl8im")
 position = Vector2(107, 172)
 scale = Vector2(4.44, 4.44)
 
-[node name="Graphic" type="Sprite2D" parent="." groups=["building", "resource_dropoff"]]
+[node name="Graphic" type="Sprite2D" parent="."]
 position = Vector2(113, 114)
 texture = ExtResource("1_edfkt")

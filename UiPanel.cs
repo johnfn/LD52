@@ -178,7 +178,6 @@ public partial class UiPanel : Control {
     }
   }
 
-
   private void _handleMouseDown(InputEventMouseButton mouseEvent) {
     if (!mouseEvent.Pressed) {
       return;
