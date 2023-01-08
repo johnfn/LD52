@@ -29,6 +29,8 @@ public partial class UiPanel : Control {
 
   Label selectionNameLabel;
 
+  Label selectionLabel;
+
   Actions actions;
 
   public override void _Ready() {
@@ -36,6 +38,7 @@ public partial class UiPanel : Control {
 
     // Panels
     selectionCommandsPanel = GetNode<Panel>("VBoxContainer/SelectionDataAndCommands/SelectionCommands");
+    selectionLabel = GetNode<Label>("VBoxContainer/SelectionDataAndCommands/SelectionData/Label");
     genericPanel = selectionCommandsPanel.GetNode<VBoxContainer>("GenericPanel");
     townHallPanel = selectionCommandsPanel.GetNode<Control>("TownHallPanel");
     resourceDepotPanel = selectionCommandsPanel.GetNode<Control>("ResourceDepotPanel");
@@ -155,6 +158,10 @@ public partial class UiPanel : Control {
       selectionNameLabel.Text = fb.unitName;
     }
 
+    if (Globals.selectedUnit is ISelectable ss) {
+      GD.Print("Yeet");
+      selectionLabel.Text = ss.selectionText;
+    }
   }
 
   public override void _Input(InputEvent @event) {

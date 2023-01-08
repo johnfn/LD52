@@ -22,6 +22,12 @@ public partial class Twig : Sprite2D, ISelectable, IResource {
     }
   }
 
+  public string selectionText {
+    get {
+      return "Just a Twig!";
+    }
+  }
+
   public float harvestTime { get; set; } = Util.DEBUG ? 0.1f : 5f;
 
   public void OnHoverStart() {

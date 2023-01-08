@@ -12,6 +12,12 @@ public partial class ResourceDepot : Sprite2D, IBuilding, ISelectable {
   public string unitName { get; set; } = "Resource Depot";
   public BuildingStatus status { get; set; } = BuildingStatus.Idle;
 
+  public string selectionText {
+    get {
+      return "Resource Depot!";
+    }
+  }
+
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;
 

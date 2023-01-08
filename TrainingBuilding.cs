@@ -50,6 +50,16 @@ public partial class TrainingBuilding : Sprite2D, IBuilding, ISelectable, IColli
     }
   }
 
+  public string selectionText {
+    get {
+      if (!IsBugBarracks) {
+        return "Stuff!";
+      } else {
+        return "Boring bug barracks blorg";
+      }
+    }
+  }
+
 
   public string name { get; set; } = "Training Building";
 

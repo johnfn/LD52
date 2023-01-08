@@ -20,6 +20,24 @@ public partial class FightingBug : Sprite2D, IUnit, ISelectable {
   private int _damage = 0;
   private List<Vector2> _path = new List<Vector2>();
 
+  public string selectionText {
+    get {
+      if (unitType == UnitType.Beetle) {
+        return "This is a BEETLE!";
+      }
+
+      if (unitType == UnitType.Scout) {
+        return "This is a SCOUT!";
+      }
+
+      if (unitType == UnitType.Spit) {
+        return "This is a SPIT!";
+      }
+
+      return "Screw YOU!";
+    }
+  }
+
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
     // ["Town Hall"] = (delegate () {
     //   Actions.selectBuilding(BuildingType.TownHall);

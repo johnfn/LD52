@@ -54,6 +54,12 @@ public partial class Ant : Sprite2D, IUnit, ISelectable {
     Modulate = new Color(1, 1, 1, 1f);
   }
 
+  public string selectionText {
+    get {
+      return "This is an ANT!";
+    }
+  }
+
   // IUnit
   public string unitName { get; set; } = "Ant";
   public int health { get; set; } = 10;

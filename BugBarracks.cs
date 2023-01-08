@@ -7,6 +7,12 @@ public partial class BugBarracks : Sprite2D, IBuilding, ISelectable {
 
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>();
 
+  public string selectionText {
+    get {
+      return "Boring bug barracks blorg";
+    }
+  }
+
   public string name { get; set; } = "Barracks";
 
   public float buildProgress { get; set; } = 0;

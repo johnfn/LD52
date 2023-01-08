@@ -46,6 +46,7 @@ public interface ISelectable {
 
   public string name { get; set; }
 
+  public string selectionText { get; }
 }
 
 

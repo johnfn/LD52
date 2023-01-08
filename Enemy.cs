@@ -15,6 +15,12 @@ public partial class Enemy : Sprite2D, ISelectable {
 
   public string name { get; set; } = "Enemy";
 
+  public string selectionText {
+    get {
+      return "Just some enemy";
+    }
+  }
+
   public override void _Ready() {
   }
 
