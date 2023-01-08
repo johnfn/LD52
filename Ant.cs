@@ -35,14 +35,6 @@ public class InventoryItem {
   public ResourceType resourceType { get; set; }
 }
 
-public class BuildingState {
-  public BuildingType SelectedBuildingType = BuildingType.None;
-  public float BuildProgress = 0;
-  public float BuildTime = 0;
-  public Node2D ConstructionNode = null;
-  public BuildBuildingStatus BuildingStatus = BuildBuildingStatus.None;
-}
-
 public partial class Ant : Sprite2D, IDamageable, ISelectable {
 
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>() {
@@ -53,6 +45,8 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
       Actions.selectBuilding(BuildingType.ResourceDepot);
     }),
   };
+
+  public ConstructionSite ConstructionSite = null;
 
   public Node2D node { get => this; }
 
@@ -98,9 +92,7 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
 
   private UiPanel _uiPanel;
   private ResourcePanel _resourcePanel;
-
-  private BuildingState _buildingState;
-
+  public BuildBuildingStatus BuildingStatus = BuildBuildingStatus.None;
 
   public override void _Ready() {
     var stats = Util.UnitStats[UnitType.Ant];
@@ -128,32 +120,32 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
   }
 
   private void _processBuild(double delta) {
-    if (_buildingState.BuildingStatus == BuildBuildingStatus.MovingToBuild) {
+    if (BuildingStatus == BuildBuildingStatus.MovingToBuild) {
       var done = Util.WalkAlongPath(this, _path, _speed * (float)delta);
 
       if (done) {
-        _buildingState.BuildingStatus = BuildBuildingStatus.Building;
+        BuildingStatus = BuildBuildingStatus.Building;
       }
 
       return;
     }
 
-    if (_buildingState.BuildingStatus == BuildBuildingStatus.Building) {
-      _buildingState.BuildProgress += (float)delta;
+    if (BuildingStatus == BuildBuildingStatus.Building) {
+      ConstructionSite.BuildingState.BuildProgress += (float)delta;
 
-      if (_buildingState.BuildProgress >= _buildingState.BuildTime) {
+      if (ConstructionSite.BuildingState.BuildProgress >= ConstructionSite.BuildingState.BuildTime) {
         _status = UnitStatus.Idle;
 
-        var buildingPosition = _buildingState.ConstructionNode.GlobalPosition;
-        _buildingState.ConstructionNode.QueueFree();
+        var buildingPosition = ConstructionSite.GlobalPosition;
+        ConstructionSite.QueueFree();
 
-        var buildingStats = Util.BuildingStats[_buildingState.SelectedBuildingType];
+        var buildingStats = Util.BuildingStats[ConstructionSite.BuildingState.SelectedBuildingType];
         var building = GD.Load<PackedScene>(buildingStats.resourcePath).Instantiate() as Node2D;
 
         GetTree().Root.AddChild(building);
         building.GlobalPosition = buildingPosition;
 
-        _buildingState = new BuildingState();
+        ConstructionSite.BuildingState = new BuildingState();
       }
     }
   }
@@ -261,18 +253,19 @@ public partial class Ant : Sprite2D, IDamageable, ISelectable {
 
     _status = UnitStatus.Building;
 
-    _buildingState = new BuildingState {
-      BuildingStatus = BuildBuildingStatus.MovingToBuild,
+    ConstructionSite = GD.Load<PackedScene>("res://Scenes/construction.tscn").Instantiate<ConstructionSite>();
+
+    ConstructionSite.BuildingState = new BuildingState {
       BuildProgress = 0,
       BuildTime = stats.buildTime,
-      ConstructionNode = GD.Load<PackedScene>("res://Scenes/construction.tscn").Instantiate<Node2D>(),
       SelectedBuildingType = buildingType
     };
 
+    BuildingStatus = BuildBuildingStatus.MovingToBuild;
 
-    GetTree().Root.AddChild(_buildingState.ConstructionNode);
+    GetTree().Root.AddChild(ConstructionSite);
 
-    _buildingState.ConstructionNode.GlobalPosition = buildingPosition;
+    ConstructionSite.GlobalPosition = buildingPosition;
     _path = Util.Pathfind(GetTree(), GlobalPosition, buildingPosition);
   }
 }
