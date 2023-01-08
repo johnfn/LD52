@@ -69,8 +69,8 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
   public override void _Ready()
   {
     _originalModColor = Modulate;
-    attackTween = CreateTween();
-    takeDamageTween = CreateTween();
+    //attackTween = CreateTween();
+    //takeDamageTween = CreateTween();
     
     var stats = Util.UnitStats[unitType];
 
@@ -154,9 +154,9 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
   public void Damage(int amount) {
     health -= amount;
 
-    takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
-    takeDamageTween.TweenInterval(.1);
-    takeDamageTween.TweenProperty(this, "modulate", _originalModColor, .05).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
+    //takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
+    //takeDamageTween.TweenInterval(.1);
+    //takeDamageTween.TweenProperty(this, "modulate", _originalModColor, .05).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
 
     if (health <= 0) {
       QueueFree();
@@ -164,8 +164,8 @@ public partial class FightingBug : Sprite2D, IDamageable, ISelectable {
   }
   private void AnimateAttack()
   {
-    attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
-    attackTween.TweenInterval(.05);
-    attackTween.TweenProperty(this, "scale", 1f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
+    //attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
+    //attackTween.TweenInterval(.05);
+    //attackTween.TweenProperty(this, "scale", 1f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
   }
 }

@@ -6,7 +6,7 @@ using Godot;
 public class Util {
   public static int CELL_SIZE = 32;
   public static bool DEBUG = true;
-  public static bool DEBUG_PATH = false;
+  public static bool DEBUG_PATH = true;
 
   public static uint BUILDING_BITMASK = 0b10;
   public static uint UNIT_BITMASK = 0b100;
@@ -136,7 +136,7 @@ public class Util {
 
     var astar = new AStar2D();
     var pointIds = new Dictionary<Vector2, int>();
-    int lastId = 0;
+    int lastId = -1;
 
     var f = new PhysicsPointQueryParameters2D();
     f.Exclude = new Godot.Collections.Array<RID>();
@@ -159,7 +159,7 @@ public class Util {
           DbgPoint(point, tree, new Color(0, 1, 0, 0.5f));
         }
 
-        pointIds[point] = lastId++;
+        pointIds[point] = ++lastId;
         astar.AddPoint(lastId, point);
 
         var neighbors = new Vector2[] {
@@ -190,7 +190,14 @@ public class Util {
       return new List<Vector2>();
     }
 
-    return astar.GetPointPath(pointIds[start], pointIds[end]).ToList();
+    var astarList= astar.GetPointPath(pointIds[start], pointIds[end]).ToList();
+    
+    foreach(Vector2 point in astarList){
+      DbgPoint(point, tree, new Color(1, 1, 1, 1f));
+
+    }
+
+    return astarList;
   }
 
   /** Returns true when done */
