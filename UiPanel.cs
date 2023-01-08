@@ -5,242 +5,242 @@ using Godot;
 
 
 public partial class UiPanel : Control {
-    public ISelectable hoveredUnit = null;
-    // public Sprite2D selectedBuilding = null;
-    // public BuildingType selectedBuildingType = BuildingType.None;
+  public ISelectable hoveredUnit = null;
+  // public Sprite2D selectedBuilding = null;
+  // public BuildingType selectedBuildingType = BuildingType.None;
 
-    VBoxContainer genericPanel;
-
-
-    Control townHallPanel;
-    Control resourceDepotPanel;
-    Control buildPanel;
-    Label progressLabel;
-    Control unitPanel;
-    Control builderPanel;
-    Button townHallButton;
-    Button townHallBuyGrasshopperButton;
-    Button depotButton;
-
-    Panel selectionInfoPanel;
-    Panel selectionCommandsPanel;
-
-    Label selectionNameLabel;
-
-    Actions actions;
-
-    public override void _Ready() {
-        actions = GetNode<Actions>("/root/Actions");
-
-        // Panels
-        selectionCommandsPanel = GetNode<Panel>("VBoxContainer/SelectionDataAndCommands/SelectionCommands");
-        genericPanel = selectionCommandsPanel.GetNode<VBoxContainer>("GenericPanel");
-        townHallPanel = selectionCommandsPanel.GetNode<Control>("TownHallPanel");
-        resourceDepotPanel = selectionCommandsPanel.GetNode<Control>("ResourceDepotPanel");
-        buildPanel = selectionCommandsPanel.GetNode<Control>("BuildPanel");
-        unitPanel = selectionCommandsPanel.GetNode<Control>("UnitPanel");
-        builderPanel = selectionCommandsPanel.GetNode<Control>("BuilderPanel");
+  VBoxContainer genericPanel;
 
 
-        // NameTag
-        selectionInfoPanel = GetNode<Panel>("VBoxContainer/SelectionNameTag/IconPanel");
-        selectionInfoPanel.ThemeTypeVariation = "RoundedPanel";
-        selectionNameLabel = GetNode<Label>("VBoxContainer/SelectionNameTag/NamePanel/Label");
+  Control townHallPanel;
+  Control resourceDepotPanel;
+  Control buildPanel;
+  Label progressLabel;
+  Control unitPanel;
+  Control builderPanel;
+  Button townHallButton;
+  Button townHallBuyGrasshopperButton;
+  Button depotButton;
 
-        // Misc stuff I havent looked at yet
-        progressLabel = buildPanel.GetNode<Label>("ProgressLabel");
-        townHallButton = builderPanel.GetNode<Button>("TownHallButton");
-        depotButton = builderPanel.GetNode<Button>("ResourceDepot");
-        townHallBuyGrasshopperButton = townHallPanel.GetNode<Button>("BuyGrasshopper");
+  Panel selectionInfoPanel;
+  Panel selectionCommandsPanel;
+
+  Label selectionNameLabel;
+
+  Actions actions;
+
+  public override void _Ready() {
+    actions = GetNode<Actions>("/root/Actions");
+
+    // Panels
+    selectionCommandsPanel = GetNode<Panel>("VBoxContainer/SelectionDataAndCommands/SelectionCommands");
+    genericPanel = selectionCommandsPanel.GetNode<VBoxContainer>("GenericPanel");
+    townHallPanel = selectionCommandsPanel.GetNode<Control>("TownHallPanel");
+    resourceDepotPanel = selectionCommandsPanel.GetNode<Control>("ResourceDepotPanel");
+    buildPanel = selectionCommandsPanel.GetNode<Control>("BuildPanel");
+    unitPanel = selectionCommandsPanel.GetNode<Control>("UnitPanel");
+    builderPanel = selectionCommandsPanel.GetNode<Control>("BuilderPanel");
 
 
-        _showCommandUi();
+    // NameTag
+    selectionInfoPanel = GetNode<Panel>("VBoxContainer/SelectionNameTag/IconPanel");
+    selectionInfoPanel.ThemeTypeVariation = "RoundedPanel";
+    selectionNameLabel = GetNode<Label>("VBoxContainer/SelectionNameTag/NamePanel/Label");
 
-        // townHallBuyGrasshopperButton.Connect("pressed", Callable.From(() => {
-        //     if (Globals.selectedUnit is TownHall th) {
-        //         th.BuyUnit(UnitType.Ant);
-        //     }
-        // }));
+    // Misc stuff I havent looked at yet
+    progressLabel = buildPanel.GetNode<Label>("ProgressLabel");
+    townHallButton = builderPanel.GetNode<Button>("TownHallButton");
+    depotButton = builderPanel.GetNode<Button>("ResourceDepot");
+    townHallBuyGrasshopperButton = townHallPanel.GetNode<Button>("BuyGrasshopper");
 
-        // townHallButton.Connect("pressed", Callable.From(() => {
-        //     _beginBuilding(BuildingType.TownHall);
-        // }));
 
-        // depotButton.Connect("pressed", Callable.From(() => {
-        //     _beginBuilding(BuildingType.ResourceDepot);
-        // }));
+    _showCommandUi();
+
+    // townHallBuyGrasshopperButton.Connect("pressed", Callable.From(() => {
+    //     if (Globals.selectedUnit is TownHall th) {
+    //         th.BuyUnit(UnitType.Ant);
+    //     }
+    // }));
+
+    // townHallButton.Connect("pressed", Callable.From(() => {
+    //     _beginBuilding(BuildingType.TownHall);
+    // }));
+
+    // depotButton.Connect("pressed", Callable.From(() => {
+    //     _beginBuilding(BuildingType.ResourceDepot);
+    // }));
+  }
+
+
+
+  private void _showCommandUi() {
+    if (Globals.selectedUnit == null) {
+      selectionNameLabel.Text = "Selected Unit: None";
+    }
+
+    // if (Globals.selectedUnit is IUnit u) {
+    //   unitPanelVisible = true;
+    //   selectionNameLabel.Text = "Selected Unit: " + u.unitName;
+    //   Globals.selectedUnitName = u.unitName;
+    // }
+
+    if (Globals.selectedUnit is ISelectable s) {
+      foreach (var child in genericPanel.GetChildren()) {
+        genericPanel.RemoveChild(child);
+      }
+      foreach (var item in Globals.selectedUnit.actions) {
+        var label = new Button();
+        label.Text = item.Key;
+        genericPanel.AddChild(label);
+        label.Connect("pressed", Godot.Callable.From(item.Value));
+      }
     }
 
 
+    if (Globals.selectedUnit is TownHall th) {
+      if (th.status == BuildingStatus.Building) {
+        selectionNameLabel.Text = "Town Hall (Producing units...)";
+      } else {
+        selectionNameLabel.Text = "Town Hall";
+      }
+    }
 
-    private void _showCommandUi() {
+    if (Globals.selectedUnit is BugBarracks b) {
+      selectionNameLabel.Text = "Barracks";
+    }
+
+    if (Globals.selectedUnit is ResourceDepot rd) {
+      selectionNameLabel.Text = "Resource Depot";
+    }
+
+
+    if (Globals.selectedUnit is Ant a) {
+      selectionNameLabel.Text = a.unitName;
+
+      if (a.InventoryItem != null) {
+        selectionNameLabel.Text += " - Holding " + a.InventoryItem.resourceType;
+      }
+    }
+
+  }
+
+  public override void _Input(InputEvent @event) {
+    base._Input(@event);
+
+    if (@event is InputEventMouseButton mouseEvent) {
+      _handleMouseDown(mouseEvent);
+    }
+
+    if (@event is InputEventMouseMotion mouseMotionEvent) {
+      _handleMouseMove(mouseMotionEvent);
+    }
+  }
+
+
+  private void _handleMouseDown(InputEventMouseButton mouseEvent) {
+    if (!mouseEvent.Pressed) {
+      return;
+    }
+
+    if (Globals.gameMode == GameMode.Build) {
+      if (mouseEvent.ButtonIndex == MouseButton.Left) {
+        Actions.placeBuilding();
+
+        return;
+      }
+    }
+
+    if (Globals.gameMode == GameMode.Command) {
+      // Issue action like Move
+
+      if (mouseEvent.ButtonIndex == MouseButton.Right) {
         if (Globals.selectedUnit == null) {
-            selectionNameLabel.Text = "Selected Unit: None";
+          return;
         }
 
-        // if (Globals.selectedUnit is IUnit u) {
-        //   unitPanelVisible = true;
-        //   selectionNameLabel.Text = "Selected Unit: " + u.unitName;
-        //   Globals.selectedUnitName = u.unitName;
-        // }
+        var hoveredUnit = GetHoveredUnit();
 
-        if (Globals.selectedUnit is ISelectable s) {
-            foreach (var child in genericPanel.GetChildren()) {
-                genericPanel.RemoveChild(child);
-            }
-            foreach (var item in Globals.selectedUnit.actions) {
-                var label = new Button();
-                label.Text = item.Key;
-                genericPanel.AddChild(label);
-                label.Connect("pressed", Godot.Callable.From(item.Value));
-            }
+        if (hoveredUnit is IResource resource) {
+          if (Globals.selectedUnit is Ant a) {
+            a.Harvest(resource);
+          }
+        } else {
+          if (Globals.selectedUnit is Ant a) {
+            a.Move(Util.MousePosition(GetTree()));
+          }
         }
 
+        return;
+      }
 
-        if (Globals.selectedUnit is TownHall th) {
-            if (th.status == BuildingStatus.Building) {
-                selectionNameLabel.Text = "Town Hall (Producing units...)";
-            } else {
-                selectionNameLabel.Text = "Town Hall";
-            }
+      // Select
+
+      if (mouseEvent.ButtonIndex == MouseButton.Left) {
+        var unit = GetHoveredUnit();
+
+        if (unit is ISelectable s) {
+          Globals.selectedUnit = s;
+          _showCommandUi();
         }
+      }
+    }
+  }
 
-        if (Globals.selectedUnit is BugBarracks b) {
-            selectionNameLabel.Text = "Barracks";
-        }
+  private void _handleMouseMove(InputEventMouseMotion mouseMotionEvent) {
+    if (Globals.gameMode == GameMode.Build) {
+      var pos = Util.MousePosition(GetTree());
+      var roundedTo32 = new Vector2((int)(pos.x / 32) * 32, (int)(pos.y / 32) * 32);
 
-        if (Globals.selectedUnit is ResourceDepot rd) {
-            selectionNameLabel.Text = "Resource Depot";
-        }
-
-
-        if (Globals.selectedUnit is Ant a) {
-            selectionNameLabel.Text = a.unitName;
-
-            if (a.InventoryItem != null) {
-                selectionNameLabel.Text += " - Holding " + a.InventoryItem.resourceType;
-            }
-        }
-
+      Globals.selectedBuilding.Position = roundedTo32;
     }
 
-    public override void _Input(InputEvent @event) {
-        base._Input(@event);
+    if (Globals.gameMode == GameMode.Command) {
+      var prevHoveredUnit = hoveredUnit;
 
-        if (@event is InputEventMouseButton mouseEvent) {
-            _handleMouseDown(mouseEvent);
+      hoveredUnit = GetHoveredUnit();
+
+      if (prevHoveredUnit != hoveredUnit) {
+        if (prevHoveredUnit != null) {
+          prevHoveredUnit.OnHoverEnd();
         }
 
-        if (@event is InputEventMouseMotion mouseMotionEvent) {
-            _handleMouseMove(mouseMotionEvent);
+        if (hoveredUnit != null) {
+          hoveredUnit.OnHoverStart();
         }
+      }
+    }
+  }
+
+  public ISelectable GetHoveredUnit() {
+    var mousePosition = Util.MousePosition(GetTree());
+    var param = new PhysicsPointQueryParameters2D();
+
+    param.Exclude = new Godot.Collections.Array<RID>();
+    param.CollideWithAreas = true;
+    param.CollideWithBodies = true;
+    param.Position = mousePosition;
+
+    List<Node2D> collisions = GetWorld2d().DirectSpaceState.IntersectPoint(param)
+      .Select(x => (Node2D)x["collider"])
+      .ToList();
+
+    ISelectable best = null;
+
+    // TODO: Maybe handle priority or something
+
+    foreach (var collision in collisions) {
+      if (collision.GetParent() is ISelectable c) {
+        best = c;
+      }
     }
 
+    return best;
+  }
 
-    private void _handleMouseDown(InputEventMouseButton mouseEvent) {
-        if (!mouseEvent.Pressed) {
-            return;
-        }
 
-        if (Globals.gameMode == GameMode.Build) {
-            if (mouseEvent.ButtonIndex == MouseButton.Left) {
-                Actions.placeBuilding();
-
-                return;
-            }
-        }
-
-        if (Globals.gameMode == GameMode.Command) {
-            // Issue action like Move
-
-            if (mouseEvent.ButtonIndex == MouseButton.Right) {
-                if (Globals.selectedUnit == null) {
-                    return;
-                }
-
-                var hoveredUnit = GetHoveredUnit();
-
-                if (hoveredUnit is IResource resource) {
-                    if (Globals.selectedUnit is Ant a) {
-                        a.Harvest(resource);
-                    }
-                } else {
-                    if (Globals.selectedUnit is Ant a) {
-                        a.Move(Util.MousePosition(GetTree()));
-                    }
-                }
-
-                return;
-            }
-
-            // Select
-
-            if (mouseEvent.ButtonIndex == MouseButton.Left) {
-                var unit = GetHoveredUnit();
-
-                if (unit is ISelectable s) {
-                    Globals.selectedUnit = s;
-                    _showCommandUi();
-                }
-            }
-        }
+  public override void _Process(double delta) {
+    if (Globals.gameMode == GameMode.Build) {
+      _showCommandUi();
     }
-
-    private void _handleMouseMove(InputEventMouseMotion mouseMotionEvent) {
-        if (Globals.gameMode == GameMode.Build) {
-            var pos = Util.MousePosition(GetTree());
-            var roundedTo32 = new Vector2((int)(pos.x / 32) * 32, (int)(pos.y / 32) * 32);
-
-            Globals.selectedBuilding.Position = roundedTo32;
-        }
-
-        if (Globals.gameMode == GameMode.Command) {
-            var prevHoveredUnit = hoveredUnit;
-
-            hoveredUnit = GetHoveredUnit();
-
-            if (prevHoveredUnit != hoveredUnit) {
-                if (prevHoveredUnit != null) {
-                    prevHoveredUnit.OnHoverEnd();
-                }
-
-                if (hoveredUnit != null) {
-                    hoveredUnit.OnHoverStart();
-                }
-            }
-        }
-    }
-
-    public ISelectable GetHoveredUnit() {
-        var mousePosition = Util.MousePosition(GetTree());
-        var param = new PhysicsPointQueryParameters2D();
-
-        param.Exclude = new Godot.Collections.Array<RID>();
-        param.CollideWithAreas = true;
-        param.CollideWithBodies = true;
-        param.Position = mousePosition;
-
-        List<Node2D> collisions = GetWorld2d().DirectSpaceState.IntersectPoint(param)
-          .Select(x => (Node2D)x["collider"])
-          .ToList();
-
-        ISelectable best = null;
-
-        // TODO: Maybe handle priority or something
-
-        foreach (var collision in collisions) {
-            if (collision.GetParent() is ISelectable c) {
-                best = c;
-            }
-        }
-
-        return best;
-    }
-
-
-    public override void _Process(double delta) {
-        if (Globals.gameMode == GameMode.Build) {
-            _showCommandUi();
-        }
-    }
+  }
 }
