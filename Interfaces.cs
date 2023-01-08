@@ -65,6 +65,8 @@ public interface IDamageable {
   public void Damage(int amount) {
     health -= amount;
 
+    this.healthBar.SetProgress((float)health / (float)maxHealth);
+
     if (health <= 0) {
       node.QueueFree();
     }
