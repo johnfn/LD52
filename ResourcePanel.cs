@@ -3,7 +3,7 @@ using Godot;
 public partial class ResourcePanel : VBoxContainer {
   Label twigLabel;
   Label meatLabel;
-  Label supplyLabel => GetNode<Label>("SupplyContainer/SupplyLabel");
+  RichTextLabel supplyLabel => GetNode<RichTextLabel>("SupplyContainer/SupplyLabel");
 
   public override void _Ready() {
     twigLabel = GetNode<Label>("TwigContainer/TwigLabel");
@@ -24,6 +24,7 @@ public partial class ResourcePanel : VBoxContainer {
     return (usedSupply, totalSupply);
   }
 
+  [System.Obsolete]
   public override void _Process(double delta) {
     twigLabel.Text = Globals.MatchstickCount.ToString();
     meatLabel.Text = Globals.GummyCount.ToString();
@@ -33,5 +34,16 @@ public partial class ResourcePanel : VBoxContainer {
     var (usedSupply, totalSupply) = CalculateSupply(GetTree());
 
     supplyLabel.Text = $"{usedSupply} / {totalSupply}";
+
+    if (usedSupply >= totalSupply) {
+      supplyLabel.AddThemeColorOverride(
+        "default_color",
+        Colors.Red
+      );
+    } else {
+      if (supplyLabel.HasThemeColorOverride("default_color")) {
+        supplyLabel.RemoveThemeColorOverride("default_color");
+      }
+    }
   }
 }
