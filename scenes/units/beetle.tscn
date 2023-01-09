@@ -130,7 +130,6 @@ position = Vector2(11.44, 83.44)
 scale = Vector2(1.88, 1.88)
 
 [node name="Graphics" type="Sprite2D" parent="."]
-modulate = Color(1, 0.270588, 0.439216, 1)
 scale = Vector2(0.48, 0.48)
 texture = ExtResource("3_05uur")
 
@@ -138,6 +137,7 @@ texture = ExtResource("3_05uur")
 scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/HitEffect"]
+visible = false
 position = Vector2(4.16666, -6.25)
 texture = ExtResource("5_d23tj")
 centered = false

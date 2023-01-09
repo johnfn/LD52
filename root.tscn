@@ -131,7 +131,6 @@ grow_vertical = 2
 theme = ExtResource("9_tyxdu")
 
 [node name="UiPanel" parent="Static/UIRoot" instance=ExtResource("9_vx6l0")]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -142,10 +141,8 @@ offset_right = 150.0
 grow_vertical = 0
 
 [node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
-layout_mode = 0
 
 [node name="error_panel" parent="Static/UIRoot" instance=ExtResource("13_71qpp")]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 0.05

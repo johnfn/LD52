@@ -137,6 +137,7 @@ texture = ExtResource("1_2q7kb")
 scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/HitEffect"]
+visible = false
 position = Vector2(4.16666, -6.25)
 texture = ExtResource("5_ttouk")
 centered = false
