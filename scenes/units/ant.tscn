@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dr36wj34htulv"]
+[gd_scene load_steps=19 format=3 uid="uid://dr36wj34htulv"]
 
 [ext_resource type="Script" path="res://Ant.cs" id="2_uvaca"]
 [ext_resource type="Texture2D" uid="uid://br4e4t6sgengi" path="res://assets/shadow.png" id="3_fwrfi"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://w70psda3hbtg" path="res://assets/ant_hand.png" id="7_abyob"]
 [ext_resource type="Texture2D" uid="uid://43hxgsr58w5o" path="res://assets/swordslice0.png" id="8_lea3g"]
 [ext_resource type="Texture2D" uid="uid://3wjkjmipqnio" path="res://assets/swordslice1.png" id="8_m6wi2"]
+[ext_resource type="Texture2D" uid="uid://b4u4y67ci6ho8" path="res://assets/resource_single_gummy.png" id="9_du126"]
 [ext_resource type="Texture2D" uid="uid://bbdwpg0obsr0g" path="res://assets/swordslice2 copy.png" id="10_0rc3a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
@@ -169,6 +170,13 @@ position = Vector2(14, 39.9761)
 rotation = 0.836013
 scale = Vector2(2.708, 2.708)
 texture = ExtResource("6_lae66")
+
+[node name="HeldGummy" type="Sprite2D" parent="Graphics/Hands"]
+modulate = Color(0.439216, 0.301961, 1, 1)
+position = Vector2(14, -6)
+rotation = 0.836013
+scale = Vector2(1.88129, 1.88129)
+texture = ExtResource("9_du126")
 
 [node name="HitEffect" type="Node2D" parent="Graphics"]
 scale = Vector2(2, 2)

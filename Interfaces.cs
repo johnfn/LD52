@@ -58,7 +58,7 @@ public interface IResource {
   public int amount { get; set; }
   public float harvestTime { get; set; }
   public Vector2 resourceGlobalPosition { get; }
-  public ResourceType resourceType { get; set; }
+  public ResourceType resourceType { get; }
   public AnimationPlayer animationPlayer { get; }
 }
 

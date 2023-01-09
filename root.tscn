@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bj1lyglc0f7o5" path="res://scenes/units/scout.tscn" id="17_xojm5"]
 [ext_resource type="PackedScene" uid="uid://bab7ujmjijflk" path="res://scenes/units/spitbug.tscn" id="18_ig11u"]
 [ext_resource type="PackedScene" uid="uid://2sxxdxvs8mbk" path="res://scenes/bullet.tscn" id="19_ql7ub"]
-[ext_resource type="PackedScene" uid="uid://bf6tor4dkolmi" path="res://scenes/enemy.tscn" id="20_koe4t"]
+[ext_resource type="PackedScene" uid="uid://bcgi6jhru5fdo" path="res://scenes/gummy_source.tscn" id="19_x6mja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irmio"]
 size = Vector2(197, 1199.5)
@@ -80,20 +80,8 @@ position = Vector2(613, 353)
 [node name="TwigSource" parent="Map" instance=ExtResource("5_b4qjw")]
 position = Vector2(1426, 343)
 
-[node name="Enemy" parent="." instance=ExtResource("20_koe4t")]
-position = Vector2(1435, 719)
-
-[node name="Enemy2" parent="." instance=ExtResource("20_koe4t")]
-position = Vector2(654, 579)
-
-[node name="Enemy3" parent="." instance=ExtResource("20_koe4t")]
-position = Vector2(1074, 992)
-
-[node name="Enemy4" parent="." instance=ExtResource("20_koe4t")]
-position = Vector2(674, 976)
-
 [node name="Ant" parent="." instance=ExtResource("3_0h73t")]
-position = Vector2(1038, 392)
+position = Vector2(1537, 809)
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(890, 606)
@@ -175,5 +163,9 @@ position = Vector2(882, 667)
 
 [node name="SpitBug" parent="." instance=ExtResource("18_ig11u")]
 position = Vector2(1011, 163)
+
+[node name="GummySource" parent="." instance=ExtResource("19_x6mja")]
+position = Vector2(1892, 1241)
+scale = Vector2(1.88068, 1.88068)
 
 [node name="Bullet" parent="." instance=ExtResource("19_ql7ub")]

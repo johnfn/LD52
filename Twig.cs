@@ -14,6 +14,9 @@ public partial class Twig : Node2D, ISelectable, IResource {
 
   // IResource
   public int amount { get; set; } = 10;
+
+
+  [Export]
   public ResourceType resourceType { get; set; } = ResourceType.Twig;
 
   public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");

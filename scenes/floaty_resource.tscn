@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfmlgqqwbchkm"]
+[gd_scene load_steps=6 format=3 uid="uid://bfmlgqqwbchkm"]
 
 [ext_resource type="Script" path="res://FloatingResource.cs" id="1_clr0d"]
 [ext_resource type="Texture2D" uid="uid://bnaw6fgmhr87" path="res://assets/resource_single_match.png" id="1_kgfxp"]
+[ext_resource type="Texture2D" uid="uid://b4u4y67ci6ho8" path="res://assets/resource_single_gummy.png" id="3_eomxt"]
 
 [sub_resource type="Animation" id="Animation_j7ulr"]
 resource_name = "Play"
@@ -41,10 +42,16 @@ script = ExtResource("1_clr0d")
 
 [node name="Graphics" type="Node2D" parent="."]
 
-[node name="Graphic" type="Sprite2D" parent="Graphics"]
+[node name="MatchGraphic" type="Sprite2D" parent="Graphics"]
 position = Vector2(-12, 17)
 scale = Vector2(0.426667, 0.426667)
 texture = ExtResource("1_kgfxp")
+
+[node name="GummyGraphic" type="Sprite2D" parent="Graphics"]
+modulate = Color(0.690196, 0.345098, 1, 1)
+position = Vector2(-19, 18)
+scale = Vector2(0.415738, 0.415738)
+texture = ExtResource("3_eomxt")
 
 [node name="Label" type="Label" parent="Graphics"]
 offset_left = 14.0
