@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c5jobfql2jwj0"]
+[gd_scene load_steps=17 format=3 uid="uid://c5jobfql2jwj0"]
 
 [ext_resource type="Texture2D" uid="uid://br4e4t6sgengi" path="res://assets/shadow.png" id="2_0wtq6"]
 [ext_resource type="Script" path="res://FightingBug.cs" id="2_3vggm"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://43hxgsr58w5o" path="res://assets/swordslice0.png" id="5_d23tj"]
 [ext_resource type="Texture2D" uid="uid://3wjkjmipqnio" path="res://assets/swordslice1.png" id="8_o37l5"]
 [ext_resource type="Texture2D" uid="uid://bbdwpg0obsr0g" path="res://assets/swordslice2 copy.png" id="9_oopwl"]
+[ext_resource type="PackedScene" uid="uid://13s47xtcrkgx" path="res://normal_point_light.tscn" id="10_kkwqe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(188, 161.25)
@@ -159,3 +160,6 @@ position = Vector2(0, -248)
 libraries = {
 "": SubResource("AnimationLibrary_6hawo")
 }
+
+[node name="NormalPointLight" parent="." instance=ExtResource("10_kkwqe")]
+position = Vector2(16, -48)

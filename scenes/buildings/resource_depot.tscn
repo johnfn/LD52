@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://noqqsuc8xwxj"]
+[gd_scene load_steps=8 format=3 uid="uid://noqqsuc8xwxj"]
 
 [ext_resource type="Texture2D" uid="uid://y846dubsgoaw" path="res://assets/building_depot.png" id="2_pdj1l"]
 [ext_resource type="Script" path="res://ResourceDepot.cs" id="2_sfpc8"]
 [ext_resource type="Texture2D" uid="uid://br4e4t6sgengi" path="res://assets/shadow.png" id="3_1jx5e"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_5ndly"]
 [ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="4_3gypa"]
+[ext_resource type="PackedScene" uid="uid://13s47xtcrkgx" path="res://normal_point_light.tscn" id="6_07rme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
@@ -35,3 +36,6 @@ shape = SubResource("RectangleShape2D_kl8im")
 [node name="HealthBar" parent="." instance=ExtResource("4_3gypa")]
 modulate = Color(0, 1, 0.12549, 1)
 position = Vector2(12, -300)
+
+[node name="NormalPointLight" parent="." instance=ExtResource("6_07rme")]
+position = Vector2(16, -48)

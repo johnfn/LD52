@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://13s47xtcrkgx"]
+
+[ext_resource type="Texture2D" uid="uid://bxbsj8syqmfls" path="res://assets/bloblight.png" id="1_ug5wh"]
+
+[node name="NormalPointLight" type="PointLight2D"]
+position = Vector2(1.00006, 7.00006)
+scale = Vector2(17.373, 17.373)
+blend_mode = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 2
+shadow_filter_smooth = 3.5
+texture = ExtResource("1_ug5wh")

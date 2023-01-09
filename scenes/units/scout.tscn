@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bj1lyglc0f7o5"]
+[gd_scene load_steps=17 format=3 uid="uid://bj1lyglc0f7o5"]
 
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="1_0osf5"]
 [ext_resource type="Texture2D" uid="uid://b6dethx4ddbjd" path="res://assets/enemy_scout_body.png" id="1_2q7kb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://43hxgsr58w5o" path="res://assets/swordslice0.png" id="5_ttouk"]
 [ext_resource type="Texture2D" uid="uid://3wjkjmipqnio" path="res://assets/swordslice1.png" id="8_hg3rf"]
 [ext_resource type="Texture2D" uid="uid://bbdwpg0obsr0g" path="res://assets/swordslice2 copy.png" id="9_xx4xu"]
+[ext_resource type="PackedScene" uid="uid://13s47xtcrkgx" path="res://normal_point_light.tscn" id="10_cwpox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(151, 157.812)
@@ -158,3 +159,6 @@ position = Vector2(22, -104)
 libraries = {
 "": SubResource("AnimationLibrary_6hawo")
 }
+
+[node name="NormalPointLight" parent="." instance=ExtResource("10_cwpox")]
+position = Vector2(16, -48)
