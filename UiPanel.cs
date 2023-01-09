@@ -107,9 +107,7 @@ public partial class UiPanel : Control {
 
 
   private void _showCommandUi() {
-    if (Globals.selectedUnit == null) {
-      selectionNameLabel.Text = "Selected Unit: None";
-    }
+    Visible = true;
 
     // if (Globals.selectedUnit is IUnit u) {
     //   unitPanelVisible = true;
@@ -124,6 +122,8 @@ public partial class UiPanel : Control {
 
       foreach (var item in Globals.selectedUnit.actions) {
         var label = new Button();
+
+        label.AddThemeFontSizeOverride("font_size", 30);
 
         label.Text = item.Key;
         genericPanel.AddChild(label);
@@ -338,6 +338,8 @@ public partial class UiPanel : Control {
         if (unit is ISelectable s) {
           Globals.selectedUnit = s;
           _showCommandUi();
+        } else {
+          Globals.selectedUnit = null;
         }
       }
     }
@@ -438,8 +440,25 @@ public partial class UiPanel : Control {
     return best;
   }
 
+  private int _timeSinceUnselected = 100; // start invis
   private GameMode _prevGameMode = GameMode.Build;
   public override void _Process(double delta) {
+    if (Globals.selectedUnit == null) {
+      _timeSinceUnselected += 1;
+
+      Modulate = new Color(1, 1, 1, 1.0f - (float)_timeSinceUnselected / 100.0f);
+
+      if (_timeSinceUnselected > 100) {
+        Visible = false;
+      }
+
+      return;
+    }
+
+    Modulate = new Color(1, 1, 1, 1);
+    Visible = true;
+    _timeSinceUnselected = 0;
+
     if (Globals.gameMode != _prevGameMode) {
       _showCommandUi();
 

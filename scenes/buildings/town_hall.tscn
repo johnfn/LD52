@@ -21,7 +21,8 @@ collision_layer = 3
 script = ExtResource("3_othbg")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Area"]
-position = Vector2(10, 90)
+position = Vector2(18, 30)
+scale = Vector2(1.43712, 1.20913)
 shape = SubResource("CircleShape2D_65rd0")
 
 [node name="Shadow" type="Sprite2D" parent="."]

@@ -35,8 +35,8 @@ collision_layer = 3
 script = ExtResource("3_ivv0c")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Area"]
-position = Vector2(6, 36)
-scale = Vector2(1.80645, 0.913361)
+position = Vector2(14, -23)
+scale = Vector2(1.64495, 1.23991)
 shape = SubResource("CircleShape2D_xkp2o")
 
 [node name="HealthBar" parent="." instance=ExtResource("5_u8xlh")]
