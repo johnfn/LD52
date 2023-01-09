@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public enum AttackStatus {
@@ -23,6 +24,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
   private Color _originalModColor;
   public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
   public ProgressBar healthBar => GetNode<ProgressBar>("HealthBar");
+  public AnimationPlayer animationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
 
   public string selectionText {
     get {
@@ -118,6 +120,13 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
       } else {
         _attackCooldownCurrent = _attackCooldownMax;
 
+        var hitSprite = GetNode<Sprite2D>("Graphic/HitEffect/Sprite2D");
+        // rotate hitSprite towards enemy.
+
+        hitSprite.GlobalRotation = (_attackTarget.GlobalPosition - GlobalPosition).Angle();
+
+        animationPlayer.Play("Attack");
+
         if (_attackTarget is IDamageable id) {
           id.Damage(_damage, this);
         }
@@ -144,6 +153,8 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
     _status = UnitStatus.Attacking;
     _attackStatus = AttackStatus.GoingToTarget;
     _path = Util.Pathfind(GetTree(), GlobalPosition, target.GlobalPosition);
+
+    _path = _path.SkipLast(2).ToList();
     _attackTarget = target;
   }
 

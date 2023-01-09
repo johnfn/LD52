@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://sjy3brj31pqu"]
+
+[ext_resource type="Material" uid="uid://cyg5gdpojhl7e" path="res://scenes/blur.tres" id="2_ajprs"]
+
+[node name="FogOfWar" type="Node2D"]
+material = ExtResource("2_ajprs")

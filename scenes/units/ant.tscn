@@ -18,12 +18,11 @@ size = Vector2(188, 161.25)
 [sub_resource type="Animation" id="Animation_aufqb"]
 resource_name = "Attack"
 length = 0.3001
-loop_mode = 1
 step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Graphic/HitEffect/Sprite:texture")
+tracks/0/path = NodePath("Graphic/HitEffect/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +34,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Graphic/HitEffect/Sprite:visible")
+tracks/1/path = NodePath("Graphic/HitEffect/Sprite2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -147,7 +146,6 @@ modulate = Color(0, 1, 0.12549, 1)
 position = Vector2(-2.25056, -187)
 
 [node name="Graphic" type="Node2D" parent="."]
-position = Vector2(-2.25056, -49)
 scale = Vector2(0.5, 0.5)
 
 [node name="Body" type="Sprite2D" parent="Graphic"]
@@ -155,6 +153,7 @@ position = Vector2(0, -32)
 texture = ExtResource("6_hn0gk")
 
 [node name="Hands" type="Node2D" parent="Graphic"]
+position = Vector2(2.08165e-12, -180)
 
 [node name="Hand1" type="Sprite2D" parent="Graphic/Hands"]
 position = Vector2(-126, 78)
@@ -177,7 +176,7 @@ scale = Vector2(2, 2)
 [node name="Sprite" type="Sprite2D" parent="Graphic/HitEffect"]
 visible = false
 position = Vector2(128, -15)
-texture = ExtResource("10_0rc3a")
+texture = ExtResource("8_m6wi2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

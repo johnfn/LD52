@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cyg5gdpojhl7e"]
+
+[ext_resource type="Shader" path="res://scenes/fog_of_war.gdshader" id="1_4xdbm"]
+
+[resource]
+shader = ExtResource("1_4xdbm")
+shader_parameter/blur_amount = 3.941

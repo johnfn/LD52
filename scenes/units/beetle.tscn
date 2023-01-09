@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5jobfql2jwj0"]
+[gd_scene load_steps=16 format=3 uid="uid://c5jobfql2jwj0"]
 
 [ext_resource type="Texture2D" uid="uid://br4e4t6sgengi" path="res://assets/shadow.png" id="2_0wtq6"]
 [ext_resource type="Script" path="res://FightingBug.cs" id="2_3vggm"]
@@ -6,9 +6,112 @@
 [ext_resource type="Texture2D" uid="uid://b2fd8mfkqsi1a" path="res://assets/warrior.png" id="3_05uur"]
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="4_ryn41"]
 [ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="5_a1xud"]
+[ext_resource type="Texture2D" uid="uid://43hxgsr58w5o" path="res://assets/swordslice0.png" id="5_d23tj"]
+[ext_resource type="Texture2D" uid="uid://3wjkjmipqnio" path="res://assets/swordslice1.png" id="8_o37l5"]
+[ext_resource type="Texture2D" uid="uid://bbdwpg0obsr0g" path="res://assets/swordslice2 copy.png" id="9_oopwl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(188, 161.25)
+
+[sub_resource type="Animation" id="Animation_aufqb"]
+resource_name = "Attack"
+length = 0.3001
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphic/HitEffect/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_d23tj"), ExtResource("8_o37l5"), ExtResource("9_oopwl")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphic/HitEffect/Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_u2mya"]
+resource_name = "Carry"
+length = 0.333367
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphic:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, 2), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphic/Hands:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.08165e-12, -180)]
+}
+
+[sub_resource type="Animation" id="Animation_pq6pd"]
+resource_name = "Idle"
+length = 0.333367
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphic:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, 2), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphic/Hands:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wy4t4"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6hawo"]
+_data = {
+"Attack": SubResource("Animation_aufqb"),
+"Carry": SubResource("Animation_u2mya"),
+"Idle": SubResource("Animation_pq6pd"),
+"RESET": SubResource("Animation_wy4t4")
+}
 
 [node name="Beetle" type="Node2D" groups=["good_unit"]]
 position = Vector2(-3, 7)
@@ -17,19 +120,27 @@ unitType = 2
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.454902)
-position = Vector2(-1, -14)
+position = Vector2(5.44, 84.44)
 scale = Vector2(0.48, 0.48)
 texture = ExtResource("2_0wtq6")
 
 [node name="SelectionCircle" parent="." instance=ExtResource("4_ryn41")]
-position = Vector2(5, -15)
+position = Vector2(11.44, 83.44)
 scale = Vector2(1.88, 1.88)
 
 [node name="Graphic" type="Sprite2D" parent="."]
 modulate = Color(1, 0.270588, 0.439216, 1)
-position = Vector2(-19, -95)
 scale = Vector2(0.48, 0.48)
 texture = ExtResource("3_05uur")
+
+[node name="HitEffect" type="Node2D" parent="Graphic"]
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphic/HitEffect"]
+position = Vector2(4.16666, -6.25)
+texture = ExtResource("5_d23tj")
+centered = false
+offset = Vector2(50, -100)
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(-1, -25)
@@ -43,3 +154,8 @@ shape = SubResource("RectangleShape2D_wx0nu")
 [node name="HealthBar" parent="." instance=ExtResource("5_a1xud")]
 modulate = Color(0, 1, 0.12549, 1)
 position = Vector2(0, -248)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6hawo")
+}

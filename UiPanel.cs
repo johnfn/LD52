@@ -128,6 +128,7 @@ public partial class UiPanel : Control {
 
         label.Text = item.Key;
         genericPanel.AddChild(label);
+
         label.Connect("pressed", Godot.Callable.From(() => {
           item.Value.Invoke();
           hoverPanel.Visible = false;
