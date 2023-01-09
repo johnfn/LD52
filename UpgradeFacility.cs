@@ -7,6 +7,14 @@ public enum UpgradeType {
   BugStrengthI,
   BugStrengthII,
   BugStrengthIII,
+
+  FastMatchstickI,
+  FastMatchstickII,
+  FastMatchstickIII,
+
+  FastGummyI,
+  FastGummyII,
+  FastGummyIII,
 }
 
 public class Upgrade {
@@ -28,12 +36,12 @@ public partial class UpgradeFacility : Node2D, IBuilding, ISelectable {
   public BuildingStatus status { get; set; } = BuildingStatus.Idle;
   public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
   public ProgressBar progressBar => GetNode<ProgressBar>("ProgressBar");
-  private UiPanel _uiPanel;
+  private UiPanel _uiPanel => GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
 
   public string selectionText {
     get {
       if (_currentUpgrade == null) {
-        return "Research new bug-technologies";
+        return "Research new bug-technologies...";
       }
 
       return "Researching: " + _currentUpgrade.name;
@@ -47,7 +55,6 @@ public partial class UpgradeFacility : Node2D, IBuilding, ISelectable {
   private float _upgradeTimeLeft = 0f;
 
   public override void _Ready() {
-    _uiPanel = GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
     SelectionCircle.Unit = this;
   }
 
@@ -60,6 +67,10 @@ public partial class UpgradeFacility : Node2D, IBuilding, ISelectable {
   public Dictionary<string, Action> actions {
     get {
       var result = new Dictionary<string, Action>();
+
+      if (_currentUpgrade != null) {
+        return result;
+      }
 
       if (Upgrades.BugStrengthLevel == 0) {
         result.Add("Bug Strength I", () => {

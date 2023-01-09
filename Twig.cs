@@ -39,7 +39,19 @@ public partial class Twig : Node2D, ISelectable, IResource {
     }
   }
 
-  public float harvestTime { get; set; } = Util.DEBUG ? 1f : 5f;
+  public float harvestTime {
+    get {
+      if (resourceType == ResourceType.Twig) {
+        return 3f - Upgrades.MatchstickSpeedLevel / 2.0f;
+      }
+
+      if (resourceType == ResourceType.Meat) {
+        return 6f - Upgrades.GummySpeedLevel;
+      }
+
+      return 10f;
+    }
+  }
 
   public void OnHoverStart() {
     // sprite.Modulate = new Color(1, 1, 1, 0.5f);

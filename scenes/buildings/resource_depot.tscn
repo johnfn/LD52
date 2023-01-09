@@ -44,3 +44,6 @@ position = Vector2(12, -300)
 
 [node name="NormalPointLight" parent="." instance=ExtResource("6_07rme")]
 position = Vector2(16, -48)
+
+[node name="ProgressBar" parent="." instance=ExtResource("4_3gypa")]
+position = Vector2(14, -357)

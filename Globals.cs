@@ -32,6 +32,8 @@ public class GroupNames {
 
 public class Upgrades {
   public static int BugStrengthLevel = 0;
+  public static int MatchstickSpeedLevel = 0;
+  public static int GummySpeedLevel = 0;
 
   public static Dictionary<UpgradeType, Upgrade> AllUpgrades = new Dictionary<UpgradeType, Upgrade> {
     [UpgradeType.BugStrengthI] = new Upgrade {
@@ -67,6 +69,78 @@ public class Upgrades {
       description = "Increase the strength of all fighting bugs by 2 more, for a total of 6.",
       onComplete = () => {
         BugStrengthLevel = 3;
+      }
+    },
+
+    [UpgradeType.FastGummyI] = new Upgrade {
+      type = UpgradeType.FastGummyI,
+      name = "Gummy Harvesting I",
+      matchstickCost = Util.DEBUG ? 0 : 50,
+      gummyCost = Util.DEBUG ? 0 : 100,
+      time = Util.DEBUG ? 1f : 10f,
+      description = "Increase the speed of gummy harvesting.",
+      onComplete = () => {
+        GummySpeedLevel = 1;
+      }
+    },
+
+    [UpgradeType.FastGummyII] = new Upgrade {
+      type = UpgradeType.FastGummyII,
+      name = "Gummy Harvesting II",
+      matchstickCost = Util.DEBUG ? 0 : 50,
+      gummyCost = Util.DEBUG ? 0 : 200,
+      time = Util.DEBUG ? 1f : 10f,
+      description = "Increase the speed of gummy harvesting even more.",
+      onComplete = () => {
+        GummySpeedLevel = 2;
+      }
+    },
+
+    [UpgradeType.FastGummyIII] = new Upgrade {
+      type = UpgradeType.FastGummyIII,
+      name = "Gummy Harvesting III",
+      matchstickCost = Util.DEBUG ? 0 : 50,
+      gummyCost = Util.DEBUG ? 0 : 300,
+      time = Util.DEBUG ? 1f : 10f,
+      description = "Increase the speed of gummy harvesting to ridiculous degrees!!!",
+      onComplete = () => {
+        GummySpeedLevel = 3;
+      }
+    },
+
+    [UpgradeType.FastMatchstickI] = new Upgrade {
+      type = UpgradeType.FastMatchstickI,
+      name = "Matchstick Harvesting I",
+      matchstickCost = Util.DEBUG ? 0 : 100,
+      gummyCost = Util.DEBUG ? 0 : 50,
+      time = Util.DEBUG ? 1f : 10f,
+      description = "Increase the speed of matchstick harvesting.",
+      onComplete = () => {
+        MatchstickSpeedLevel = 1;
+      }
+    },
+
+    [UpgradeType.FastMatchstickII] = new Upgrade {
+      type = UpgradeType.FastGummyII,
+      name = "Matchstick Harvesting II",
+      matchstickCost = Util.DEBUG ? 0 : 200,
+      gummyCost = Util.DEBUG ? 0 : 50,
+      time = Util.DEBUG ? 1f : 10f,
+      description = "Teach ants the fine arts of harvesting matchsticks from a local zen master.",
+      onComplete = () => {
+        MatchstickSpeedLevel = 2;
+      }
+    },
+
+    [UpgradeType.FastMatchstickIII] = new Upgrade {
+      type = UpgradeType.FastGummyIII,
+      name = "Matchstick Harvesting III",
+      matchstickCost = Util.DEBUG ? 0 : 300,
+      gummyCost = Util.DEBUG ? 0 : 50,
+      time = Util.DEBUG ? 1f : 10f,
+      description = "Open demonic portals to more matchsticks.",
+      onComplete = () => {
+        MatchstickSpeedLevel = 3;
       }
     },
   };

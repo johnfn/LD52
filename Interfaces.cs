@@ -62,7 +62,7 @@ public interface IDealsDamage {
 
 public interface IResource {
   public int amount { get; set; }
-  public float harvestTime { get; set; }
+  public float harvestTime { get; }
   public Vector2 resourceGlobalPosition { get; }
   public ResourceType resourceType { get; }
   public AnimationPlayer animationPlayer { get; }
