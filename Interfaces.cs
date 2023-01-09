@@ -35,6 +35,7 @@ public struct UnitStats {
   public int attackCooldown;
   public int damage;
   public int speed;
+  public bool ranged;
 }
 
 public interface ISelectable {

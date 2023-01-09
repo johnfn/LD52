@@ -58,9 +58,20 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
   public string name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
   private int _speed = 500;
+  private bool _ranged = false;
 
   private Tween attackTween;
   private Tween takeDamageTween;
+
+  private int _distanceRequiredToAttackEnemy {
+    get {
+      if (_ranged) {
+        return 600;
+      }
+
+      return 100;
+    }
+  }
 
   public override void _Ready() {
     _originalModColor = Modulate;
@@ -75,6 +86,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
     _speed = stats.speed;
     _attackCooldownMax = stats.attackCooldown;
     _damage = stats.damage;
+    _ranged = stats.ranged;
     SelectionCircle.Unit = this;
   }
 
@@ -101,8 +113,10 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
 
     // If the target moved, pursue.
     if (
-      _attackStatus != AttackStatus.GoingToTarget &&
-      _attackTarget.GlobalPosition.DistanceTo(GlobalPosition) > 100
+      _path.Count == 0 || (
+        _attackStatus != AttackStatus.GoingToTarget &&
+        _attackTarget.GlobalPosition.DistanceTo(GlobalPosition) > _distanceRequiredToAttackEnemy
+      )
     ) {
       _attackStatus = AttackStatus.GoingToTarget;
       _path = Util.Pathfind(GetTree(), GlobalPosition, _attackTarget.GlobalPosition);
@@ -110,9 +124,11 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
 
     // Otherwise, attack!
     if (_attackStatus == AttackStatus.GoingToTarget) {
-      var done = Util.WalkAlongPath(this, _path, _speed * (float)delta);
+      Util.WalkAlongPath(this, _path, _speed * (float)delta);
 
-      if (done) {
+      if (
+        GlobalPosition.DistanceTo(_attackTarget.GlobalPosition) <= _distanceRequiredToAttackEnemy
+      ) {
         _attackStatus = AttackStatus.Attacking;
       }
     } else if (_attackStatus == AttackStatus.Attacking) {
@@ -121,12 +137,14 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
       } else {
         _attackCooldownCurrent = _attackCooldownMax;
 
-        var hitSprite = GetNode<Sprite2D>("Graphics/HitEffect/Sprite2D");
-        // rotate hitSprite towards enemy.
+        if (!_ranged) {
+          var hitSprite = GetNode<Sprite2D>("Graphics/HitEffect/Sprite2D");
+          // rotate hitSprite towards enemy.
 
-        hitSprite.GlobalRotation = (_attackTarget.GlobalPosition - GlobalPosition).Angle();
+          hitSprite.GlobalRotation = (_attackTarget.GlobalPosition - GlobalPosition).Angle();
 
-        animationPlayer.Play("Attack");
+          animationPlayer.Play("Attack");
+        }
 
         if (_attackTarget is IDamageable id) {
           id.Damage(_damage, this);

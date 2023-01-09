@@ -280,6 +280,7 @@ public class Util {
           twigCost = 50,
           meatCost = 0,
           attackCooldown = 100,
+          ranged = false,
           damage = 1,
           resourcePath = "res://scenes/units/ant.tscn",
           description = "Ants harvest resources and build buildings."
@@ -293,8 +294,9 @@ public class Util {
             health = 10,
             twigCost = 20,
             meatCost = 0,
+            ranged = false,
             attackCooldown = 100,
-            damage = 5,
+            damage = 3,
             resourcePath = "res://scenes/units/beetle.tscn",
             description = "Beetles are strong, resilient fighters!"
           },
@@ -308,7 +310,8 @@ public class Util {
             twigCost = 20,
             meatCost = 0,
             attackCooldown = 200,
-            damage = 3,
+            ranged = false,
+            damage = 2,
             resourcePath = "res://scenes/units/scout.tscn",
             description = "Scouts are not strong fighters, but they make it up with speed and agility! Which is a synonym for speed."
           },
@@ -321,8 +324,9 @@ public class Util {
             health = 10,
             twigCost = 20,
             meatCost = 0,
+            ranged = true,
             attackCooldown = 50,
-            damage = 5,
+            damage = 3,
             resourcePath = "res://scenes/units/spitbug.tscn",
             description = "Spit bugs are your long range militia!"
           }
