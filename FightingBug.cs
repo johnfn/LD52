@@ -137,20 +137,28 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
       } else {
         _attackCooldownCurrent = _attackCooldownMax;
 
-        if (!_ranged) {
+        if (_ranged) {
+          var bullet = GD.Load<PackedScene>("res://scenes/bullet.tscn").Instantiate<Bullet>();
+
+          bullet.GlobalPosition = GlobalPosition;
+          bullet.Target = _attackTarget;
+          bullet.Damage = _damage;
+          bullet.Source = this;
+
+          GetTree().Root.AddChild(bullet);
+        } else {
           var hitSprite = GetNode<Sprite2D>("Graphics/HitEffect/Sprite2D");
           // rotate hitSprite towards enemy.
 
           hitSprite.GlobalRotation = (_attackTarget.GlobalPosition - GlobalPosition).Angle();
 
           animationPlayer.Play("Attack");
+
+          if (_attackTarget is IDamageable id) {
+            id.Damage(_damage, this);
+          }
         }
 
-        if (_attackTarget is IDamageable id) {
-          id.Damage(_damage, this);
-        }
-
-        AnimateAttack();
       }
     }
   }
@@ -177,16 +185,6 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
     _attackTarget = target;
 
     Util.FlashNodeWhite(target);
-  }
-
-  //takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
-  //takeDamageTween.TweenInterval(.1);
-  //takeDamageTween.TweenProperty(this, "modulate", _originalModColor, .05).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
-
-  private void AnimateAttack() {
-    //attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);
-    //attackTween.TweenInterval(.05);
-    //attackTween.TweenProperty(this, "scale", 1f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);
   }
 
   public void Damage(int amount, Node2D source) {

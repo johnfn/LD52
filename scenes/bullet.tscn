@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://2sxxdxvs8mbk"]
+[gd_scene load_steps=4 format=3 uid="uid://2sxxdxvs8mbk"]
+
+[ext_resource type="Script" path="res://Bullet.cs" id="1_a3505"]
+[ext_resource type="Texture2D" uid="uid://bmawuic6xocje" path="res://assets/enemy_scout_hand.png" id="1_lyqsq"]
+[ext_resource type="Texture2D" uid="uid://br4e4t6sgengi" path="res://assets/shadow.png" id="3_24m1i"]
 
 [node name="Bullet" type="Node2D"]
+scale = Vector2(1.88068, 1.88068)
+script = ExtResource("1_a3505")
+
+[node name="Graphics" type="Sprite2D" parent="."]
+position = Vector2(3, 1)
+scale = Vector2(0.191667, 0.191667)
+texture = ExtResource("1_lyqsq")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.552941)
+position = Vector2(1.59517, 36.6888)
+scale = Vector2(0.109886, 0.109886)
+texture = ExtResource("3_24m1i")

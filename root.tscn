@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://7wv033c6p42i"]
+[gd_scene load_steps=22 format=3 uid="uid://7wv033c6p42i"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Script" path="res://Root.cs" id="1_38of0"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://ctrb1n4wlapv6" path="res://scenes/error_pane.tscn" id="14_wu0pv"]
 [ext_resource type="PackedScene" uid="uid://bj1lyglc0f7o5" path="res://scenes/units/scout.tscn" id="17_xojm5"]
 [ext_resource type="PackedScene" uid="uid://bab7ujmjijflk" path="res://scenes/units/spitbug.tscn" id="18_ig11u"]
+[ext_resource type="PackedScene" uid="uid://2sxxdxvs8mbk" path="res://scenes/bullet.tscn" id="19_ql7ub"]
 [ext_resource type="PackedScene" uid="uid://bf6tor4dkolmi" path="res://scenes/enemy.tscn" id="20_koe4t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irmio"]
@@ -142,7 +143,6 @@ grow_vertical = 2
 theme = ExtResource("9_tyxdu")
 
 [node name="UiPanel" parent="Static/UIRoot" instance=ExtResource("9_vx6l0")]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -153,10 +153,8 @@ offset_right = 150.0
 grow_vertical = 0
 
 [node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
-layout_mode = 0
 
 [node name="error_panel" parent="Static/UIRoot" instance=ExtResource("13_71qpp")]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 0.05
@@ -178,4 +176,4 @@ position = Vector2(882, 667)
 [node name="SpitBug" parent="." instance=ExtResource("18_ig11u")]
 position = Vector2(1011, 163)
 
-[node name="Bullet" type="Node2D" parent="."]
+[node name="Bullet" parent="." instance=ExtResource("19_ql7ub")]
