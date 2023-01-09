@@ -95,7 +95,7 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
   public BuildBuildingStatus BuildingStatus = BuildBuildingStatus.None;
   public ProgressBar ProgressBar => GetNode<ProgressBar>("ProgressBar");
   public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
-  public Node2D HeldTwig => GetNode<Node2D>("Graphic/Hands/HeldTwig");
+  public Node2D HeldTwig => GetNode<Node2D>("Graphics/Hands/HeldTwig");
 
   public ProgressBar healthBar => GetNode<ProgressBar>("HealthBar");
 

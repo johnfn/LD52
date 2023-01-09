@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://butb8nk3j7nsg" path="res://scenes/error_panel.tscn" id="13_71qpp"]
 [ext_resource type="Script" path="res://SelectionRect.cs" id="13_fuotw"]
 [ext_resource type="PackedScene" uid="uid://ctrb1n4wlapv6" path="res://scenes/error_pane.tscn" id="14_wu0pv"]
-[ext_resource type="PackedScene" uid="uid://c5jobfql2jwj0" path="res://scenes/units/beetle.tscn" id="15_xik6a"]
+[ext_resource type="PackedScene" uid="uid://bj1lyglc0f7o5" path="res://scenes/units/scout.tscn" id="17_xojm5"]
 [ext_resource type="PackedScene" uid="uid://bf6tor4dkolmi" path="res://scenes/enemy.tscn" id="20_koe4t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irmio"]
@@ -141,7 +141,6 @@ grow_vertical = 2
 theme = ExtResource("9_tyxdu")
 
 [node name="UiPanel" parent="Static/UIRoot" instance=ExtResource("9_vx6l0")]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -152,10 +151,8 @@ offset_right = 150.0
 grow_vertical = 0
 
 [node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
-layout_mode = 0
 
 [node name="error_panel" parent="Static/UIRoot" instance=ExtResource("13_71qpp")]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 0.05
@@ -171,5 +168,5 @@ script = ExtResource("13_fuotw")
 points = PackedVector2Array(0, 0, 50, 2.08165e-12)
 joint_mode = 2
 
-[node name="Ant2" parent="." instance=ExtResource("15_xik6a")]
-position = Vector2(928, 636)
+[node name="Scout" parent="." instance=ExtResource("17_xojm5")]
+position = Vector2(882, 667)

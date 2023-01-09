@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj1lyglc0f7o5"]
+[gd_scene load_steps=16 format=3 uid="uid://bj1lyglc0f7o5"]
 
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="1_0osf5"]
 [ext_resource type="Texture2D" uid="uid://b6dethx4ddbjd" path="res://assets/enemy_scout_body.png" id="1_2q7kb"]
@@ -6,9 +6,112 @@
 [ext_resource type="Texture2D" uid="uid://br4e4t6sgengi" path="res://assets/shadow.png" id="2_qg44e"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_iexxq"]
 [ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="4_0oi7s"]
+[ext_resource type="Texture2D" uid="uid://43hxgsr58w5o" path="res://assets/swordslice0.png" id="5_ttouk"]
+[ext_resource type="Texture2D" uid="uid://3wjkjmipqnio" path="res://assets/swordslice1.png" id="8_hg3rf"]
+[ext_resource type="Texture2D" uid="uid://bbdwpg0obsr0g" path="res://assets/swordslice2 copy.png" id="9_xx4xu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(151, 157.812)
+
+[sub_resource type="Animation" id="Animation_aufqb"]
+resource_name = "Attack"
+length = 0.3001
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/HitEffect/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_ttouk"), ExtResource("8_hg3rf"), ExtResource("9_xx4xu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/HitEffect/Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_u2mya"]
+resource_name = "Carry"
+length = 0.333367
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, 2), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Hands:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.08165e-12, -180)]
+}
+
+[sub_resource type="Animation" id="Animation_pq6pd"]
+resource_name = "Idle"
+length = 0.333367
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, 2), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Hands:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wy4t4"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6hawo"]
+_data = {
+"Attack": SubResource("Animation_aufqb"),
+"Carry": SubResource("Animation_u2mya"),
+"Idle": SubResource("Animation_pq6pd"),
+"RESET": SubResource("Animation_wy4t4")
+}
 
 [node name="Scout" type="Node2D" groups=["good_unit"]]
 script = ExtResource("2_o23u0")
@@ -24,11 +127,20 @@ position = Vector2(32.7802, 49.3802)
 scale = Vector2(0.842033, 0.487346)
 texture = ExtResource("2_qg44e")
 
-[node name="Graphic" type="Sprite2D" parent="."]
+[node name="Graphics" type="Sprite2D" parent="."]
 modulate = Color(0.984314, 1, 0.0313726, 1)
 position = Vector2(17, 5)
 scale = Vector2(0.475764, 0.475764)
 texture = ExtResource("1_2q7kb")
+
+[node name="HitEffect" type="Node2D" parent="Graphics"]
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/HitEffect"]
+position = Vector2(4.16666, -6.25)
+texture = ExtResource("5_ttouk")
+centered = false
+offset = Vector2(50, -100)
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(-5, 8)
@@ -42,3 +154,8 @@ shape = SubResource("RectangleShape2D_wx0nu")
 [node name="HealthBar" parent="." instance=ExtResource("4_0oi7s")]
 modulate = Color(0, 1, 0.12549, 1)
 position = Vector2(22, -104)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6hawo")
+}
