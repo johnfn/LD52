@@ -32,6 +32,11 @@ public partial class UiPanel : Control {
 
   Actions actions;
 
+  Label bottomDamageLabel => GetNode<Label>("Bottom/Damage");
+  Sprite2D bottomDamageIcon => GetNode<Sprite2D>("Bottom/DamageIcon");
+  Label bottomHealthLabel => GetNode<Label>("Bottom/Health");
+  Sprite2D bottomHealthIcon => GetNode<Sprite2D>("Bottom/HealthIcon");
+
   public override void _Ready() {
     actions = GetNode<Actions>("/root/Actions");
 
@@ -106,7 +111,7 @@ public partial class UiPanel : Control {
 
 
 
-  private void _showCommandUi() {
+  public void _showCommandUi() {
     Visible = true;
 
     // if (Globals.selectedUnit is IUnit u) {
@@ -189,6 +194,34 @@ public partial class UiPanel : Control {
 
     if (Globals.selectedUnit is ISelectable ss) {
       selectionLabel.Text = ss.selectionText;
+    }
+
+    if (Globals.selectedUnit is IDamageable id) {
+      bottomHealthLabel.Visible = true;
+      bottomHealthIcon.Visible = true;
+
+      bottomHealthLabel.Text = id.health + "/" + id.maxHealth;
+    } else {
+      bottomHealthLabel.Visible = false;
+      bottomHealthIcon.Visible = false;
+    }
+
+    if (Globals.selectedUnit is IDealsDamage dd) {
+      bottomDamageLabel.Visible = true;
+      bottomDamageIcon.Visible = true;
+
+      bottomDamageLabel.Text = dd.Strength.ToString();
+
+      GD.Print("StrLev" + Upgrades.BugStrengthLevel);
+
+      if (Upgrades.BugStrengthLevel == 0) {
+        bottomDamageLabel.Text = dd.Strength.ToString();
+      } else {
+        bottomDamageLabel.Text = (dd.Strength - Upgrades.BugStrengthLevel * 2).ToString() + " + " + Upgrades.BugStrengthLevel.ToString();
+      }
+    } else {
+      bottomDamageLabel.Visible = false;
+      bottomDamageIcon.Visible = false;
     }
   }
 
@@ -351,7 +384,7 @@ public partial class UiPanel : Control {
           Globals.selectedUnit = s;
           _showCommandUi();
         } else {
-          Globals.selectedUnit = null;
+          // Globals.selectedUnit = null;
         }
       }
     }

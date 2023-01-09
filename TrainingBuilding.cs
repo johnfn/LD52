@@ -143,18 +143,18 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
   public void BuyUnit(UnitType unit) {
     var stats = Util.UnitStats[unit];
 
-    if (stats.twigCost > Globals.TwigCount) {
+    if (stats.twigCost > Globals.MatchstickCount) {
       errorPopup.ShowError("Not enough matchsticks.");
       return;
     }
 
-    if (stats.meatCost > Globals.MeatCount) {
+    if (stats.meatCost > Globals.GummyCount) {
       errorPopup.ShowError("Not enough gummies.");
       return;
     }
 
-    Globals.TwigCount -= stats.twigCost;
-    Globals.MeatCount -= stats.meatCost;
+    Globals.MatchstickCount -= stats.twigCost;
+    Globals.GummyCount -= stats.meatCost;
 
     status = BuildingStatus.Building;
 

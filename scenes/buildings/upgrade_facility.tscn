@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://b0wgc31iejook"]
+
+[ext_resource type="Script" path="res://UpgradeFacility.cs" id="1_0v47y"]
+[ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="2_uner4"]
+[ext_resource type="Texture2D" uid="uid://br4e4t6sgengi" path="res://assets/shadow.png" id="3_lg85o"]
+[ext_resource type="Texture2D" uid="uid://ch8k4bqektohx" path="res://assets/upgrade_facility.png" id="4_64an3"]
+[ext_resource type="Script" path="res://ClickableArea2D.gd" id="5_fymjh"]
+[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="6_s5hpg"]
+[ext_resource type="PackedScene" uid="uid://13s47xtcrkgx" path="res://normal_point_light.tscn" id="7_2qujg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
+size = Vector2(204, 169)
+
+[node name="UpgradeFacility" type="Node2D"]
+script = ExtResource("1_0v47y")
+
+[node name="SelectionCircle" parent="." instance=ExtResource("2_uner4")]
+position = Vector2(16, 26)
+scale = Vector2(5.07855, 3.30042)
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.533333)
+position = Vector2(16, 15)
+scale = Vector2(1.02992, 0.717416)
+texture = ExtResource("3_lg85o")
+
+[node name="Graphics" type="Sprite2D" parent="." groups=["building"]]
+position = Vector2(17, -44)
+scale = Vector2(0.811257, 0.811257)
+texture = ExtResource("4_64an3")
+
+[node name="Area" type="Area2D" parent="." groups=["collider"]]
+position = Vector2(2.5, 5.5)
+collision_layer = 3
+script = ExtResource("5_fymjh")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area"]
+position = Vector2(9, -12)
+shape = SubResource("RectangleShape2D_kl8im")
+
+[node name="HealthBar" parent="." instance=ExtResource("6_s5hpg")]
+modulate = Color(0, 1, 0.12549, 1)
+position = Vector2(12, -300)
+
+[node name="NormalPointLight" parent="." instance=ExtResource("7_2qujg")]
+position = Vector2(16, -48)
+
+[node name="ProgressBar" parent="." instance=ExtResource("6_s5hpg")]
+position = Vector2(4, -149)

@@ -12,6 +12,7 @@ public enum BuildingType {
   ResourceDepot,
   Barrachnid,
   GuardTower,
+  UpgradeFacility,
   None,
 }
 
@@ -52,6 +53,10 @@ public interface ISelectable {
   public string name { get; set; }
 
   public string selectionText { get; }
+}
+
+public interface IDealsDamage {
+  public int Strength { get; }
 }
 
 

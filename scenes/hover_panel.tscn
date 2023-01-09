@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://k3xxpip0ksw5"]
+[gd_scene load_steps=14 format=3 uid="uid://k3xxpip0ksw5"]
 
 [ext_resource type="Script" path="res://HoverPanel.cs" id="1_8bd57"]
 [ext_resource type="Texture2D" uid="uid://b4u4y67ci6ho8" path="res://assets/resource_single_gummy.png" id="1_ufkl0"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b2fd8mfkqsi1a" path="res://assets/warrior.png" id="8_8e00f"]
 [ext_resource type="Texture2D" uid="uid://d1x17llgf2svh" path="res://assets/healer_body.png" id="9_7jmhi"]
 [ext_resource type="Texture2D" uid="uid://dj6384b8a0gt0" path="res://assets/attack_icon.png" id="10_f5qwd"]
+[ext_resource type="Texture2D" uid="uid://ch8k4bqektohx" path="res://assets/upgrade_facility.png" id="11_23p0e"]
 [ext_resource type="Texture2D" uid="uid://b6chfstcy54ny" path="res://assets/heart_icon.png" id="11_85tov"]
 
 [node name="HoverPanel" type="Panel"]
@@ -137,6 +138,11 @@ texture = ExtResource("6_qgq08")
 position = Vector2(113, 177)
 scale = Vector2(0.36, 0.36)
 texture = ExtResource("6_m5tnw")
+
+[node name="BuildingUpgradeFacility" type="Sprite2D" parent="Graphics"]
+position = Vector2(113, 177)
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("11_23p0e")
 
 [node name="AttackIcon" type="Sprite2D" parent="."]
 position = Vector2(261, 287)

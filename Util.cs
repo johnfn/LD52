@@ -296,6 +296,19 @@ public class Util {
           description = "A guard tower will fire at enemies automatically!"
         }
       },
+
+      {
+        BuildingType.UpgradeFacility,
+        new BuildingStats() {
+          buildTime = 1f,
+          health = 10,
+          twigCost = 40,
+          meatCost = 0,
+          name = "Upgrade Facility",
+          resourcePath = "res://scenes/buildings/guard_tower.tscn",
+          description = "Here you can bug-research new bug-technologies to make bugs bug-stronger! Bug."
+        }
+      },
     };
     }
   }

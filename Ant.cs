@@ -49,6 +49,10 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
     ["Guard Tower"] = (delegate () {
       Actions.selectBuilding(BuildingType.GuardTower);
     }),
+
+    ["Upgrade Facility"] = (delegate () {
+      Actions.selectBuilding(BuildingType.UpgradeFacility);
+    }),
   };
 
   public ConstructionSite ConstructionSite = null;
@@ -221,9 +225,9 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
         // Add to resources.
 
         if (InventoryItem.resourceType == ResourceType.Twig) {
-          Globals.TwigCount += Globals.TwigHarvestRate;
+          Globals.MatchstickCount += Globals.TwigHarvestRate;
         } else if (InventoryItem.resourceType == ResourceType.Meat) {
-          Globals.MeatCount += Globals.MeatHarvestRate;
+          Globals.GummyCount += Globals.MeatHarvestRate;
         }
 
         HeldTwig.Visible = false;

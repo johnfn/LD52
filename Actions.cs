@@ -11,8 +11,8 @@ public partial class Actions : Node {
     var stats = Util.BuildingStats[buildingType];
 
     if (
-      Globals.TwigCount >= stats.twigCost &&
-      Globals.MeatCount >= stats.meatCost
+      Globals.MatchstickCount >= stats.twigCost &&
+      Globals.GummyCount >= stats.meatCost
     ) {
       Globals.selectedBuildingType = buildingType;
       Globals.selectedBuilding = GD.Load<PackedScene>(stats.resourcePath).Instantiate<Node2D>();
@@ -22,9 +22,9 @@ public partial class Actions : Node {
       tree.Root.GetNode<Node2D>("Root").AddChild(Globals.selectedBuilding);
       Globals.gameMode = GameMode.Build;
     } else {
-      if (Globals.TwigCount < stats.twigCost) {
+      if (Globals.MatchstickCount < stats.twigCost) {
         errorPopup.ShowError("Not enough Twigs to build this.");
-      } else if (Globals.MeatCount < stats.meatCost) {
+      } else if (Globals.GummyCount < stats.meatCost) {
         errorPopup.ShowError("Not enough Meat to build this.");
       }
     }
@@ -49,18 +49,18 @@ public partial class Actions : Node {
         return;
       }
 
-      if (Globals.TwigCount < stats.twigCost) {
+      if (Globals.MatchstickCount < stats.twigCost) {
         errorPopup.ShowError("Not enough Twigs to build this.");
         return;
       }
 
-      if (Globals.MeatCount < stats.meatCost) {
+      if (Globals.GummyCount < stats.meatCost) {
         errorPopup.ShowError("Not enough Meat to build this.");
         return;
       }
 
-      Globals.TwigCount -= stats.twigCost;
-      Globals.MeatCount -= stats.meatCost;
+      Globals.MatchstickCount -= stats.twigCost;
+      Globals.GummyCount -= stats.meatCost;
 
       a.Build(Globals.selectedBuildingType, Globals.selectedBuilding.Position);
 

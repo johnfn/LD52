@@ -9,7 +9,7 @@ public enum AttackStatus {
   Attacking
 }
 
-public partial class FightingBug : Node2D, IDamageable, ISelectable {
+public partial class FightingBug : Node2D, IDamageable, ISelectable, IDealsDamage {
   [Export]
   public UnitType unitType;
 
@@ -18,7 +18,12 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
   private Enemy _attackTarget = null;
   private int _attackCooldownMax = 0;
   private int _attackCooldownCurrent = 0;
-  private int _damage = 0;
+  public int Strength {
+    get {
+      var stats = Util.UnitStats[unitType];
+      return stats.damage + Upgrades.BugStrengthLevel * 2;
+    }
+  }
   private List<Vector2> _path = new List<Vector2>();
   public Node2D node { get => this; }
   private Color _originalModColor;
@@ -33,7 +38,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
       }
 
       if (unitType == UnitType.Scout) {
-        return "This is a SCOUT!";
+        return "This is a scout: Fast, but weak.";
       }
 
       if (unitType == UnitType.Spit) {
@@ -85,7 +90,6 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
 
     _speed = stats.speed;
     _attackCooldownMax = stats.attackCooldown;
-    _damage = stats.damage;
     _ranged = stats.ranged;
     SelectionCircle.Unit = this;
   }
@@ -142,7 +146,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
 
           bullet.GlobalPosition = GlobalPosition;
           bullet.Target = _attackTarget;
-          bullet.Damage = _damage;
+          bullet.Damage = Strength;
           bullet.Source = this;
 
           Util.Add(GetTree(), bullet);
@@ -155,7 +159,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
           animationPlayer.Play("Attack");
 
           if (_attackTarget is IDamageable id) {
-            id.Damage(_damage, this);
+            id.Damage(Strength, this);
           }
         }
 
