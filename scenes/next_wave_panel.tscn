@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://daho0it3kb3dm"]
+
+[ext_resource type="Script" path="res://NextWavePanel.cs" id="1_rjm6s"]
+
+[node name="NextWavePanel" type="Panel"]
+offset_left = 32.0
+offset_top = 5.0
+offset_right = 1801.0
+offset_bottom = 84.0
+script = ExtResource("1_rjm6s")
+
+[node name="Progress" type="ColorRect" parent="."]
+offset_right = 1749.0
+offset_bottom = 74.0
+color = Color(0.0627451, 0.0509804, 0.0901961, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 680.0
+offset_top = 16.0
+offset_right = 1094.0
+offset_bottom = 57.0
+theme_override_font_sizes/font_size = 30
+text = "Time Until Next Wave: 1:00"

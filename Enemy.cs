@@ -28,7 +28,7 @@ public partial class Enemy : Node2D, ISelectable, IDamageable {
 
   public ProgressBar healthBar => GetNode<ProgressBar>("HealthBar");
 
-  public int _speed = 500;
+  public int _speed = 200;
   private float _attackCooldownMax;
   private float _attackCooldownCurrent;
   private int _damageAmount;
