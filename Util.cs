@@ -309,6 +309,19 @@ public class Util {
           description = "Here you can bug-research new bug-technologies to make bugs bug-stronger! Bug."
         }
       },
+
+      {
+        BuildingType.House,
+        new BuildingStats() {
+          buildTime = 1f,
+          health = 10,
+          twigCost = 25,
+          meatCost = 0,
+          name = "House",
+          resourcePath = "res://scenes/buildings/supply.tscn",
+          description = "Provides 4 housing for your bugs."
+        }
+      },
     };
     }
   }
@@ -380,7 +393,7 @@ public class Util {
 
   public static List<Wave> Waves = new List<Wave> {
     new Wave {
-      TimeTillWave = 10,
+      TimeTillWave = 5,
       Monsters = new Dictionary<MonsterType, int> {
         [MonsterType.NormalMonster] = 3
       }

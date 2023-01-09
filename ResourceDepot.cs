@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 using System;
-public partial class ResourceDepot : Node2D, IBuilding, ISelectable {
+public partial class ResourceDepot : Node2D, IBuilding, ISelectable, IDamageable {
   public Dictionary<string, Action> actions {
     get {
       var result = new Dictionary<string, Action>();
@@ -74,7 +74,20 @@ public partial class ResourceDepot : Node2D, IBuilding, ISelectable {
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;
 
+  public int health { get; set; }
+  public int maxHealth { get; set; }
+  public ProgressBar healthBar => GetNode<ProgressBar>("HealthBar");
+  public Node2D node => this;
+
   public override void _Ready() {
+    var stats = Util.BuildingStats[
+      BuildingType.ResourceDepot
+    ];
+
+    SelectionCircle.Unit = this;
+
+    health = stats.health;
+    maxHealth = stats.health;
     SelectionCircle.Unit = this;
   }
 

@@ -53,6 +53,10 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
     ["Upgrade Facility"] = (delegate () {
       Actions.selectBuilding(BuildingType.UpgradeFacility);
     }),
+
+    ["House"] = (delegate () {
+      Actions.selectBuilding(BuildingType.House);
+    }),
   };
 
   public ConstructionSite ConstructionSite = null;

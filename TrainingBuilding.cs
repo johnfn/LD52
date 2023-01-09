@@ -16,7 +16,7 @@ public enum BuildingStatus {
 }
 
 // This is currently either TrainingBuilding or BugBarracks
-public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollider, IDamageable {
+public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollider, IDamageable, IProvidesSupply {
   public ErrorPopup errorPopup => GetTree().Root.GetNode<ErrorPopup>("Root/Static/UIRoot/error_panel");
 
   [Export]
@@ -55,9 +55,9 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
   public string selectionText {
     get {
       if (!IsBugBarracks) {
-        return "Town Hall info goes here";
+        return "This is a Town Hall, where you can train ants to build and harvest. This building provides 8 supply.";
       } else {
-        return "Boring bug barracks blorg";
+        return "This is a Bug Barracks.";
       }
     }
   }
@@ -93,6 +93,16 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
   public int maxHealth { get; set; }
 
   public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
+
+  public int Supply {
+    get {
+      if (IsBugBarracks) {
+        return 0;
+      } else {
+        return 6;
+      }
+    }
+  }
 
   public void OnHoverStart() {
     // Modulate = new Color(1, 1, 1, 0.5f);

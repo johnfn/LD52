@@ -11,7 +11,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
 
-[node name="ResourceDepot" type="Node2D"]
+[node name="ResourceDepot" type="Node2D" groups=["building", "resource_dropoff"]]
 script = ExtResource("2_sfpc8")
 
 [node name="SelectionCircle" parent="." instance=ExtResource("2_7tulf")]
@@ -24,7 +24,7 @@ position = Vector2(16, 15)
 scale = Vector2(1.02992, 0.717416)
 texture = ExtResource("3_1jx5e")
 
-[node name="Graphics" type="Sprite2D" parent="." groups=["building", "resource_dropoff"]]
+[node name="Graphics" type="Sprite2D" parent="."]
 position = Vector2(15, -99)
 scale = Vector2(0.811257, 0.811257)
 texture = ExtResource("2_pdj1l")

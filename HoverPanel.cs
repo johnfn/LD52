@@ -43,6 +43,9 @@ public partial class HoverPanel : Panel {
       } else if (name == "Upgrade Facility") {
         type = BuildingType.UpgradeFacility;
         GetNode<Node2D>("Graphics/BuildingUpgradeFacility").Visible = true;
+      } else if (name == "House") {
+        type = BuildingType.House;
+        GetNode<Node2D>("Graphics/BuildingUpgradeFacility").Visible = true;
       }
 
       var stats = Util.BuildingStats[type];
