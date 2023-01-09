@@ -135,7 +135,7 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
 
         newUnit.Position = Util.FindSafeSpaceNear(GetTree(), GlobalPosition, true);
 
-        GetParent().AddChild(newUnit);
+        Util.Add(GetTree(), newUnit);
 
         currentBuildingUnitType = UnitType.None;
       }
