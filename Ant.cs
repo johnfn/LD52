@@ -47,7 +47,7 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
     }),
 
     ["Barracks"] = (delegate () {
-      Actions.selectBuilding(BuildingType.Barrachnid);
+      Actions.selectBuilding(BuildingType.Barracks);
     }),
 
     ["Guard Tower"] = (delegate () {

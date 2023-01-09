@@ -10,7 +10,7 @@ public enum ResourceType {
 public enum BuildingType {
   TownHall,
   ResourceDepot,
-  Barrachnid,
+  Barracks,
   GuardTower,
   UpgradeFacility,
   House,

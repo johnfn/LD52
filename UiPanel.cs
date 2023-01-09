@@ -114,12 +114,6 @@ public partial class UiPanel : Control {
   public void _showCommandUi() {
     Visible = true;
 
-    // if (Globals.selectedUnit is IUnit u) {
-    //   unitPanelVisible = true;
-    //   selectionNameLabel.Text = "Selected Unit: " + u.unitName;
-    //   Globals.selectedUnitName = u.unitName;
-    // }
-
     if (Globals.selectedUnit is ISelectable s) {
       foreach (var child in genericPanel.GetChildren()) {
         genericPanel.RemoveChild(child);
@@ -141,7 +135,7 @@ public partial class UiPanel : Control {
         label.Connect("mouse_entered", Godot.Callable.From(() => {
           if (Globals.gameMode == GameMode.Command) {
             hoverPanel.Visible = true;
-            hoverPanel.GlobalPosition = GetGlobalMousePosition() + new Vector2(0, -400);
+            hoverPanel.GlobalPosition = GetGlobalMousePosition() + new Vector2(0, -500);
             hoverPanel.Initialize(item.Key);
           }
         }));

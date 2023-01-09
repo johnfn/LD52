@@ -20,9 +20,8 @@ public partial class NextWavePanel : Panel {
   public ColorRect Progress => GetNode<ColorRect>("Progress");
   public List<IDamageable> Monsters = new List<IDamageable>();
   public Panel NextLevelTutorial => GetNode<Panel>("NextLevelTutorial");
-
   public int CurrentWave = Util.DEBUG ? 0 : -1;
-
+  public bool HasBuiltBarracksWave2 = false;
 
   public override void _Ready() {
     base._Ready();
@@ -57,8 +56,37 @@ public partial class NextWavePanel : Panel {
 
   private int _prevMonsterCount = 0;
 
+  private bool _CheckForDynamicTutorial() {
+    if (CurrentWave == 1 && !HasBuiltBarracksWave2) {
+      var buildings = GetTree().GetNodesInGroup(GroupNames.Building);
+      var done = false;
+
+      foreach (var b in buildings) {
+        if (b is TrainingBuilding bb) {
+          if (bb.IsBugBarracks && Globals.gameMode == GameMode.Command) {
+            done = true;
+          }
+        }
+      }
+
+      if (done) {
+        HasBuiltBarracksWave2 = true;
+        NextLevelTutorial.Visible = true;
+        NextLevelTutorial.GetNode<Label>("TutorialText").Text = "Excellent! Now, click on the barracks and train a beetle.";
+
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   public override void _Process(double delta) {
     if (NextLevelTutorial.Visible) {
+      return;
+    }
+
+    if (_CheckForDynamicTutorial()) {
       return;
     }
 

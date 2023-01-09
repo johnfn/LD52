@@ -34,7 +34,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable, IDealsDamag
   public string selectionText {
     get {
       if (unitType == UnitType.Beetle) {
-        return "This is a BEETLE!";
+        return "This is a beetle, a melee bug fighter.";
       }
 
       if (unitType == UnitType.Scout) {
@@ -42,7 +42,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable, IDealsDamag
       }
 
       if (unitType == UnitType.Spit) {
-        return "This is a SPIT!";
+        return "This is a spit bug, a long range fighter!";
       }
 
       return "Screw YOU!";

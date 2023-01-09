@@ -30,12 +30,6 @@ script = ExtResource("1_38of0")
 [node name="Beetle" parent="." instance=ExtResource("2_xup5x")]
 position = Vector2(1208, 702)
 
-[node name="Beetle2" parent="." instance=ExtResource("2_xup5x")]
-position = Vector2(1388, 633)
-
-[node name="Beetle3" parent="." instance=ExtResource("2_xup5x")]
-position = Vector2(1390, 836)
-
 [node name="Map" type="Node2D" parent="."]
 y_sort_enabled = true
 script = ExtResource("1_6y1nh")
@@ -85,6 +79,12 @@ position = Vector2(1426, 343)
 
 [node name="Ant" parent="." instance=ExtResource("3_0h73t")]
 position = Vector2(951, 741)
+
+[node name="Ant2" parent="." instance=ExtResource("3_0h73t")]
+position = Vector2(1112, 874)
+
+[node name="Ant3" parent="." instance=ExtResource("3_0h73t")]
+position = Vector2(863, 973)
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(890, 606)

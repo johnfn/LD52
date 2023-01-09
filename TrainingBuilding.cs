@@ -119,7 +119,7 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
 
   public override void _Ready() {
     var stats = Util.BuildingStats[
-      IsBugBarracks ? BuildingType.Barrachnid : BuildingType.TownHall
+      IsBugBarracks ? BuildingType.Barracks : BuildingType.TownHall
     ];
 
     health = stats.health;

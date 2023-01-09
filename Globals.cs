@@ -14,8 +14,8 @@ public class Globals {
   public static ISelectable hoveredUnit = null;
   public static GameMode gameMode = GameMode.Command;
 
-  public static int MatchstickCount { get; set; } = Util.DEBUG ? 500 : 0;
-  public static int GummyCount { get; set; } = 0;
+  public static int MatchstickCount { get; set; } = Util.DEBUG ? 25 : 25;
+  public static int GummyCount { get; set; } = 20;
 
   public static int TwigHarvestRate = 1;
   public static int MeatHarvestRate = 1;

@@ -22,7 +22,7 @@ public partial class ConstructionSite : Node2D, ISelectable {
         return "";
       }
 
-      return "A construction site." + (BuildingState.BuildProgress / BuildingState.BuildTime).ToString(
+      return "A construction site." + (100f * BuildingState.BuildProgress / BuildingState.BuildTime).ToString(
         "0"
       ) + "% done.";
     }

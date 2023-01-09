@@ -251,7 +251,7 @@ public class Util {
         new BuildingStats() {
           buildTime = 5f,
           health = 10,
-          twigCost = 0,
+          twigCost = 100,
           meatCost = 0,
           name = "Town Hall",
           resourcePath = "res://scenes/buildings/town_hall.tscn",
@@ -264,7 +264,7 @@ public class Util {
         new BuildingStats() {
           buildTime = 5f,
           health = 10,
-          twigCost = 20,
+          twigCost = 15,
           meatCost = 0,
           name = "Resource Depot",
           resourcePath = "res://scenes/buildings/resource_depot.tscn",
@@ -273,11 +273,11 @@ public class Util {
       },
 
       {
-        BuildingType.Barrachnid,
+        BuildingType.Barracks,
         new BuildingStats() {
           buildTime = 5f,
           health = 10,
-          twigCost = 20,
+          twigCost = 25,
           meatCost = 0,
           resourcePath = "res://scenes/buildings/bug_barracks.tscn",
           description = "Train bug warriors to fight bug battles!"
@@ -289,7 +289,7 @@ public class Util {
         new BuildingStats() {
           buildTime = 1f,
           health = 10,
-          twigCost = 40,
+          twigCost = 20,
           meatCost = 0,
           name = "Guard Tower",
           resourcePath = "res://scenes/buildings/guard_tower.tscn",
@@ -302,7 +302,7 @@ public class Util {
         new BuildingStats() {
           buildTime = 1f,
           health = 10,
-          twigCost = 40,
+          twigCost = 35,
           meatCost = 0,
           name = "Upgrade Facility",
           resourcePath = "res://scenes/buildings/guard_tower.tscn",
@@ -315,7 +315,7 @@ public class Util {
         new BuildingStats() {
           buildTime = 1f,
           health = 10,
-          twigCost = 25,
+          twigCost = 20,
           meatCost = 0,
           name = "House",
           resourcePath = "res://scenes/buildings/supply.tscn",
@@ -334,8 +334,8 @@ public class Util {
           name = "Ant",
           speed = 300,
           health = 10,
-          twigCost = 50,
-          meatCost = 0,
+          twigCost = 0,
+          meatCost = 5,
           attackCooldown = 100,
           ranged = false,
           damage = 1,
@@ -349,8 +349,8 @@ public class Util {
             buildTime = 5f,
             speed = 300,
             health = 10,
-            twigCost = 20,
-            meatCost = 0,
+            twigCost = 0,
+            meatCost = 10,
             ranged = false,
             attackCooldown = 100,
             damage = 3,
@@ -380,7 +380,7 @@ public class Util {
             speed = 400,
             health = 10,
             twigCost = 20,
-            meatCost = 0,
+            meatCost = 20,
             ranged = true,
             attackCooldown = 200,
             damage = 3,
@@ -397,7 +397,7 @@ public class Util {
       Monsters = new Dictionary<MonsterType, int> {
         [MonsterType.NormalMonster] = 1
       },
-      Tutorial = "It was just an average day in BugTopia, when suddenly, a bunch of evil bugs started to attack!\n\n\nFend them off by clicking on your beetles, then right clicking the bad bugs to attack them.",
+      Tutorial = "It was just an average day in BugTopia, when suddenly, a bunch of evil bugs started to attack!\n\n\nFend them off by clicking on your beetle, then right clicking the bad bug to attack it.",
     },
 
     new Wave {
@@ -405,15 +405,15 @@ public class Util {
       Monsters = new Dictionary<MonsterType, int> {
         [MonsterType.NormalMonster] = 1
       },
-      Tutorial = "Well done! But there are more bugs coming! Let's improve our defenses.\n\nClick on an ant, and then order it to build a Barracks.",
+      Tutorial = "Well done! But there are more bugs coming, and a single beetle might not be enough.\n\nClick on an ant, and then order it to build a Barracks.",
     },
 
     new Wave {
-      TimeTillWave = 10,
+      TimeTillWave = 40,
       Monsters = new Dictionary<MonsterType, int> {
-        [MonsterType.NormalMonster] = 8
+        [MonsterType.NormalMonster] = 3
       },
-      Tutorial = "Fiddle dee dee",
+      Tutorial = "Great! But your resources (see the top left) are dwindling. We'll need matchsticks and gummies to train a bug army - order your ants to harvest them by right clicking on them.",
     },
   };
 
