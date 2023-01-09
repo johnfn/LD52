@@ -155,11 +155,21 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
 
     if (stats.twigCost > Globals.MatchstickCount) {
       errorPopup.ShowError("Not enough matchsticks.");
+
       return;
     }
 
     if (stats.meatCost > Globals.GummyCount) {
       errorPopup.ShowError("Not enough gummies.");
+
+      return;
+    }
+
+    var (usedSupply, totalSupply) = ResourcePanel.CalculateSupply(GetTree());
+
+    if (usedSupply >= totalSupply) {
+      errorPopup.ShowError("Build more houses!");
+
       return;
     }
 

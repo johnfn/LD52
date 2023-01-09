@@ -10,14 +10,9 @@ public partial class ResourcePanel : VBoxContainer {
     meatLabel = GetNode<Label>("MeatContainer/MeatLabel");
   }
 
-  public override void _Process(double delta) {
-    twigLabel.Text = Globals.MatchstickCount.ToString();
-    meatLabel.Text = Globals.GummyCount.ToString();
-
-    // calculate supply 
-
-    var allBuildings = GetTree().GetNodesInGroup(GroupNames.Building);
-    var usedSupply = 0;
+  public static (int usedSupply, int totalSupply) CalculateSupply(SceneTree tree) {
+    var allBuildings = tree.GetNodesInGroup(GroupNames.Building);
+    var usedSupply = tree.GetNodesInGroup(GroupNames.GoodUnit).Count;
     var totalSupply = 0;
 
     foreach (Node2D building in allBuildings) {
@@ -25,6 +20,17 @@ public partial class ResourcePanel : VBoxContainer {
         totalSupply += s.Supply;
       }
     }
+
+    return (usedSupply, totalSupply);
+  }
+
+  public override void _Process(double delta) {
+    twigLabel.Text = Globals.MatchstickCount.ToString();
+    meatLabel.Text = Globals.GummyCount.ToString();
+
+    // calculate supply 
+
+    var (usedSupply, totalSupply) = CalculateSupply(GetTree());
 
     supplyLabel.Text = $"{usedSupply} / {totalSupply}";
   }
