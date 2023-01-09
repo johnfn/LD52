@@ -58,11 +58,11 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
   public int priority { get; set; } = 0;
 
   public void OnHoverStart() {
-    Modulate = new Color(1, 1, 1, 0.5f);
+    // Modulate = new Color(1, 1, 1, 0.5f);
   }
 
   public void OnHoverEnd() {
-    Modulate = new Color(1, 1, 1, 1f);
+    // Modulate = new Color(1, 1, 1, 1f);
   }
 
   public string selectionText {
