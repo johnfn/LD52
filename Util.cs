@@ -334,6 +334,29 @@ public class Util {
     }
   }
 
+  public static List<Wave> Waves = new List<Wave> {
+    new Wave {
+      TimeTillWave = 10,
+      Monsters = new Dictionary<MonsterType, int> {
+        [MonsterType.NormalMonster] = 3
+      }
+    },
+
+    new Wave {
+      TimeTillWave = 10,
+      Monsters = new Dictionary<MonsterType, int> {
+        [MonsterType.NormalMonster] = 5
+      }
+    },
+
+    new Wave {
+      TimeTillWave = 10,
+      Monsters = new Dictionary<MonsterType, int> {
+        [MonsterType.NormalMonster] = 8
+      }
+    },
+  };
+
   public static void FlashNodeWhite(Node2D node) {
     node.GetNode<Node2D>("Graphics").Modulate = new Color(3f, 3f, 3f, 1f);
 

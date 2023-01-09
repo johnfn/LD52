@@ -1,34 +1,77 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
+
+public enum MonsterType {
+  NormalMonster,
+}
+
+public class Wave {
+  public int TimeTillWave = 5;
+  public Dictionary<MonsterType, int> Monsters = new Dictionary<MonsterType, int>();
+}
 
 public partial class NextWavePanel : Panel {
   public Label TimeLeftLabel => GetNode<Label>("Label");
-  public float TimeTillNextWave = 5;
-  public float InitialTimeTillNextWave = 5;
+  public float TimeTillNextWave;
+  public float InitialTimeTillNextWave;
   public ColorRect Progress => GetNode<ColorRect>("Progress");
+  public List<IDamageable> Monsters = new List<IDamageable>();
+
+  public int CurrentWave = -1;
 
   public override void _Ready() {
+    base._Ready();
+
+    _advanceWave();
   }
 
+  private void _advanceWave() {
+    ++CurrentWave;
+
+    var wave = Util.Waves[CurrentWave];
+
+    TimeTillNextWave = wave.TimeTillWave;
+    InitialTimeTillNextWave = wave.TimeTillWave;
+    Monsters.Clear();
+  }
+
+  private int _prevMonsterCount = 0;
+
   public override void _Process(double delta) {
-    Progress.Scale = new Vector2(
-      1 - (TimeTillNextWave / InitialTimeTillNextWave),
-      1
-    );
+    var aliveMonsters = Monsters.Where(m => IsInstanceValid(m.node)).Count();
+    var monsterDiedThisTick = aliveMonsters != _prevMonsterCount;
 
-    if (TimeTillNextWave < 0) {
-      // Already started next wave
-      return;
+    _prevMonsterCount = aliveMonsters;
+
+    if (aliveMonsters == 0) {
+      if (monsterDiedThisTick) {
+        // wave just completed.
+        _advanceWave();
+      }
+
+      Progress.Scale = new Vector2(
+        1 - (TimeTillNextWave / InitialTimeTillNextWave),
+        1
+      );
+
+      if (TimeTillNextWave < 0) {
+        // Already started next wave
+        return;
+      }
+
+      TimeTillNextWave -= (float)delta;
+
+      if (TimeTillNextWave < 0) {
+        _startNextWave();
+        TimeLeftLabel.Text = "Next wave started!";
+      } else {
+        TimeLeftLabel.Text = $"Next wave in {TimeTillNextWave.ToString("0.0")}s";
+      }
     }
 
-    TimeTillNextWave -= (float)delta;
 
-    if (TimeTillNextWave < 0) {
-      _startNextWave();
-      TimeLeftLabel.Text = "Next wave started!";
-    } else {
-      TimeLeftLabel.Text = $"Next wave in {TimeTillNextWave.ToString("0.0")}s";
-    }
   }
 
   private Vector2 _getPointInDarkness(
@@ -80,13 +123,16 @@ public partial class NextWavePanel : Panel {
 
   private void _startNextWave() {
     var allColliders = GetTree().GetNodesInGroup(GroupNames.Collider);
+    var wave = Util.Waves[CurrentWave];
 
-    for (var i = 0; i < 15; i++) {
-      var enemy = GD.Load<PackedScene>("res://scenes/enemy.tscn").Instantiate<Enemy>();
+    for (var i = 0; i < wave.Monsters[MonsterType.NormalMonster]; i++) {
+      var monster = GD.Load<PackedScene>("res://scenes/enemy.tscn").Instantiate<Enemy>();
 
-      GetTree().Root.AddChild(enemy);
+      GetTree().Root.AddChild(monster);
 
-      enemy.GlobalPosition = _getPointInDarkness(allColliders);
+      monster.GlobalPosition = _getPointInDarkness(allColliders);
+
+      Monsters.Add(monster);
     }
   }
 }
