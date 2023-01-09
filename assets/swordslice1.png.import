@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://de1bcomr4nryv"
-path="res://.godot/imported/enemy_hand.png-39647348f6966f9f316ec507223997c8.ctex"
+uid="uid://3wjkjmipqnio"
+path="res://.godot/imported/swordslice1.png-171fe045f655e49481525887feb84e3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemy_hand.png"
-dest_files=["res://.godot/imported/enemy_hand.png-39647348f6966f9f316ec507223997c8.ctex"]
+source_file="res://assets/swordslice1.png"
+dest_files=["res://.godot/imported/swordslice1.png-171fe045f655e49481525887feb84e3d.ctex"]
 
 [params]
 
