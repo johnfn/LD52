@@ -99,5 +99,23 @@ public partial class HoverPanel : Panel {
 
       return;
     }
+
+    foreach (var upgrade in Upgrades.AllUpgrades) {
+      if (
+        upgrade.Value.name == name
+      ) {
+        TitleLabel.Text = upgrade.Value.name;
+        DescriptionLabel.Text = upgrade.Value.description;
+        ToothpickCost.Text = upgrade.Value.matchstickCost.ToString();
+        GummyCost.Text = upgrade.Value.gummyCost.ToString();
+
+        HeartIcon.Visible = false;
+        Health.Visible = false;
+        AttackIcon.Visible = false;
+        Damage.Visible = false;
+
+        return;
+      }
+    }
   }
 }

@@ -212,8 +212,6 @@ public partial class UiPanel : Control {
 
       bottomDamageLabel.Text = dd.Strength.ToString();
 
-      GD.Print("StrLev" + Upgrades.BugStrengthLevel);
-
       if (Upgrades.BugStrengthLevel == 0) {
         bottomDamageLabel.Text = dd.Strength.ToString();
       } else {
