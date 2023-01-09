@@ -325,7 +325,7 @@ public class Util {
             twigCost = 20,
             meatCost = 0,
             ranged = true,
-            attackCooldown = 50,
+            attackCooldown = 200,
             damage = 3,
             resourcePath = "res://scenes/units/spitbug.tscn",
             description = "Spit bugs are your long range militia!"
