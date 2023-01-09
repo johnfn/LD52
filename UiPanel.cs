@@ -128,7 +128,7 @@ public partial class UiPanel : Control {
       foreach (var item in Globals.selectedUnit.actions) {
         var label = new Button();
 
-        label.AddThemeFontSizeOverride("font_size", 30);
+        label.AddThemeFontSizeOverride("font_size", 24);
 
         label.Text = item.Key;
         genericPanel.AddChild(label);

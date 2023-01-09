@@ -21,7 +21,7 @@ public partial class NextWavePanel : Panel {
   public List<IDamageable> Monsters = new List<IDamageable>();
   public Panel NextLevelTutorial => GetNode<Panel>("NextLevelTutorial");
 
-  public int CurrentWave = -1;
+  public int CurrentWave = Util.DEBUG ? 0 : -1;
 
 
   public override void _Ready() {

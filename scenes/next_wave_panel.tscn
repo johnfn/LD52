@@ -10,13 +10,11 @@ offset_bottom = 84.0
 script = ExtResource("1_rjm6s")
 
 [node name="Progress" type="ColorRect" parent="."]
-layout_mode = 0
 offset_right = 1749.0
 offset_bottom = 74.0
 color = Color(0.0627451, 0.0509804, 0.0901961, 1)
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
 offset_left = 680.0
 offset_top = 16.0
 offset_right = 1094.0
@@ -25,14 +23,12 @@ theme_override_font_sizes/font_size = 30
 text = "Time Until Next Wave: 1:00"
 
 [node name="NextLevelTutorial" type="Panel" parent="."]
-layout_mode = 0
 offset_left = 323.0
 offset_top = -825.0
 offset_right = 1372.0
 offset_bottom = -101.0
 
 [node name="Button" type="Button" parent="NextLevelTutorial"]
-layout_mode = 0
 offset_left = 288.0
 offset_top = 482.0
 offset_right = 786.0
@@ -41,7 +37,6 @@ theme_override_font_sizes/font_size = 80
 text = "Got it!"
 
 [node name="TutorialText" type="Label" parent="NextLevelTutorial"]
-layout_mode = 0
 offset_left = 40.0
 offset_top = 41.0
 offset_right = 985.0

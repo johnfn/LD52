@@ -16,17 +16,25 @@ public partial class ConstructionSite : Node2D, ISelectable {
   public int priority { get; set; } = 0;
   public string name { get; set; } = "Construction Site";
 
-  public string selectionText => "A construction site." + System.Environment.NewLine + "Build time: " + BuildingState.BuildTime + System.Environment.NewLine + "Build progress: " + BuildingState.BuildProgress;
+  public string selectionText {
+    get {
+      if (BuildingState == null) {
+        return "";
+      }
+
+      return "A construction site." + (BuildingState.BuildProgress / BuildingState.BuildTime).ToString(
+        "0"
+      ) + "% done.";
+    }
+  }
 
   public BuildingState BuildingState = null;
   public ProgressBar ProgressBar => GetNode<ProgressBar>("ProgressBar");
 
   public void OnHoverEnd() {
-    Modulate = new Color(1, 1, 1, 1f);
   }
 
   public void OnHoverStart() {
-    Modulate = new Color(1, 1, 1, 0.5f);
   }
 
   public override void _Process(double delta) {

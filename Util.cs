@@ -393,7 +393,7 @@ public class Util {
 
   public static List<Wave> Waves = new List<Wave> {
     new Wave {
-      TimeTillWave = 5,
+      TimeTillWave = 15,
       Monsters = new Dictionary<MonsterType, int> {
         [MonsterType.NormalMonster] = 1
       },
@@ -401,11 +401,11 @@ public class Util {
     },
 
     new Wave {
-      TimeTillWave = 10,
+      TimeTillWave = 30,
       Monsters = new Dictionary<MonsterType, int> {
         [MonsterType.NormalMonster] = 1
       },
-      Tutorial = "Well done! But there are more bugs coming! Click on an ant, and then order it to build a Barracks.",
+      Tutorial = "Well done! But there are more bugs coming! Let's improve our defenses.\n\nClick on an ant, and then order it to build a Barracks.",
     },
 
     new Wave {

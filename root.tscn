@@ -1,26 +1,21 @@
-[gd_scene load_steps=24 format=3 uid="uid://7wv033c6p42i"]
+[gd_scene load_steps=19 format=3 uid="uid://7wv033c6p42i"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Script" path="res://Root.cs" id="1_38of0"]
+[ext_resource type="PackedScene" uid="uid://c5jobfql2jwj0" path="res://scenes/units/beetle.tscn" id="2_xup5x"]
 [ext_resource type="PackedScene" uid="uid://dr36wj34htulv" path="res://scenes/units/ant.tscn" id="3_0h73t"]
 [ext_resource type="PackedScene" uid="uid://c53hvbe0eljly" path="res://rock.tscn" id="3_4crhu"]
 [ext_resource type="PackedScene" uid="uid://dorjg41xf3w54" path="res://scenes/buildings/town_hall.tscn" id="4_21wg8"]
 [ext_resource type="Texture2D" uid="uid://dxvo5na4nb2ff" path="res://background1.png" id="4_bw8bu"]
 [ext_resource type="Script" path="res://Camera.cs" id="4_po8t6"]
 [ext_resource type="PackedScene" uid="uid://c8l5g8frp2lkg" path="res://scenes/twig_source.tscn" id="5_b4qjw"]
-[ext_resource type="PackedScene" uid="uid://dc46ttjpit4rn" path="res://scenes/buildings/bug_barracks.tscn" id="7_5gmsh"]
 [ext_resource type="Theme" uid="uid://beulorra254b2" path="res://assets/UI/SimpleBox.tres" id="9_tyxdu"]
 [ext_resource type="PackedScene" uid="uid://drlyhbmyyfjva" path="res://scenes/buildings/ui_panel.tscn" id="9_vx6l0"]
 [ext_resource type="PackedScene" uid="uid://dwmu32upluapl" path="res://scenes/resource_panel.tscn" id="10_nmyny"]
 [ext_resource type="PackedScene" uid="uid://butb8nk3j7nsg" path="res://scenes/error_panel.tscn" id="13_71qpp"]
-[ext_resource type="Script" path="res://SelectionRect.cs" id="13_fuotw"]
 [ext_resource type="PackedScene" uid="uid://ctrb1n4wlapv6" path="res://scenes/error_pane.tscn" id="14_wu0pv"]
 [ext_resource type="PackedScene" uid="uid://daho0it3kb3dm" path="res://scenes/next_wave_panel.tscn" id="15_w5f2v"]
-[ext_resource type="PackedScene" uid="uid://bj1lyglc0f7o5" path="res://scenes/units/scout.tscn" id="17_xojm5"]
-[ext_resource type="PackedScene" uid="uid://bab7ujmjijflk" path="res://scenes/units/spitbug.tscn" id="18_ig11u"]
-[ext_resource type="PackedScene" uid="uid://2sxxdxvs8mbk" path="res://scenes/bullet.tscn" id="19_ql7ub"]
 [ext_resource type="PackedScene" uid="uid://bcgi6jhru5fdo" path="res://scenes/gummy_source.tscn" id="19_x6mja"]
-[ext_resource type="PackedScene" uid="uid://noqqsuc8xwxj" path="res://scenes/buildings/resource_depot.tscn" id="21_5gdfu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irmio"]
 size = Vector2(197, 1199.5)
@@ -31,6 +26,15 @@ size = Vector2(1801, 186.5)
 [node name="Root" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_38of0")
+
+[node name="Beetle" parent="." instance=ExtResource("2_xup5x")]
+position = Vector2(1208, 702)
+
+[node name="Beetle2" parent="." instance=ExtResource("2_xup5x")]
+position = Vector2(1388, 633)
+
+[node name="Beetle3" parent="." instance=ExtResource("2_xup5x")]
+position = Vector2(1390, 836)
 
 [node name="Map" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -73,17 +77,14 @@ position = Vector2(548, 87)
 [node name="Rock5" parent="Map" instance=ExtResource("3_4crhu")]
 position = Vector2(650, -46)
 
-[node name="TownHall" parent="Map" instance=ExtResource("4_21wg8")]
+[node name="TownHall" parent="." instance=ExtResource("4_21wg8")]
 position = Vector2(376, 791)
 
-[node name="BugBarracks" parent="Map" instance=ExtResource("7_5gmsh")]
-position = Vector2(613, 353)
-
-[node name="TwigSource" parent="Map" instance=ExtResource("5_b4qjw")]
+[node name="TwigSource" parent="." instance=ExtResource("5_b4qjw")]
 position = Vector2(1426, 343)
 
 [node name="Ant" parent="." instance=ExtResource("3_0h73t")]
-position = Vector2(1537, 809)
+position = Vector2(951, 741)
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(890, 606)
@@ -133,19 +134,22 @@ grow_vertical = 2
 theme = ExtResource("9_tyxdu")
 
 [node name="UiPanel" parent="Static/UIRoot" instance=ExtResource("9_vx6l0")]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 offset_left = -431.0
-offset_top = -510.0
+offset_top = -584.0
 offset_right = 302.0
 offset_bottom = -81.0
 grow_vertical = 0
 
 [node name="ResourcePanel" parent="Static/UIRoot" instance=ExtResource("10_nmyny")]
+layout_mode = 0
 
 [node name="error_panel" parent="Static/UIRoot" instance=ExtResource("13_71qpp")]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 0.05
@@ -155,32 +159,15 @@ grow_vertical = 1
 ErrorPaneScene = ExtResource("14_wu0pv")
 
 [node name="NextWavePanel" parent="Static/UIRoot" instance=ExtResource("15_w5f2v")]
+layout_mode = 0
 offset_left = -2.0
 offset_top = 1075.0
 offset_right = 1767.0
 offset_bottom = 1154.0
 
-[node name="SelectionRect" type="Node2D" parent="."]
-script = ExtResource("13_fuotw")
-
-[node name="Rect" type="Line2D" parent="SelectionRect"]
-points = PackedVector2Array(0, 0, 50, 2.08165e-12)
-joint_mode = 2
-
-[node name="Scout" parent="." instance=ExtResource("17_xojm5")]
-position = Vector2(882, 667)
-
-[node name="SpitBug" parent="." instance=ExtResource("18_ig11u")]
-position = Vector2(1011, 163)
-
 [node name="GummySource" parent="." instance=ExtResource("19_x6mja")]
 position = Vector2(1892, 1241)
 scale = Vector2(1.88068, 1.88068)
 
-[node name="Bullet" parent="." instance=ExtResource("19_ql7ub")]
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0.305882, 1)
-
-[node name="ResourceDepot" parent="." instance=ExtResource("21_5gdfu")]
-position = Vector2(1262, 738)
