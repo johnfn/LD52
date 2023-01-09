@@ -10,7 +10,6 @@ public partial class UiPanel : Control {
 
   VBoxContainer genericPanel;
 
-
   Control townHallPanel;
   Control resourceDepotPanel;
   Control buildPanel;
@@ -25,6 +24,7 @@ public partial class UiPanel : Control {
 
   Panel selectionInfoPanel;
   Panel selectionCommandsPanel;
+  HoverPanel hoverPanel;
 
   Label selectionNameLabel;
 
@@ -48,6 +48,8 @@ public partial class UiPanel : Control {
     builderPanel = selectionCommandsPanel.GetNode<Control>("BuilderPanel");
     barracksPanel = selectionCommandsPanel.GetNode<Control>("BarracksPanel");
 
+    hoverPanel = GetNode<HoverPanel>("HoverPanel");
+    hoverPanel.Visible = false;
 
     // NameTag
     selectionInfoPanel = GetNode<Panel>("VBoxContainer/SelectionNameTag/IconPanel");
@@ -123,9 +125,24 @@ public partial class UiPanel : Control {
 
       foreach (var item in Globals.selectedUnit.actions) {
         var label = new Button();
+
         label.Text = item.Key;
         genericPanel.AddChild(label);
         label.Connect("pressed", Godot.Callable.From(item.Value));
+
+        label.Connect("mouse_entered", Godot.Callable.From(() => {
+          hoverPanel.Visible = true;
+          hoverPanel.GlobalPosition = GetGlobalMousePosition() + new Vector2(0, -400);
+          hoverPanel.Initialize(item.Key);
+        }));
+
+        label.Connect("mouse_exited", Godot.Callable.From(() => {
+          hoverPanel.Visible = false;
+        }));
+
+        label.Connect("mouse_moved", Godot.Callable.From(() => {
+          hoverPanel.GlobalPosition = GetGlobalMousePosition() + new Vector2(0, -400);
+        }));
       }
     }
   }
@@ -208,11 +225,12 @@ public partial class UiPanel : Control {
     if (hoveredUnit is IResource ir) {
       if (Globals.selectedUnit is Ant a) {
         nextCursor = "harvest";
+      } else if (Globals.selectedUnit is IBuilding b || Globals.selectedUnit is IResource r) {
+        nextCursor = "normal";
       } else {
         nextCursor = "fail";
       }
     }
-
 
     if (hoveredUnit is Enemy e) {
       nextCursor = "attack";

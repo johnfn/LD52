@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 using System;
-public partial class ResourceDepot : Sprite2D, IBuilding, ISelectable {
+public partial class ResourceDepot : Node2D, IBuilding, ISelectable {
 
   public Dictionary<string, Action> actions { get; set; } = new Dictionary<string, Action>();
 

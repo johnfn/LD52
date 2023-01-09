@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_ivv0c"]
 [ext_resource type="Texture2D" uid="uid://c177uwhg2g3ev" path="res://assets/building_barracks.png" id="3_ugue1"]
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="4_iiyuk"]
-[ext_resource type="PackedScene" uid="uid://dvxv7570gmnd2" path="res://progress_bar.tscn" id="5_u8xlh"]
+[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="5_u8xlh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xkp2o"]
-radius = 196.041
+radius = 114.0
 
 [node name="BugBarracks" type="Node2D" groups=["building"]]
 script = ExtResource("2_11bal")
@@ -34,7 +34,8 @@ collision_layer = 3
 script = ExtResource("3_ivv0c")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Area"]
-position = Vector2(0, -102)
+position = Vector2(6, 36)
+scale = Vector2(1.80645, 0.913361)
 shape = SubResource("CircleShape2D_xkp2o")
 
 [node name="HealthBar" parent="." instance=ExtResource("5_u8xlh")]

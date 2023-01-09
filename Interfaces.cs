@@ -16,6 +16,7 @@ public enum BuildingType {
 
 public struct BuildingStats {
   public float buildTime;
+  public string name;
   public int health;
   public int twigCost;
   public int meatCost;
@@ -30,6 +31,7 @@ public struct UnitStats {
   public int meatCost;
   public string resourcePath;
   public string description;
+  public string name;
   public int attackCooldown;
   public int damage;
 }

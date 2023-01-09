@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3 uid="uid://k3xxpip0ksw5"]
+
+[ext_resource type="Script" path="res://HoverPanel.cs" id="1_8bd57"]
+[ext_resource type="Texture2D" uid="uid://b4u4y67ci6ho8" path="res://assets/resource_single_gummy.png" id="1_ufkl0"]
+[ext_resource type="Texture2D" uid="uid://bnaw6fgmhr87" path="res://assets/resource_single_match.png" id="2_mjwa5"]
+[ext_resource type="Texture2D" uid="uid://cgsu01p0du0h8" path="res://assets/whitecircle.png" id="3_b1aod"]
+[ext_resource type="Texture2D" uid="uid://bdva8w3a28v4j" path="res://assets/building_townhall.png" id="4_aupsc"]
+[ext_resource type="Texture2D" uid="uid://d0vusutoy8w1" path="res://assets/ant_body.png" id="5_i5q3u"]
+[ext_resource type="Texture2D" uid="uid://y846dubsgoaw" path="res://assets/building_depot.png" id="6_m5tnw"]
+[ext_resource type="Texture2D" uid="uid://b2fd8mfkqsi1a" path="res://assets/warrior.png" id="8_8e00f"]
+[ext_resource type="Texture2D" uid="uid://d1x17llgf2svh" path="res://assets/healer_body.png" id="9_7jmhi"]
+
+[node name="HoverPanel" type="Panel"]
+offset_left = 320.0
+offset_top = -625.0
+offset_right = 756.0
+offset_bottom = -263.0
+script = ExtResource("1_8bd57")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 310.0
+offset_right = 436.0
+offset_bottom = 362.0
+color = Color(0.356863, 0.309804, 0.572549, 1)
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 425.0
+offset_bottom = 57.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 48
+text = "ItemName"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 213.0
+offset_top = 101.0
+offset_right = 423.0
+offset_bottom = 320.0
+text = "The herp is the derp of derp herp a derpity do twiddle dee wheeee hehehaohdsfkajd shfkjhdsf skdj fskdjf sdkjf sdkjf"
+autowrap_mode = 2
+
+[node name="ToothpickCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 320.0
+offset_right = 97.0
+offset_bottom = 359.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+text = "10"
+
+[node name="GummyCost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 383.0
+offset_top = 316.0
+offset_right = 423.0
+offset_bottom = 355.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+text = "10"
+
+[node name="ResourceSingleGummy" type="Sprite2D" parent="."]
+modulate = Color(0.341176, 1, 0.341176, 1)
+position = Vector2(352, 334)
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("1_ufkl0")
+
+[node name="ResourceSingleMatch" type="Sprite2D" parent="."]
+position = Vector2(32, 337)
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("2_mjwa5")
+
+[node name="Whitecircle" type="Sprite2D" parent="."]
+modulate = Color(0.0784314, 0.0980392, 0.25098, 1)
+position = Vector2(104, 190)
+scale = Vector2(0.386, 0.388)
+texture = ExtResource("3_b1aod")
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="UnitAnt" type="Sprite2D" parent="Graphics"]
+position = Vector2(99, 191)
+scale = Vector2(0.476661, 0.476661)
+texture = ExtResource("5_i5q3u")
+
+[node name="UnitWarrior" type="Sprite2D" parent="Graphics"]
+position = Vector2(93, 184)
+scale = Vector2(0.363973, 0.363973)
+texture = ExtResource("8_8e00f")
+
+[node name="UnitHealer" type="Sprite2D" parent="Graphics"]
+position = Vector2(103, 195)
+scale = Vector2(0.363222, 0.363222)
+texture = ExtResource("9_7jmhi")
+
+[node name="BuildingTownhall" type="Sprite2D" parent="Graphics"]
+position = Vector2(102, 185)
+scale = Vector2(0.357002, 0.357002)
+texture = ExtResource("4_aupsc")
+
+[node name="BuildingDepot" type="Sprite2D" parent="Graphics"]
+position = Vector2(113, 177)
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("6_m5tnw")

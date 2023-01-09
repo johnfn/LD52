@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://br4e4t6sgengi" path="res://assets/shadow.png" id="3_oe5ya"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_othbg"]
 [ext_resource type="Texture2D" uid="uid://bdva8w3a28v4j" path="res://assets/building_townhall.png" id="4_o27sx"]
-[ext_resource type="PackedScene" uid="uid://dvxv7570gmnd2" path="res://progress_bar.tscn" id="5_30u3w"]
+[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="5_30u3w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_65rd0"]
-radius = 196.064
+radius = 121.004
 
 [node name="TownHall" type="Node2D" groups=["building", "resource_dropoff"]]
 position = Vector2(0, 1)
@@ -20,6 +20,7 @@ collision_layer = 3
 script = ExtResource("3_othbg")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Area"]
+position = Vector2(10, 90)
 shape = SubResource("CircleShape2D_65rd0")
 
 [node name="Shadow" type="Sprite2D" parent="."]

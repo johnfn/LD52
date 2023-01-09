@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://drlyhbmyyfjva"]
+[gd_scene load_steps=5 format=3 uid="uid://drlyhbmyyfjva"]
 
 [ext_resource type="Theme" uid="uid://beulorra254b2" path="res://assets/UI/SimpleBox.tres" id="1_1p6nn"]
 [ext_resource type="Script" path="res://UiPanel.cs" id="1_ir2a3"]
+[ext_resource type="PackedScene" uid="uid://k3xxpip0ksw5" path="res://scenes/hover_panel.tscn" id="3_bwhb0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs4lf"]
 
@@ -227,3 +228,5 @@ theme = ExtResource("1_1p6nn")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_rs4lf")
 text = "Buy Grasshopper (5 Meat)"
+
+[node name="HoverPanel" parent="." instance=ExtResource("3_bwhb0")]

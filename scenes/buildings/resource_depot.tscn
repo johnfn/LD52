@@ -1,19 +1,23 @@
 [gd_scene load_steps=6 format=3 uid="uid://noqqsuc8xwxj"]
 
-[ext_resource type="Texture2D" uid="uid://bo18vk1fxgqtu" path="res://assets/resource_deposit.png" id="1_i6fab"]
+[ext_resource type="Texture2D" uid="uid://y846dubsgoaw" path="res://assets/building_depot.png" id="2_pdj1l"]
 [ext_resource type="Script" path="res://ResourceDepot.cs" id="2_sfpc8"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_5ndly"]
-[ext_resource type="PackedScene" uid="uid://dvxv7570gmnd2" path="res://progress_bar.tscn" id="4_3gypa"]
+[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="4_3gypa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8im"]
 size = Vector2(204, 169)
 
-[node name="ResourceDepot" type="Sprite2D" groups=["building", "resource_dropoff"]]
-position = Vector2(92, 96)
-texture = ExtResource("1_i6fab")
+[node name="ResourceDepot" type="Node2D"]
 script = ExtResource("2_sfpc8")
 
+[node name="ResourceDepot" type="Sprite2D" parent="." groups=["building", "resource_dropoff"]]
+position = Vector2(-1.5, -41.5)
+scale = Vector2(0.53, 0.53)
+texture = ExtResource("2_pdj1l")
+
 [node name="Area" type="Area2D" parent="." groups=["collider"]]
+position = Vector2(2.5, 5.5)
 collision_layer = 3
 script = ExtResource("3_5ndly")
 
@@ -23,4 +27,4 @@ shape = SubResource("RectangleShape2D_kl8im")
 
 [node name="HealthBar" parent="." instance=ExtResource("4_3gypa")]
 modulate = Color(0, 1, 0.12549, 1)
-position = Vector2(-71, -97)
+position = Vector2(-2, -155)

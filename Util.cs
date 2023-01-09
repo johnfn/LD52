@@ -235,6 +235,7 @@ public class Util {
           health = 10,
           twigCost = 0,
           meatCost = 0,
+          name = "Town Hall",
           resourcePath = "res://scenes/buildings/town_hall.tscn",
           description = "The town hall is the center of your town. It is where you can build new buildings and recruit new villagers."
         }
@@ -247,6 +248,7 @@ public class Util {
           health = 10,
           twigCost = 20,
           meatCost = 0,
+          name = "Resource Depot",
           resourcePath = "res://scenes/buildings/resource_depot.tscn",
           description = "Your ants can drop off resources at a resource depot."
         }
@@ -272,17 +274,19 @@ public class Util {
       return new Dictionary<UnitType, UnitStats>() {
         [UnitType.Ant] = new UnitStats() {
           buildTime = 5f,
+          name = "Ant",
           health = 10,
           twigCost = 50,
           meatCost = 0,
           attackCooldown = 100,
           damage = 1,
           resourcePath = "res://scenes/units/ant.tscn",
-          description = "Ants are awesome"
+          description = "Ants harvest resources and build buildings."
         },
 
         [UnitType.Beetle] =
           new UnitStats() {
+            name = "Beetle",
             buildTime = 5f,
             health = 10,
             twigCost = 20,
@@ -290,11 +294,12 @@ public class Util {
             attackCooldown = 100,
             damage = 5,
             resourcePath = "res://scenes/units/beetle.tscn",
-            description = "Beetles are awesome"
+            description = "Beetles are strong, resilient fighters!"
           },
 
         [UnitType.Scout] =
           new UnitStats() {
+            name = "Scout",
             buildTime = 5f,
             health = 10,
             twigCost = 20,
@@ -302,11 +307,12 @@ public class Util {
             attackCooldown = 200,
             damage = 3,
             resourcePath = "res://scenes/units/scout.tscn",
-            description = "Scouts are awesome"
+            description = "Scouts are not strong fighters, but they make it up with speed and agility! Which is a synonym for speed."
           },
 
         [UnitType.Spit] =
           new UnitStats() {
+            name = "Spit Bug",
             buildTime = 5f,
             health = 10,
             twigCost = 20,
@@ -314,7 +320,7 @@ public class Util {
             attackCooldown = 50,
             damage = 5,
             resourcePath = "res://scenes/units/spitbug.tscn",
-            description = "Spit bugs are disgusting and they should all die"
+            description = "Spit bugs are your long range militia!"
           }
       };
     }
