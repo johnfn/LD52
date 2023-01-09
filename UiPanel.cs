@@ -226,6 +226,10 @@ public partial class UiPanel : Control {
     var nextCursor = "normal";
     var hoveredUnit = Globals.hoveredUnit;
 
+    if (hoveredUnit != null) {
+      nextCursor = "select";
+    }
+
     if (hoveredUnit is IResource ir) {
       if (Globals.selectedUnit is Ant a) {
         nextCursor = "harvest";
@@ -258,6 +262,10 @@ public partial class UiPanel : Control {
       } else if (nextCursor == "fail") {
         Input.SetCustomMouseCursor(
           ResourceLoader.Load("res://assets/cursors/cursor_fail.png")
+        );
+      } else if (nextCursor == "select") {
+        Input.SetCustomMouseCursor(
+          ResourceLoader.Load("res://assets/cursors/cursor_select.png")
         );
       }
     }
