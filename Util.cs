@@ -336,7 +336,7 @@ public class Util {
 
   public static List<Wave> Waves = new List<Wave> {
     new Wave {
-      TimeTillWave = 10,
+      TimeTillWave = 1,
       Monsters = new Dictionary<MonsterType, int> {
         [MonsterType.NormalMonster] = 3
       }

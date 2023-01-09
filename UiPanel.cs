@@ -22,7 +22,6 @@ public partial class UiPanel : Control {
   Button depotButton;
   Button barracksButton;
 
-  Panel selectionInfoPanel;
   Panel selectionCommandsPanel;
   HoverPanel hoverPanel;
 
@@ -52,8 +51,8 @@ public partial class UiPanel : Control {
     hoverPanel.Visible = false;
 
     // NameTag
-    selectionInfoPanel = GetNode<Panel>("VBoxContainer/SelectionNameTag/IconPanel");
-    selectionInfoPanel.ThemeTypeVariation = "RoundedPanel";
+    // selectionInfoPanel = GetNode<Panel>("VBoxContainer/SelectionNameTag/IconPanel");
+    // selectionInfoPanel.ThemeTypeVariation = "RoundedPanel";
     selectionNameLabel = GetNode<Label>("VBoxContainer/SelectionNameTag/NamePanel/Label");
 
     // Misc stuff I havent looked at yet
