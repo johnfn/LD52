@@ -43,5 +43,9 @@ shape = SubResource("CircleShape2D_xkp2o")
 modulate = Color(0, 1, 0.12549, 1)
 position = Vector2(-10, -373)
 
+[node name="ProgressBar" parent="." instance=ExtResource("5_u8xlh")]
+modulate = Color(0, 1, 0.12549, 1)
+position = Vector2(-7, -422)
+
 [node name="NormalPointLight" parent="." instance=ExtResource("7_83djl")]
 position = Vector2(16, -48)

@@ -45,3 +45,7 @@ position = Vector2(-18, -384)
 
 [node name="NormalPointLight" parent="." instance=ExtResource("7_7m1op")]
 position = Vector2(16, -48)
+
+[node name="ProgressBar" parent="." instance=ExtResource("5_30u3w")]
+modulate = Color(0, 1, 0.12549, 1)
+position = Vector2(-18, -425)

@@ -22,10 +22,15 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
   [Export]
   public bool IsBugBarracks;
   public ProgressBar healthBar => GetNode<ProgressBar>("HealthBar");
+  public ProgressBar progressBar => GetNode<ProgressBar>("ProgressBar");
 
   // ISelectable
   public Dictionary<string, Action> actions {
     get {
+      if (buildTime > 0) {
+        return new Dictionary<string, Action>() { };
+      }
+
       if (!IsBugBarracks) {
         return new Dictionary<string, Action>() {
           ["Ant"] = () => {
@@ -54,6 +59,10 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
 
   public string selectionText {
     get {
+      if (buildTime > 0) {
+        return "Training a new unit!";
+      }
+
       if (!IsBugBarracks) {
         return "This is a Town Hall, where you can train ants to build and harvest. This building provides 8 supply.";
       } else {
@@ -67,7 +76,7 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
 
   // IBuilding
   public float buildProgress { get; set; } = 0;
-  public float buildTime { get; set; } = 0.1f;
+  public float buildTime { get; set; } = 0;
   public string unitName {
     get {
       if (IsBugBarracks) {
@@ -133,6 +142,8 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
     if (status == BuildingStatus.Building) {
       buildProgress += (float)delta;
 
+      progressBar.SetProgress(buildProgress / buildTime);
+
       if (buildProgress >= buildTime) {
         status = BuildingStatus.Idle;
         buildProgress = 0;
@@ -179,7 +190,9 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
     status = BuildingStatus.Building;
 
     buildProgress = 0;
-    buildTime = 0.1f;
+    buildTime = stats.buildTime;
     currentBuildingUnitType = unit;
+
+    _uiPanel._showCommandUi();
   }
 }

@@ -330,7 +330,7 @@ public class Util {
     get {
       return new Dictionary<UnitType, UnitStats>() {
         [UnitType.Ant] = new UnitStats() {
-          buildTime = 5f,
+          buildTime = 4f,
           name = "Ant",
           speed = 300,
           health = 10,
@@ -346,7 +346,7 @@ public class Util {
         [UnitType.Beetle] =
           new UnitStats() {
             name = "Beetle",
-            buildTime = 5f,
+            buildTime = 8f,
             speed = 300,
             health = 10,
             twigCost = 0,
@@ -362,7 +362,7 @@ public class Util {
           new UnitStats() {
             name = "Scout",
             speed = 600,
-            buildTime = 5f,
+            buildTime = 6f,
             health = 10,
             twigCost = 20,
             meatCost = 0,
@@ -376,7 +376,7 @@ public class Util {
         [UnitType.Spit] =
           new UnitStats() {
             name = "Spit Bug",
-            buildTime = 5f,
+            buildTime = 10f,
             speed = 400,
             health = 10,
             twigCost = 20,
@@ -414,6 +414,14 @@ public class Util {
         [MonsterType.NormalMonster] = 3
       },
       Tutorial = "Great! But your resources (see the top left) are dwindling. We'll need matchsticks and gummies to train a bug army - order your ants to harvest them by right clicking on them.",
+    },
+
+    new Wave {
+      TimeTillWave = 20,
+      Monsters = new Dictionary<MonsterType, int> {
+        [MonsterType.NormalMonster] = 3
+      },
+      Tutorial = "Don't forget, you can move the camera with WASD, and zoom in and out with scroll wheel.",
     },
   };
 

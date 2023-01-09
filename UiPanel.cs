@@ -120,19 +120,21 @@ public partial class UiPanel : Control {
       }
 
       foreach (var item in Globals.selectedUnit.actions) {
-        var label = new Button();
+        var button = new Button();
 
-        label.AddThemeFontSizeOverride("font_size", 24);
+        button.AddThemeFontSizeOverride("font_size", 24);
 
-        label.Text = item.Key;
-        genericPanel.AddChild(label);
+        // button.Disabled = true;
 
-        label.Connect("pressed", Godot.Callable.From(() => {
+        button.Text = item.Key;
+        genericPanel.AddChild(button);
+
+        button.Connect("pressed", Godot.Callable.From(() => {
           item.Value.Invoke();
           hoverPanel.Visible = false;
         }));
 
-        label.Connect("mouse_entered", Godot.Callable.From(() => {
+        button.Connect("mouse_entered", Godot.Callable.From(() => {
           if (Globals.gameMode == GameMode.Command) {
             hoverPanel.Visible = true;
             hoverPanel.GlobalPosition = GetGlobalMousePosition() + new Vector2(0, -500);
@@ -140,7 +142,7 @@ public partial class UiPanel : Control {
           }
         }));
 
-        label.Connect("mouse_exited", Godot.Callable.From(() => {
+        button.Connect("mouse_exited", Godot.Callable.From(() => {
           hoverPanel.Visible = false;
         }));
       }
@@ -166,12 +168,6 @@ public partial class UiPanel : Control {
       selectionNameLabel.Text = u.unitName;
 
       healthLabel.Text = "Health: " + u.health + "/" + u.maxHealth;
-    }
-
-    if (Globals.selectedUnit is TrainingBuilding th) {
-      if (th.status == BuildingStatus.Building) {
-        selectionNameLabel.Text += "Producing units...)";
-      }
     }
 
     if (Globals.selectedUnit is Ant a) {
