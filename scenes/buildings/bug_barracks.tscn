@@ -15,7 +15,8 @@ script = ExtResource("2_11bal")
 IsBugBarracks = true
 
 [node name="SelectionCircle" parent="." instance=ExtResource("4_iiyuk")]
-scale = Vector2(4.347, 2.825)
+position = Vector2(11, 7)
+scale = Vector2(7.627, 4.95659)
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.533333)

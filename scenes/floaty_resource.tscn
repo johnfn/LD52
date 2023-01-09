@@ -42,14 +42,16 @@ script = ExtResource("1_clr0d")
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Graphic" type="Sprite2D" parent="Graphics"]
+position = Vector2(-12, 17)
+scale = Vector2(0.426667, 0.426667)
 texture = ExtResource("1_kgfxp")
 
 [node name="Label" type="Label" parent="Graphics"]
-offset_left = 26.0
-offset_top = -35.0
-offset_right = 172.0
-offset_bottom = 143.0
-theme_override_font_sizes/font_size = 80
+offset_left = 14.0
+offset_top = -7.0
+offset_right = 160.0
+offset_bottom = 171.0
+theme_override_font_sizes/font_size = 40
 text = "+5"
 metadata/_edit_use_anchors_ = true
 

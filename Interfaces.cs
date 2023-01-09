@@ -55,6 +55,7 @@ public interface IResource {
   public float harvestTime { get; set; }
   public Vector2 resourceGlobalPosition { get; }
   public ResourceType resourceType { get; set; }
+  public AnimationPlayer animationPlayer { get; }
 }
 
 public interface IDamageable {

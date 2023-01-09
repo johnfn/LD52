@@ -199,6 +199,48 @@ public partial class UiPanel : Control {
     }
   }
 
+  private string _currentMouseCursor = "";
+
+  private void _maybeUpdateMouseCursor() {
+    var nextCursor = "normal";
+    var hoveredUnit = Globals.hoveredUnit;
+
+    if (hoveredUnit is IResource ir) {
+      if (Globals.selectedUnit is Ant a) {
+        nextCursor = "harvest";
+      } else {
+        nextCursor = "fail";
+      }
+    }
+
+
+    if (hoveredUnit is Enemy e) {
+      nextCursor = "attack";
+    }
+
+    if (nextCursor != _currentMouseCursor) {
+      _currentMouseCursor = nextCursor;
+
+      if (nextCursor == "normal") {
+        Input.SetCustomMouseCursor(
+          ResourceLoader.Load("res://assets/cursors/cursor_normal.png")
+        );
+      } else if (nextCursor == "attack") {
+        Input.SetCustomMouseCursor(
+          ResourceLoader.Load("res://assets/cursors/cursor_attack.png")
+        );
+      } else if (nextCursor == "harvest") {
+        Input.SetCustomMouseCursor(
+          ResourceLoader.Load("res://assets/cursors/cursor_harvest.png")
+        );
+      } else if (nextCursor == "fail") {
+        Input.SetCustomMouseCursor(
+          ResourceLoader.Load("res://assets/cursors/cursor_fail.png")
+        );
+      }
+    }
+  }
+
   private void _handleMouseDown(InputEventMouseButton mouseEvent) {
     if (!mouseEvent.Pressed) {
       return;
@@ -231,6 +273,7 @@ public partial class UiPanel : Control {
 
         if (Globals.hoveredUnit is IResource resource) {
           if (Globals.selectedUnit is Ant a) {
+            resource.animationPlayer.Play("Target");
             a.Harvest(resource);
           }
         } else if (Globals.hoveredUnit is ConstructionSite c) {
@@ -279,6 +322,8 @@ public partial class UiPanel : Control {
       var prevHoveredUnit = Globals.hoveredUnit;
 
       Globals.hoveredUnit = GetHoveredUnit();
+
+      _maybeUpdateMouseCursor();
 
       if (prevHoveredUnit != Globals.hoveredUnit) {
         if (prevHoveredUnit != null) {

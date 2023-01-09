@@ -96,11 +96,11 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
   public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
 
   public void OnHoverStart() {
-    Modulate = new Color(1, 1, 1, 0.5f);
+    // Modulate = new Color(1, 1, 1, 0.5f);
   }
 
   public void OnHoverEnd() {
-    Modulate = new Color(1, 1, 1, 1f);
+    // Modulate = new Color(1, 1, 1, 1f);
   }
 
   // Locals
