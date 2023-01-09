@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Ant.cs" id="2_uvaca"]
 [ext_resource type="Texture2D" uid="uid://br4e4t6sgengi" path="res://assets/shadow.png" id="3_fwrfi"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_yorjn"]
-[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="4_ojxw3"]
+[ext_resource type="PackedScene" uid="uid://dvxv7570gmnd2" path="res://progress_bar.tscn" id="4_ojxw3"]
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="5_e7mwg"]
 [ext_resource type="Texture2D" uid="uid://d0vusutoy8w1" path="res://assets/ant_body.png" id="6_hn0gk"]
 [ext_resource type="Texture2D" uid="uid://bnaw6fgmhr87" path="res://assets/resource_single_match.png" id="6_lae66"]
@@ -121,17 +121,17 @@ position = Vector2(-1, 7)
 script = ExtResource("2_uvaca")
 
 [node name="SelectionCircle" parent="." instance=ExtResource("5_e7mwg")]
-position = Vector2(-2, 6)
+position = Vector2(-4.25054, -43)
 scale = Vector2(1.88, 1.88)
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.501961)
-position = Vector2(9, 33)
+position = Vector2(6.74943, -16)
 scale = Vector2(1.05273, 0.619141)
 texture = ExtResource("3_fwrfi")
 
 [node name="Area" type="Area2D" parent="."]
-position = Vector2(-11, 4)
+position = Vector2(-13.2506, -45)
 collision_layer = 5
 script = ExtResource("3_yorjn")
 
@@ -140,13 +140,14 @@ position = Vector2(13, -1)
 shape = SubResource("RectangleShape2D_wx0nu")
 
 [node name="ProgressBar" parent="." instance=ExtResource("4_ojxw3")]
-position = Vector2(0, -138)
+position = Vector2(-2.25056, -187)
 
 [node name="HealthBar" parent="." instance=ExtResource("4_ojxw3")]
 modulate = Color(0, 1, 0.12549, 1)
-position = Vector2(0, -138)
+position = Vector2(-2.25056, -187)
 
 [node name="Graphic" type="Node2D" parent="."]
+position = Vector2(-2.25056, -49)
 scale = Vector2(0.5, 0.5)
 
 [node name="Body" type="Sprite2D" parent="Graphic"]

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_0e81p"]
 [ext_resource type="Texture2D" uid="uid://b2fd8mfkqsi1a" path="res://assets/warrior.png" id="3_05uur"]
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="4_ryn41"]
-[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="5_a1xud"]
+[ext_resource type="PackedScene" uid="uid://dvxv7570gmnd2" path="res://progress_bar.tscn" id="5_a1xud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(188, 161.25)
@@ -17,22 +17,22 @@ unitType = 2
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.454902)
-position = Vector2(-6, 11)
+position = Vector2(-1, -14)
 scale = Vector2(0.48, 0.48)
 texture = ExtResource("2_0wtq6")
 
 [node name="SelectionCircle" parent="." instance=ExtResource("4_ryn41")]
-position = Vector2(3.8147e-06, 10)
+position = Vector2(5, -15)
 scale = Vector2(1.88, 1.88)
 
 [node name="Graphic" type="Sprite2D" parent="."]
 modulate = Color(1, 0.270588, 0.439216, 1)
-position = Vector2(-24, -70)
+position = Vector2(-19, -95)
 scale = Vector2(0.48, 0.48)
 texture = ExtResource("3_05uur")
 
 [node name="Area" type="Area2D" parent="."]
-position = Vector2(-6, 0)
+position = Vector2(-1, -25)
 collision_layer = 5
 script = ExtResource("3_0e81p")
 
@@ -42,4 +42,4 @@ shape = SubResource("RectangleShape2D_wx0nu")
 
 [node name="HealthBar" parent="." instance=ExtResource("5_a1xud")]
 modulate = Color(0, 1, 0.12549, 1)
-position = Vector2(-5, -223)
+position = Vector2(0, -248)

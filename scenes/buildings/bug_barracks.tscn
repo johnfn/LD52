@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_ivv0c"]
 [ext_resource type="Texture2D" uid="uid://c177uwhg2g3ev" path="res://assets/building_barracks.png" id="3_ugue1"]
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="4_iiyuk"]
-[ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="5_u8xlh"]
+[ext_resource type="PackedScene" uid="uid://dvxv7570gmnd2" path="res://progress_bar.tscn" id="5_u8xlh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xkp2o"]
 radius = 196.041
@@ -15,20 +15,21 @@ script = ExtResource("2_11bal")
 IsBugBarracks = true
 
 [node name="SelectionCircle" parent="." instance=ExtResource("4_iiyuk")]
-position = Vector2(11, 7)
+position = Vector2(3, -31)
 scale = Vector2(7.627, 4.95659)
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.533333)
-position = Vector2(7, 32)
+position = Vector2(-1, -6)
 scale = Vector2(1.44481, 0.719922)
 texture = ExtResource("3_5im4e")
 
 [node name="Graphic" type="Sprite2D" parent="."]
-position = Vector2(0, -96)
+position = Vector2(-8, -134)
 texture = ExtResource("3_ugue1")
 
 [node name="Area" type="Area2D" parent="." groups=["collider"]]
+position = Vector2(-8, -38)
 collision_layer = 3
 script = ExtResource("3_ivv0c")
 
@@ -38,4 +39,4 @@ shape = SubResource("CircleShape2D_xkp2o")
 
 [node name="HealthBar" parent="." instance=ExtResource("5_u8xlh")]
 modulate = Color(0, 1, 0.12549, 1)
-position = Vector2(-2, -335)
+position = Vector2(-10, -373)

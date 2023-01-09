@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dwmu32upluapl" path="res://scenes/resource_panel.tscn" id="10_nmyny"]
 [ext_resource type="PackedScene" uid="uid://butb8nk3j7nsg" path="res://scenes/error_panel.tscn" id="13_71qpp"]
 [ext_resource type="Script" path="res://SelectionRect.cs" id="13_fuotw"]
-[ext_resource type="PackedScene" path="res://scenes/error_pane.tscn" id="14_wu0pv"]
+[ext_resource type="PackedScene" uid="uid://ctrb1n4wlapv6" path="res://scenes/error_pane.tscn" id="14_wu0pv"]
 [ext_resource type="PackedScene" uid="uid://c5jobfql2jwj0" path="res://scenes/units/beetle.tscn" id="15_xik6a"]
 [ext_resource type="PackedScene" uid="uid://bf6tor4dkolmi" path="res://scenes/enemy.tscn" id="20_koe4t"]
 
@@ -25,25 +25,31 @@ size = Vector2(197, 1199.5)
 size = Vector2(1801, 186.5)
 
 [node name="Root" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_38of0")
 
 [node name="Map" type="Node2D" parent="."]
+y_sort_enabled = true
 script = ExtResource("1_6y1nh")
 
 [node name="BG1" type="Sprite2D" parent="Map"]
+z_index = -1
 position = Vector2(-1030, 618)
 texture = ExtResource("4_bw8bu")
 
 [node name="BG2" type="Sprite2D" parent="Map"]
+z_index = -1
 position = Vector2(249.57, 618)
 texture = ExtResource("4_bw8bu")
 flip_h = true
 
 [node name="BG3" type="Sprite2D" parent="Map"]
+z_index = -1
 position = Vector2(1515, 615)
 texture = ExtResource("4_bw8bu")
 
 [node name="BG4" type="Sprite2D" parent="Map"]
+z_index = -1
 position = Vector2(2794.57, 618)
 texture = ExtResource("4_bw8bu")
 flip_h = true
