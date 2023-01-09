@@ -64,9 +64,18 @@ public partial class Enemy : Node2D, ISelectable, IDamageable {
   private IDamageable _target;
 
   public override void _Process(double delta) {
+    var distanceNeededToTarget = 100;
+
+    if (_target is IBuilding ib) {
+      distanceNeededToTarget = 400;
+    }
+
     if (
       _status == EnemyStatus.Attacking &&
-      (_target == null || _target.health <= 0 || !IsInstanceValid(_target.node) || _target.node.GlobalPosition.DistanceTo(GlobalPosition) > 100)
+      (_target == null ||
+      _target.health <= 0 ||
+      !IsInstanceValid(_target.node) ||
+      _target.node.GlobalPosition.DistanceTo(GlobalPosition) > distanceNeededToTarget)
     ) {
       _status = EnemyStatus.SeekingTarget;
       _target = null;
