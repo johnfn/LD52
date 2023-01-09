@@ -40,6 +40,7 @@ public class Util {
     var collisions = tree.Root.World2d.DirectSpaceState.IntersectPoint(f);
 
     if (collisions.Count == 0) {
+      GD.Print("Early");
       return point;
     }
 
@@ -54,12 +55,29 @@ public class Util {
         new Vector2(-1, 0),
         new Vector2(0, -1)
       }) {
-        var nextEnd = end + i * direction * CELL_SIZE;
+        var candidatePoint = end + i * direction * CELL_SIZE;
 
-        f.Position = nextEnd;
+        var pointsToCheck = new List<Vector2>() {
+          candidatePoint,
+          candidatePoint + new Vector2(-100, -100),
+          candidatePoint + new Vector2(100, -100),
+          candidatePoint + new Vector2(-100, 100),
+          candidatePoint + new Vector2(100, 100),
+        };
 
-        if (tree.Root.World2d.DirectSpaceState.IntersectPoint(f).Count == 0) {
-          return nextEnd;
+        var safe = true;
+
+        foreach (var p in pointsToCheck) {
+          f.Position = p;
+
+          if (tree.Root.World2d.DirectSpaceState.IntersectPoint(f).Count != 0) {
+            safe = false;
+            break;
+          }
+        }
+
+        if (safe) {
+          return candidatePoint;
         }
       }
     }
@@ -336,7 +354,7 @@ public class Util {
 
   public static List<Wave> Waves = new List<Wave> {
     new Wave {
-      TimeTillWave = 1,
+      TimeTillWave = 10,
       Monsters = new Dictionary<MonsterType, int> {
         [MonsterType.NormalMonster] = 3
       }
