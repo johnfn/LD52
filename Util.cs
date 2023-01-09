@@ -370,4 +370,11 @@ public class Util {
 
     tween.SetEase(Tween.EaseType.Out);
   }
+
+  public static void Add(
+    SceneTree tree,
+    Node2D thing
+  ) {
+    tree.Root.GetNode<Node2D>("Root").AddChild(thing);
+  }
 }

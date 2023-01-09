@@ -58,7 +58,6 @@ position = Vector2(-11.0004, -116)
 
 [node name="Graphics" type="Node2D" parent="."]
 position = Vector2(0, -3.8147e-06)
-scale = Vector2(1, 1)
 
 [node name="EnemyBody" type="Sprite2D" parent="Graphics"]
 position = Vector2(-2.0004, -41)

@@ -155,7 +155,7 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
         var buildingStats = Util.BuildingStats[ConstructionSite.BuildingState.SelectedBuildingType];
         var building = GD.Load<PackedScene>(buildingStats.resourcePath).Instantiate() as Node2D;
 
-        GetTree().Root.AddChild(building);
+        Util.Add(GetTree(), building);
         building.GlobalPosition = buildingPosition;
 
         ConstructionSite.BuildingState = new BuildingState();
@@ -232,7 +232,7 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
         var floatyResource = GD.Load<PackedScene>("res://scenes/floaty_resource.tscn").Instantiate<FloatingResource>();
         floatyResource.GlobalPosition = GlobalPosition;
         floatyResource.ResourceType = harvestState.resource.resourceType;
-        GetTree().Root.AddChild(floatyResource);
+        Util.Add(GetTree(), floatyResource);
 
         return;
       }
@@ -283,7 +283,7 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
 
     BuildingStatus = BuildBuildingStatus.MovingToBuild;
 
-    GetTree().Root.AddChild(ConstructionSite);
+    Util.Add(GetTree(), ConstructionSite);
 
     ConstructionSite.GlobalPosition = buildingPosition;
     _path = Util.Pathfind(GetTree(), GlobalPosition, buildingPosition);

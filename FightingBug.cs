@@ -145,7 +145,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
           bullet.Damage = _damage;
           bullet.Source = this;
 
-          GetTree().Root.AddChild(bullet);
+          Util.Add(GetTree(), bullet);
         } else {
           var hitSprite = GetNode<Sprite2D>("Graphics/HitEffect/Sprite2D");
           // rotate hitSprite towards enemy.

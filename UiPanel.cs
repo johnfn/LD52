@@ -278,7 +278,7 @@ public partial class UiPanel : Control {
 
     if (mouseEvent.ButtonIndex == MouseButton.Right && Globals.selectedUnit != null) {
       var clickAnimation = GD.Load<PackedScene>("res://scenes/click_animation.tscn").Instantiate<ClickAnimation>();
-      GetTree().Root.AddChild(clickAnimation);
+      Util.Add(GetTree(), clickAnimation);
       clickAnimation.Play();
       clickAnimation.GlobalPosition = Util.MousePosition(GetTree());
     }

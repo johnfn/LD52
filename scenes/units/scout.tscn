@@ -115,6 +115,7 @@ _data = {
 }
 
 [node name="Scout" type="Node2D" groups=["good_unit"]]
+position = Vector2(-21, -77)
 script = ExtResource("2_o23u0")
 unitType = 3
 

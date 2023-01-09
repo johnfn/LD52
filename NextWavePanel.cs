@@ -128,7 +128,7 @@ public partial class NextWavePanel : Panel {
     for (var i = 0; i < wave.Monsters[MonsterType.NormalMonster]; i++) {
       var monster = GD.Load<PackedScene>("res://scenes/enemy.tscn").Instantiate<Enemy>();
 
-      GetTree().Root.AddChild(monster);
+      Util.Add(GetTree(), monster);
 
       monster.GlobalPosition = _getPointInDarkness(allColliders);
 
