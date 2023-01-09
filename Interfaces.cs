@@ -72,6 +72,19 @@ public interface IDamageable {
 
     if (health <= 0) {
       node.QueueFree();
+    } else {
+      node.GetNode<Node2D>("Graphics").Modulate = new Color(5000f, 0f, 0f, 1f);
+
+      // Tween modulate back to normal
+
+      var tween = node.GetTree().CreateTween();
+      tween.TweenProperty(
+          node.GetNode<Node2D>("Graphics"),
+          "modulate",
+          new Color(1, 1, 1, 1),
+          0.3f
+      );
+      tween.SetEase(Tween.EaseType.Out);
     }
   }
 

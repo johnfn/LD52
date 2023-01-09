@@ -120,7 +120,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
       } else {
         _attackCooldownCurrent = _attackCooldownMax;
 
-        var hitSprite = GetNode<Sprite2D>("Graphic/HitEffect/Sprite2D");
+        var hitSprite = GetNode<Sprite2D>("Graphics/HitEffect/Sprite2D");
         // rotate hitSprite towards enemy.
 
         hitSprite.GlobalRotation = (_attackTarget.GlobalPosition - GlobalPosition).Angle();
@@ -156,6 +156,8 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
 
     _path = _path.SkipLast(2).ToList();
     _attackTarget = target;
+
+    Util.FlashNodeWhite(target);
   }
 
   //takeDamageTween.TweenProperty(this, "modulate", new Color(1.0f, 0.0f, 0.0f, 1.0f), .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.Out);

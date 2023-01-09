@@ -325,4 +325,18 @@ public class Util {
       };
     }
   }
+
+  public static void FlashNodeWhite(Node2D node) {
+    node.GetNode<Node2D>("Graphics").Modulate = new Color(3f, 3f, 3f, 1f);
+
+    var tween = node.GetTree().CreateTween();
+    tween.TweenProperty(
+        node.GetNode<Node2D>("Graphics"),
+        "modulate",
+        new Color(1, 1, 1, 1),
+        0.2f
+    );
+
+    tween.SetEase(Tween.EaseType.Out);
+  }
 }

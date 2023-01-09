@@ -32,6 +32,7 @@ public partial class Enemy : Node2D, ISelectable, IDamageable {
   private float _attackCooldownMax;
   private float _attackCooldownCurrent;
   private int _damageAmount;
+  public AnimationPlayer animationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
 
   public string selectionText {
     get {
@@ -129,9 +130,7 @@ public partial class Enemy : Node2D, ISelectable, IDamageable {
       if (_attackCooldownCurrent > 0) {
         _attackCooldownCurrent -= (float)delta;
       } else {
-        GD.Print("Bef");
         _target.Damage(_damageAmount, this);
-        GD.Print("Aft");
         _attackCooldownCurrent = _attackCooldownMax;
 
         //attackTween.TweenProperty(this, "scale", 1.2f, .1).SetTrans(TransitionType.Elastic).SetEase(EaseType.In);

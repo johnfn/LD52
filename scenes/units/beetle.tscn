@@ -20,7 +20,7 @@ step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Graphic/HitEffect/Sprite2D:texture")
+tracks/0/path = NodePath("Graphics/HitEffect/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -32,7 +32,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Graphic/HitEffect/Sprite2D:visible")
+tracks/1/path = NodePath("Graphics/HitEffect/Sprite2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -50,7 +50,7 @@ step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Graphic:position")
+tracks/0/path = NodePath("Graphics:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -62,7 +62,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Graphic/Hands:position")
+tracks/1/path = NodePath("Graphics/Hands:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -80,7 +80,7 @@ step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Graphic:position")
+tracks/0/path = NodePath("Graphics:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -92,7 +92,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Graphic/Hands:position")
+tracks/1/path = NodePath("Graphics/Hands:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -128,15 +128,15 @@ texture = ExtResource("2_0wtq6")
 position = Vector2(11.44, 83.44)
 scale = Vector2(1.88, 1.88)
 
-[node name="Graphic" type="Sprite2D" parent="."]
+[node name="Graphics" type="Sprite2D" parent="."]
 modulate = Color(1, 0.270588, 0.439216, 1)
 scale = Vector2(0.48, 0.48)
 texture = ExtResource("3_05uur")
 
-[node name="HitEffect" type="Node2D" parent="Graphic"]
+[node name="HitEffect" type="Node2D" parent="Graphics"]
 scale = Vector2(2, 2)
 
-[node name="Sprite2D" type="Sprite2D" parent="Graphic/HitEffect"]
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/HitEffect"]
 position = Vector2(4.16666, -6.25)
 texture = ExtResource("5_d23tj")
 centered = false
@@ -148,7 +148,7 @@ collision_layer = 5
 script = ExtResource("3_0e81p")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Area"]
-position = Vector2(13, -1)
+position = Vector2(16, 83)
 shape = SubResource("RectangleShape2D_wx0nu")
 
 [node name="HealthBar" parent="." instance=ExtResource("5_a1xud")]

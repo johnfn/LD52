@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bf6tor4dkolmi"]
+[gd_scene load_steps=10 format=3 uid="uid://bf6tor4dkolmi"]
 
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="1_omtas"]
 [ext_resource type="Script" path="res://Enemy.cs" id="2_1ca0s"]
@@ -9,6 +9,26 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(188, 161.25)
+
+[sub_resource type="Animation" id="Animation_0fya4"]
+resource_name = "Hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.0717936, 8.00001),
+"update": 0,
+"values": [Color(30.6118, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t4bok"]
+_data = {
+"Hit": SubResource("Animation_0fya4")
+}
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("2_1ca0s")
@@ -36,7 +56,16 @@ shape = SubResource("RectangleShape2D_wx0nu")
 modulate = Color(0, 1, 0.12549, 1)
 position = Vector2(-11.0004, -116)
 
-[node name="EnemyBody" type="Sprite2D" parent="."]
+[node name="Graphics" type="Node2D" parent="."]
+position = Vector2(0, -3.8147e-06)
+scale = Vector2(1, 1)
+
+[node name="EnemyBody" type="Sprite2D" parent="Graphics"]
 position = Vector2(-2.0004, -41)
 scale = Vector2(0.359998, 0.359998)
 texture = ExtResource("5_ekvch")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t4bok")
+}
