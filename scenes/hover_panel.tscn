@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://k3xxpip0ksw5"]
+[gd_scene load_steps=12 format=3 uid="uid://k3xxpip0ksw5"]
 
 [ext_resource type="Script" path="res://HoverPanel.cs" id="1_8bd57"]
 [ext_resource type="Texture2D" uid="uid://b4u4y67ci6ho8" path="res://assets/resource_single_gummy.png" id="1_ufkl0"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://y846dubsgoaw" path="res://assets/building_depot.png" id="6_m5tnw"]
 [ext_resource type="Texture2D" uid="uid://b2fd8mfkqsi1a" path="res://assets/warrior.png" id="8_8e00f"]
 [ext_resource type="Texture2D" uid="uid://d1x17llgf2svh" path="res://assets/healer_body.png" id="9_7jmhi"]
+[ext_resource type="Texture2D" uid="uid://dj6384b8a0gt0" path="res://assets/attack_icon.png" id="10_f5qwd"]
+[ext_resource type="Texture2D" uid="uid://b6chfstcy54ny" path="res://assets/heart_icon.png" id="11_85tov"]
 
 [node name="HoverPanel" type="Panel"]
 offset_left = 320.0
@@ -18,6 +20,7 @@ offset_bottom = -263.0
 script = ExtResource("1_8bd57")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 310.0
 offset_right = 436.0
@@ -25,6 +28,7 @@ offset_bottom = 362.0
 color = Color(0.356863, 0.309804, 0.572549, 1)
 
 [node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
 offset_right = 425.0
 offset_bottom = 57.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -35,14 +39,16 @@ text = "ItemName"
 horizontal_alignment = 1
 
 [node name="DescriptionLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 213.0
 offset_top = 102.0
 offset_right = 423.0
-offset_bottom = 321.0
+offset_bottom = 258.0
 text = "The herp is the derp of derp herp a derpity do twiddle dee wheeee hehehaohdsfkajd shfkjhdsf skdj fskdjf sdkjf sdkjf"
 autowrap_mode = 2
 
 [node name="ToothpickCost" type="Label" parent="."]
+layout_mode = 0
 offset_left = 57.0
 offset_top = 320.0
 offset_right = 97.0
@@ -54,10 +60,35 @@ theme_override_font_sizes/font_size = 28
 text = "10"
 
 [node name="GummyCost" type="Label" parent="."]
+layout_mode = 0
 offset_left = 383.0
 offset_top = 316.0
 offset_right = 423.0
 offset_bottom = 355.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+text = "10"
+
+[node name="Damage" type="Label" parent="."]
+layout_mode = 1
+offset_left = 207.0
+offset_top = 264.0
+offset_right = 247.0
+offset_bottom = 306.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+text = "10"
+
+[node name="Health" type="Label" parent="."]
+layout_mode = 1
+offset_left = 297.0
+offset_top = 264.0
+offset_right = 337.0
+offset_bottom = 306.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
@@ -107,3 +138,13 @@ texture = ExtResource("4_aupsc")
 position = Vector2(113, 177)
 scale = Vector2(0.36, 0.36)
 texture = ExtResource("6_m5tnw")
+
+[node name="AttackIcon" type="Sprite2D" parent="."]
+position = Vector2(261, 287)
+scale = Vector2(0.476951, 0.476951)
+texture = ExtResource("10_f5qwd")
+
+[node name="HeartIcon" type="Sprite2D" parent="."]
+position = Vector2(354, 286)
+scale = Vector2(0.582587, 0.582587)
+texture = ExtResource("11_85tov")

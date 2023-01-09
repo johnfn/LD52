@@ -7,6 +7,11 @@ public partial class HoverPanel : Panel {
   public Label ToothpickCost => GetNode<Label>("ToothpickCost");
   public Label GummyCost => GetNode<Label>("GummyCost");
 
+  public Sprite2D HeartIcon => GetNode<Sprite2D>("HeartIcon");
+  public Label Health => GetNode<Label>("Health");
+  public Sprite2D AttackIcon => GetNode<Sprite2D>("AttackIcon");
+  public Label Damage => GetNode<Label>("Damage");
+
   public List<Node2D> Graphics => new List<Node2D> {
     GetNode<Node2D>("Graphics/BuildingTownhall"),
     GetNode<Node2D>("Graphics/BuildingDepot"),
@@ -40,6 +45,11 @@ public partial class HoverPanel : Panel {
       ToothpickCost.Text = stats.twigCost.ToString();
       GummyCost.Text = stats.meatCost.ToString();
 
+      HeartIcon.Visible = false;
+      Health.Visible = false;
+      AttackIcon.Visible = false;
+      Damage.Visible = false;
+
       return;
     }
 
@@ -71,6 +81,14 @@ public partial class HoverPanel : Panel {
       DescriptionLabel.Text = stats.description;
       ToothpickCost.Text = stats.twigCost.ToString();
       GummyCost.Text = stats.meatCost.ToString();
+
+      HeartIcon.Visible = true;
+      Health.Visible = true;
+      AttackIcon.Visible = true;
+      Damage.Visible = true;
+
+      Health.Text = stats.health.ToString();
+      Damage.Text = stats.damage.ToString();
 
       return;
     }
