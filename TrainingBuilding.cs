@@ -29,9 +29,7 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
       if (!IsBugBarracks) {
         return new Dictionary<string, Action>() {
           ["Ant"] = () => {
-            if (Globals.selectedUnit is TrainingBuilding th) {
-              th.BuyUnit(UnitType.Ant);
-            }
+            BuyUnit(UnitType.Ant);
           },
         };
       }
@@ -73,7 +71,7 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
   public string unitName {
     get {
       if (IsBugBarracks) {
-        return "BugBarracks";
+        return "Bug Barracks";
       } else {
         return "Town Hall";
       }

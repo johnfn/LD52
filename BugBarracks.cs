@@ -17,7 +17,7 @@ public partial class BugBarracks : Sprite2D, IBuilding, ISelectable {
 
   public float buildProgress { get; set; } = 0;
   public float buildTime { get; set; } = 5f;
-  public string unitName { get; set; } = "BugBarracks";
+  public string unitName { get; set; } = "Bug Barracks";
   public BuildingStatus status { get; set; } = BuildingStatus.Idle;
 
   public bool isHoverable { get; set; } = true;
