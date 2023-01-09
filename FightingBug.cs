@@ -72,6 +72,7 @@ public partial class FightingBug : Node2D, IDamageable, ISelectable {
     health = stats.health;
     maxHealth = stats.health;
 
+    _speed = stats.speed;
     _attackCooldownMax = stats.attackCooldown;
     _damage = stats.damage;
     SelectionCircle.Unit = this;

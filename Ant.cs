@@ -76,7 +76,7 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
   public int health { get; set; }
   public int maxHealth { get; set; }
 
-  private int _speed = 500;
+  private int _speed;
   private UnitStatus _status = UnitStatus.Idle;
 
   // Moving state
@@ -105,6 +105,7 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
     health = stats.health;
     maxHealth = stats.health;
 
+    _speed = stats.speed;
     _shape = GetNode<Area2D>("Area");
     _uiPanel = GetNode<UiPanel>("/root/Root/Static/UIRoot/UiPanel");
     _resourcePanel = GetNode<ResourcePanel>("/root/Root/Static/UIRoot/ResourcePanel");

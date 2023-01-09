@@ -275,6 +275,7 @@ public class Util {
         [UnitType.Ant] = new UnitStats() {
           buildTime = 5f,
           name = "Ant",
+          speed = 300,
           health = 10,
           twigCost = 50,
           meatCost = 0,
@@ -288,6 +289,7 @@ public class Util {
           new UnitStats() {
             name = "Beetle",
             buildTime = 5f,
+            speed = 300,
             health = 10,
             twigCost = 20,
             meatCost = 0,
@@ -300,6 +302,7 @@ public class Util {
         [UnitType.Scout] =
           new UnitStats() {
             name = "Scout",
+            speed = 600,
             buildTime = 5f,
             health = 10,
             twigCost = 20,
@@ -314,6 +317,7 @@ public class Util {
           new UnitStats() {
             name = "Spit Bug",
             buildTime = 5f,
+            speed = 400,
             health = 10,
             twigCost = 20,
             meatCost = 0,
