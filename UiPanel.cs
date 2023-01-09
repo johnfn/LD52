@@ -343,6 +343,10 @@ public partial class UiPanel : Control {
       if (mouseEvent.ButtonIndex == MouseButton.Left) {
         var unit = GetHoveredUnit();
 
+        if (unit is Ant a) {
+          Globals.buildingUnit = a;
+        }
+
         if (unit is ISelectable s) {
           Globals.selectedUnit = s;
           _showCommandUi();

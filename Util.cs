@@ -283,6 +283,19 @@ public class Util {
           description = "Train bug warriors to fight bug battles!"
         }
       },
+
+      {
+        BuildingType.GuardTower,
+        new BuildingStats() {
+          buildTime = 1f,
+          health = 10,
+          twigCost = 40,
+          meatCost = 0,
+          name = "Guard Tower",
+          resourcePath = "res://scenes/buildings/guard_tower.tscn",
+          description = "A guard tower will fire at enemies automatically!"
+        }
+      },
     };
     }
   }

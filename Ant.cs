@@ -41,8 +41,13 @@ public partial class Ant : Node2D, IDamageable, ISelectable {
     ["Town Hall"] = (delegate () {
       Actions.selectBuilding(BuildingType.TownHall);
     }),
+
     ["Resource Depot"] = (delegate () {
       Actions.selectBuilding(BuildingType.ResourceDepot);
+    }),
+
+    ["Guard Tower"] = (delegate () {
+      Actions.selectBuilding(BuildingType.GuardTower);
     }),
   };
 

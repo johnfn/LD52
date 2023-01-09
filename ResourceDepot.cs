@@ -11,6 +11,7 @@ public partial class ResourceDepot : Node2D, IBuilding, ISelectable {
   public float buildTime { get; set; } = 5f;
   public string unitName { get; set; } = "Resource Depot";
   public BuildingStatus status { get; set; } = BuildingStatus.Idle;
+  public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
 
   public string selectionText {
     get {
@@ -21,11 +22,13 @@ public partial class ResourceDepot : Node2D, IBuilding, ISelectable {
   public bool isHoverable { get; set; } = true;
   public int priority { get; set; } = 0;
 
+  public override void _Ready() {
+    SelectionCircle.Unit = this;
+  }
+
   public void OnHoverStart() {
-    Modulate = new Color(1, 1, 1, 0.5f);
   }
 
   public void OnHoverEnd() {
-    Modulate = new Color(1, 1, 1, 1f);
   }
 }

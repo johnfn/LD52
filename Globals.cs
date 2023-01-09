@@ -9,6 +9,7 @@ public class Globals {
   public static Node2D selectedBuilding;
 
   public static ISelectable selectedUnit;
+  public static ISelectable buildingUnit;
   public static ISelectable hoveredUnit = null;
   public static GameMode gameMode = GameMode.Command;
 
@@ -20,9 +21,9 @@ public class Globals {
 }
 
 public class GroupNames {
-
   public static string Building = "building";
   public static string GoodUnit = "good_unit";
+  public static string BadUnit = "bad_unit";
   public static string Collider = "collider";
   public static string ResourceDropoff = "resource_dropoff";
   public static string Debug = "Debug";

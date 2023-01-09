@@ -30,7 +30,7 @@ _data = {
 "Hit": SubResource("Animation_0fya4")
 }
 
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="Node2D" groups=["bad_unit"]]
 script = ExtResource("2_1ca0s")
 
 [node name="SelectionCircle" parent="." instance=ExtResource("1_omtas")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://7wv033c6p42i"]
+[gd_scene load_steps=25 format=3 uid="uid://7wv033c6p42i"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_6y1nh"]
 [ext_resource type="Script" path="res://Root.cs" id="1_38of0"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://bab7ujmjijflk" path="res://scenes/units/spitbug.tscn" id="18_ig11u"]
 [ext_resource type="PackedScene" uid="uid://2sxxdxvs8mbk" path="res://scenes/bullet.tscn" id="19_ql7ub"]
 [ext_resource type="PackedScene" uid="uid://bcgi6jhru5fdo" path="res://scenes/gummy_source.tscn" id="19_x6mja"]
+[ext_resource type="PackedScene" uid="uid://d34u1kagaref6" path="res://scenes/buildings/guard_tower.tscn" id="21_ohi30"]
+[ext_resource type="PackedScene" uid="uid://bf6tor4dkolmi" path="res://scenes/enemy.tscn" id="22_rfkbo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irmio"]
 size = Vector2(197, 1199.5)
@@ -180,3 +182,18 @@ scale = Vector2(1.88068, 1.88068)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0.305882, 1)
+
+[node name="ResourceDepot" parent="." instance=ExtResource("21_ohi30")]
+position = Vector2(1177, 640)
+
+[node name="ResourceDepot2" parent="." instance=ExtResource("21_ohi30")]
+position = Vector2(1206, 855)
+
+[node name="Enemy" parent="." instance=ExtResource("22_rfkbo")]
+position = Vector2(1414, 1067)
+
+[node name="Enemy2" parent="." instance=ExtResource("22_rfkbo")]
+position = Vector2(1217, 1139)
+
+[node name="Enemy3" parent="." instance=ExtResource("22_rfkbo")]
+position = Vector2(872, 1132)

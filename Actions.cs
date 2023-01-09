@@ -32,11 +32,15 @@ public partial class Actions : Node {
 
 
   public static void placeBuilding(UiPanel uiPanel) {
+    GD.Print("place");
+
     if (Globals.selectedBuildingType == BuildingType.None) {
+      GD.Print("tried to build a None");
+
       return;
     }
 
-    if (Globals.selectedUnit is Ant a) {
+    if (Globals.buildingUnit is Ant a) {
       var stats = Util.BuildingStats[Globals.selectedBuildingType];
       var isSafe = uiPanel.IsBuildingInSafeLocation(Globals.selectedBuilding);
 
@@ -63,6 +67,9 @@ public partial class Actions : Node {
       Globals.selectedBuilding.QueueFree();
 
       Globals.gameMode = GameMode.Command;
+    } else {
+      GD.Print("What");
+      GD.Print(Globals.selectedUnit);
     }
   }
 }

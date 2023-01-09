@@ -15,6 +15,7 @@ public partial class HoverPanel : Panel {
   public List<Node2D> Graphics => new List<Node2D> {
     GetNode<Node2D>("Graphics/BuildingTownhall"),
     GetNode<Node2D>("Graphics/BuildingDepot"),
+    GetNode<Node2D>("Graphics/BuildingGuardTower"),
     GetNode<Node2D>("Graphics/UnitAnt"),
     GetNode<Node2D>("Graphics/UnitWarrior"),
     GetNode<Node2D>("Graphics/UnitHealer"),
@@ -36,6 +37,9 @@ public partial class HoverPanel : Panel {
       } else if (name == "Resource Depot") {
         type = BuildingType.ResourceDepot;
         GetNode<Node2D>("Graphics/BuildingDepot").Visible = true;
+      } else if (name == "Guard Tower") {
+        type = BuildingType.GuardTower;
+        GetNode<Node2D>("Graphics/BuildingGuardTower").Visible = true;
       }
 
       var stats = Util.BuildingStats[type];

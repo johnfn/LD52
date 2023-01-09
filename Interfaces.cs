@@ -11,6 +11,7 @@ public enum BuildingType {
   TownHall,
   ResourceDepot,
   Barrachnid,
+  GuardTower,
   None,
 }
 
