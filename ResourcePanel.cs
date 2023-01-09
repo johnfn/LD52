@@ -24,7 +24,6 @@ public partial class ResourcePanel : VBoxContainer {
     return (usedSupply, totalSupply);
   }
 
-  [System.Obsolete]
   public override void _Process(double delta) {
     twigLabel.Text = Globals.MatchstickCount.ToString();
     meatLabel.Text = Globals.GummyCount.ToString();

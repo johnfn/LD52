@@ -10,6 +10,7 @@ public enum MonsterType {
 public class Wave {
   public int TimeTillWave = 5;
   public Dictionary<MonsterType, int> Monsters = new Dictionary<MonsterType, int>();
+  public string Tutorial;
 }
 
 public partial class NextWavePanel : Panel {
@@ -18,20 +19,37 @@ public partial class NextWavePanel : Panel {
   public float InitialTimeTillNextWave;
   public ColorRect Progress => GetNode<ColorRect>("Progress");
   public List<IDamageable> Monsters = new List<IDamageable>();
+  public Panel NextLevelTutorial => GetNode<Panel>("NextLevelTutorial");
 
   public int CurrentWave = -1;
+
 
   public override void _Ready() {
     base._Ready();
 
-    _advanceWave();
+    _showNextTutorialPrompt();
+
+    NextLevelTutorial.GetNode<Button>("Button").Connect("pressed", Callable.From(() => {
+      _advanceWave();
+    }));
+  }
+
+  private void _showNextTutorialPrompt() {
+    ++CurrentWave;
+    NextLevelTutorial.Visible = true;
+    var tutorialText = Util.Waves[CurrentWave].Tutorial;
+
+    if (tutorialText != "" && tutorialText != null) {
+      NextLevelTutorial.GetNode<Label>("TutorialText").Text = tutorialText;
+    } else {
+      _advanceWave();
+    }
   }
 
   private void _advanceWave() {
-    ++CurrentWave;
-
     var wave = Util.Waves[CurrentWave];
 
+    NextLevelTutorial.Visible = false;
     TimeTillNextWave = wave.TimeTillWave;
     InitialTimeTillNextWave = wave.TimeTillWave;
     Monsters.Clear();
@@ -40,6 +58,10 @@ public partial class NextWavePanel : Panel {
   private int _prevMonsterCount = 0;
 
   public override void _Process(double delta) {
+    if (NextLevelTutorial.Visible) {
+      return;
+    }
+
     var aliveMonsters = Monsters.Where(m => IsInstanceValid(m.node)).Count();
     var monsterDiedThisTick = aliveMonsters != _prevMonsterCount;
 
@@ -48,7 +70,7 @@ public partial class NextWavePanel : Panel {
     if (aliveMonsters == 0) {
       if (monsterDiedThisTick) {
         // wave just completed.
-        _advanceWave();
+        _showNextTutorialPrompt();
       }
 
       Progress.Scale = new Vector2(

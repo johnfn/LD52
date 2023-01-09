@@ -395,22 +395,25 @@ public class Util {
     new Wave {
       TimeTillWave = 5,
       Monsters = new Dictionary<MonsterType, int> {
-        [MonsterType.NormalMonster] = 3
-      }
+        [MonsterType.NormalMonster] = 1
+      },
+      Tutorial = "It was just an average day in BugTopia, when suddenly, a bunch of evil bugs started to attack!\n\n\nFend them off by clicking on your beetles, then right clicking the bad bugs to attack them.",
     },
 
     new Wave {
       TimeTillWave = 10,
       Monsters = new Dictionary<MonsterType, int> {
-        [MonsterType.NormalMonster] = 5
-      }
+        [MonsterType.NormalMonster] = 1
+      },
+      Tutorial = "Well done! But there are more bugs coming! Click on an ant, and then order it to build a Barracks.",
     },
 
     new Wave {
       TimeTillWave = 10,
       Monsters = new Dictionary<MonsterType, int> {
         [MonsterType.NormalMonster] = 8
-      }
+      },
+      Tutorial = "Fiddle dee dee",
     },
   };
 
