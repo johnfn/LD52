@@ -17,6 +17,7 @@ public enum BuildingStatus {
 
 // This is currently either TrainingBuilding or BugBarracks
 public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollider, IDamageable {
+  public ErrorPopup errorPopup => GetTree().Root.GetNode<ErrorPopup>("Root/Static/UIRoot/error_panel");
 
   [Export]
   public bool IsBugBarracks;
@@ -142,6 +143,21 @@ public partial class TrainingBuilding : Node2D, IBuilding, ISelectable, ICollide
   }
 
   public void BuyUnit(UnitType unit) {
+    var stats = Util.UnitStats[unit];
+
+    if (stats.twigCost > Globals.TwigCount) {
+      errorPopup.ShowError("Not enough matchsticks.");
+      return;
+    }
+
+    if (stats.meatCost > Globals.MeatCount) {
+      errorPopup.ShowError("Not enough gummies.");
+      return;
+    }
+
+    Globals.TwigCount -= stats.twigCost;
+    Globals.MeatCount -= stats.meatCost;
+
     status = BuildingStatus.Building;
 
     buildProgress = 0;
