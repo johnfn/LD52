@@ -56,6 +56,182 @@ position = Vector2(2794.57, 618)
 texture = ExtResource("4_bw8bu")
 flip_h = true
 
+[node name="BG1" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-3824.57, 2563)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG2" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-2545, 2563)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG3" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-1279.57, 2560)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG4" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(0, 2563)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG5" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(1280.43, 0)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG6" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(2560, 0)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG7" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(3825.43, -3)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG8" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(5105, 0)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG9" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(1280.43, 2560)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG10" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(2560, 2560)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG11" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(3825.43, 2557)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG12" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(5105, 2560)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG13" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(1280.43, -2567)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG14" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(2560, -2567)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG15" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(3825.43, -2570)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG16" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(5105, -2567)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG17" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-3824.57, -2567)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG18" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-2545, -2567)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG19" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-1279.57, -2570)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG20" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(0, -2567)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG21" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-8924.57, -2567)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG22" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-7645, -2567)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG23" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-6379.57, -2570)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG24" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-5100, -2567)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG25" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-8924.57, 3)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG26" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-7645, 3)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG27" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-6379.57, 0)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG28" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-5100, 3)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG29" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-8924.57, 2560)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG30" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-7645, 2560)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
+[node name="BG31" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-6379.57, 2557)
+texture = ExtResource("4_bw8bu")
+
+[node name="BG32" type="Sprite2D" parent="Map/BG4"]
+z_index = -1
+position = Vector2(-5100, 2560)
+texture = ExtResource("4_bw8bu")
+flip_h = true
+
 [node name="Rock" parent="Map" instance=ExtResource("3_4crhu")]
 position = Vector2(250, 231)
 
