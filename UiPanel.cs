@@ -128,20 +128,21 @@ public partial class UiPanel : Control {
 
         label.Text = item.Key;
         genericPanel.AddChild(label);
-        label.Connect("pressed", Godot.Callable.From(item.Value));
+        label.Connect("pressed", Godot.Callable.From(() => {
+          item.Value.Invoke();
+          hoverPanel.Visible = false;
+        }));
 
         label.Connect("mouse_entered", Godot.Callable.From(() => {
-          hoverPanel.Visible = true;
-          hoverPanel.GlobalPosition = GetGlobalMousePosition() + new Vector2(0, -400);
-          hoverPanel.Initialize(item.Key);
+          if (Globals.gameMode == GameMode.Command) {
+            hoverPanel.Visible = true;
+            hoverPanel.GlobalPosition = GetGlobalMousePosition() + new Vector2(0, -400);
+            hoverPanel.Initialize(item.Key);
+          }
         }));
 
         label.Connect("mouse_exited", Godot.Callable.From(() => {
           hoverPanel.Visible = false;
-        }));
-
-        label.Connect("mouse_moved", Godot.Callable.From(() => {
-          hoverPanel.GlobalPosition = GetGlobalMousePosition() + new Vector2(0, -400);
         }));
       }
     }
@@ -213,6 +214,8 @@ public partial class UiPanel : Control {
       Globals.selectedBuilding.QueueFree();
       Globals.selectedBuildingType = BuildingType.None;
       Globals.selectedBuilding = null;
+
+      hoverPanel.Visible = false;
     }
   }
 
@@ -275,6 +278,7 @@ public partial class UiPanel : Control {
       if (mouseEvent.ButtonIndex == MouseButton.Left) {
         Actions.placeBuilding(this);
 
+        hoverPanel.Visible = false;
         return;
       }
     }
@@ -426,10 +430,12 @@ public partial class UiPanel : Control {
     return best;
   }
 
-
+  private GameMode _prevGameMode = GameMode.Build;
   public override void _Process(double delta) {
-    if (Globals.gameMode == GameMode.Build) {
+    if (Globals.gameMode != _prevGameMode) {
       _showCommandUi();
+
+      _prevGameMode = Globals.gameMode;
     }
 
     _updateLabels();
