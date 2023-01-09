@@ -10,11 +10,13 @@ offset_bottom = 84.0
 script = ExtResource("1_rjm6s")
 
 [node name="Progress" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 1749.0
 offset_bottom = 74.0
 color = Color(0.0627451, 0.0509804, 0.0901961, 1)
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 680.0
 offset_top = 16.0
 offset_right = 1094.0

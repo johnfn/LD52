@@ -4,11 +4,18 @@ using Godot;
 public partial class NextWavePanel : Panel {
   public Label TimeLeftLabel => GetNode<Label>("Label");
   public float TimeTillNextWave = 5;
+  public float InitialTimeTillNextWave = 5;
+  public ColorRect Progress => GetNode<ColorRect>("Progress");
 
   public override void _Ready() {
   }
 
   public override void _Process(double delta) {
+    Progress.Scale = new Vector2(
+      1 - (TimeTillNextWave / InitialTimeTillNextWave),
+      1
+    );
+
     if (TimeTillNextWave < 0) {
       // Already started next wave
       return;
