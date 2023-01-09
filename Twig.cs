@@ -31,7 +31,11 @@ public partial class Twig : Node2D, ISelectable, IResource {
 
   public string selectionText {
     get {
-      return "Just a Twig!";
+      if (resourceType == ResourceType.Twig) {
+        return "Someone left a pile of matchboxes on the ground.";
+      } else {
+        return "A bag of gummy bears - the favorite food of all bugs!";
+      }
     }
   }
 

@@ -155,6 +155,14 @@ public partial class UiPanel : Control {
       selectionNameLabel.Text = b.unitName;
     }
 
+    if (Globals.selectedUnit is IResource r) {
+      if (r.resourceType == ResourceType.Meat) {
+        selectionNameLabel.Text = "Gummy Bears";
+      } else if (r.resourceType == ResourceType.Twig) {
+        selectionNameLabel.Text = "Matchbox";
+      }
+    }
+
     if (Globals.selectedUnit is IDamageable u) {
       selectionNameLabel.Text = u.unitName;
 
