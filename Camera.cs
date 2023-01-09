@@ -63,4 +63,20 @@ public partial class Camera : Camera2D {
       Position += new Vector2(0, 500) * (float)delta;
     }
   }
+
+  public override void _Input(InputEvent @event) {
+    if (@event is InputEventPanGesture gesture) {
+      Zoom += new Vector2(gesture.Delta.y, gesture.Delta.y) * 0.01f;
+
+      // Clamp zoom
+
+      if (Zoom.x < 0.3f) {
+        Zoom = new Vector2(0.3f, 0.3f);
+      }
+
+      if (Zoom.x > 2.0f) {
+        Zoom = new Vector2(2.0f, 2.0f);
+      }
+    }
+  }
 }
