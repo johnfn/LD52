@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://geron4k7w5uy"
+path="res://.godot/imported/sfx hit.mp3-98d5641447f0fabae3e687fcc5c13948.mp3str"
+
+[deps]
+
+source_file="res://audio/sfx hit.mp3"
+dest_files=["res://.godot/imported/sfx hit.mp3-98d5641447f0fabae3e687fcc5c13948.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

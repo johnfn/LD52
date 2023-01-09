@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b63d3nccq11su"
+path="res://.godot/imported/sfx build-done.mp3-d66d00008e4fc78bc3294b71ca8a995f.mp3str"
+
+[deps]
+
+source_file="res://audio/sfx build-done.mp3"
+dest_files=["res://.godot/imported/sfx build-done.mp3-d66d00008e4fc78bc3294b71ca8a995f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
