@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://de1bcomr4nryv"
-path="res://.godot/imported/enemy_hand.png-39647348f6966f9f316ec507223997c8.ctex"
+uid="uid://cvrch7sfrbuu6"
+path="res://.godot/imported/cursor_fail.png-852e21ed30136576a174a8353d3cafa6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemy_hand.png"
-dest_files=["res://.godot/imported/enemy_hand.png-39647348f6966f9f316ec507223997c8.ctex"]
+source_file="res://assets/cursors/cursor_fail.png"
+dest_files=["res://.godot/imported/cursor_fail.png-852e21ed30136576a174a8353d3cafa6.ctex"]
 
 [params]
 

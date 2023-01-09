@@ -16,6 +16,10 @@ public partial class Twig : Node2D, ISelectable, IResource {
   public int amount { get; set; } = 10;
   public ResourceType resourceType { get; set; } = ResourceType.Twig;
 
+  public SelectionCircle SelectionCircle => GetNode<SelectionCircle>("SelectionCircle");
+
+  public AnimationPlayer animationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
+
   public Vector2 resourceGlobalPosition {
     get {
       return GlobalPosition;
@@ -31,16 +35,18 @@ public partial class Twig : Node2D, ISelectable, IResource {
   public float harvestTime { get; set; } = Util.DEBUG ? 1f : 5f;
 
   public void OnHoverStart() {
-    sprite.Modulate = new Color(1, 1, 1, 0.5f);
+    // sprite.Modulate = new Color(1, 1, 1, 0.5f);
   }
 
   public void OnHoverEnd() {
-    sprite.Modulate = new Color(1, 1, 1, 1f);
+    // sprite.Modulate = new Color(1, 1, 1, 1f);
   }
 
   Sprite2D sprite;
   public override void _Ready() {
     sprite = GetNode<Sprite2D>("Graphic");
+
+    SelectionCircle.Unit = this;
   }
 
   public override void _Process(double delta) {

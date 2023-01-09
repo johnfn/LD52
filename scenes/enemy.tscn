@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bf6tor4dkolmi"]
+[gd_scene load_steps=8 format=3 uid="uid://bf6tor4dkolmi"]
 
 [ext_resource type="PackedScene" uid="uid://b1gkkxnag5xos" path="res://selection.tscn" id="1_omtas"]
-[ext_resource type="Texture2D" uid="uid://cfgp3vm5jedux" path="res://assets/enemy.png" id="1_vfpyn"]
 [ext_resource type="Script" path="res://Enemy.cs" id="2_1ca0s"]
+[ext_resource type="Texture2D" uid="uid://br4e4t6sgengi" path="res://assets/shadow.png" id="3_560k3"]
 [ext_resource type="Script" path="res://ClickableArea2D.gd" id="3_j0axm"]
 [ext_resource type="PackedScene" uid="uid://cpbqg76fefsbs" path="res://progress_bar.tscn" id="4_32j13"]
+[ext_resource type="Texture2D" uid="uid://oye7kva06p0l" path="res://assets/enemy_body.png" id="5_ekvch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0nu"]
 size = Vector2(188, 161.25)
@@ -16,9 +17,11 @@ script = ExtResource("2_1ca0s")
 position = Vector2(11, 45)
 scale = Vector2(2.28, 1.69852)
 
-[node name="Enemy" type="Sprite2D" parent="."]
-position = Vector2(2, 7)
-texture = ExtResource("1_vfpyn")
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.454902)
+position = Vector2(12, 30)
+scale = Vector2(0.56, 0.56)
+texture = ExtResource("3_560k3")
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(7, 17)
@@ -32,3 +35,8 @@ shape = SubResource("RectangleShape2D_wx0nu")
 [node name="HealthBar" parent="." instance=ExtResource("4_32j13")]
 modulate = Color(0, 1, 0.12549, 1)
 position = Vector2(0, -71)
+
+[node name="EnemyBody" type="Sprite2D" parent="."]
+position = Vector2(9, 4)
+scale = Vector2(0.359998, 0.359998)
+texture = ExtResource("5_ekvch")
